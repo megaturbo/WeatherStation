@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="org.jfree.ui.ApplicationFrame"/>
+<fullyQualifiedTypeName name="org.jfree.data.xy.XYDataset"/>
+<fullyQualifiedTypeName name="org.jfree.chart.JFreeChart"/>
+<fullyQualifiedTypeName name="org.jfree.chart.ChartPanel"/>
+<fullyQualifiedTypeName name="org.jfree.chart.axis.ValueAxis"/>
+<fullyQualifiedTypeName name="org.jfree.chart.axis.NumberAxis"/>
+</qualifiedTypeNameHistroy>
