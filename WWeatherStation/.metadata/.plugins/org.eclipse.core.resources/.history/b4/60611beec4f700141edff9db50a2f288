@@ -1,0 +1,13 @@
+package ch.coursjava.meteo.graph;
+
+import com.teamdev.jxbrowser.*;
+
+public class UseTest {
+
+	public static void main(final String[] args) {
+		
+		
+		
+	}
+
+}

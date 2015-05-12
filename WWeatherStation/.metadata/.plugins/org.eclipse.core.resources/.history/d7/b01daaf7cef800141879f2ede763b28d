@@ -1,0 +1,135 @@
+
+package ch.coursjava.meteo.graph;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import ch.coursjava.meteo.graph.mainpanel.JPanelStationGraphs;
+
+public class JFrameMain extends JFrame
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Constructeurs							*|
+	\*------------------------------------------------------------------*/
+
+	public JFrameMain()
+		{
+		geometry();
+		control();
+		appearance();
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	/*------------------------------*\
+	|*				Set				*|
+	\*------------------------------*/
+
+	/*------------------------------*\
+	|*				Get				*|
+	\*------------------------------*/
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	private void geometry()
+		{
+		button = new JButton("start");
+		panelGraphs = new JPanelStationGraphs();
+		panelList = new JPanelStationList();
+
+		setLayout(new BorderLayout());
+
+		JPanel panelControl = new JPanel();
+		panelControl.setLayout(new BoxLayout(panelControl, BoxLayout.PAGE_AXIS));
+
+		panelControl.add(button);
+		panelControl.setBackground(Color.DARK_GRAY);
+
+		add(panelList, BorderLayout.WEST);
+		add(panelGraphs, BorderLayout.CENTER);
+		add(panelControl, BorderLayout.EAST);
+		}
+
+	private void control()
+		{
+		thread = new Thread(new Runnable()
+			{
+
+				@Override
+				public void run()
+					{
+					while(true)
+						{
+
+						double wait = Math.random() * 2;
+						System.out.println("wait: " + wait);
+
+						sleep((long)wait*100);
+						t += wait;
+
+						panelGraphs.addValue(t, (Math.random() * 60) - 30);
+						}
+					}
+			});
+
+		button.addActionListener(new ActionListener()
+			{
+				@Override
+				public void actionPerformed(ActionEvent arg0)
+					{
+					t = 0;
+					panelGraphs.addValue(0, 0);
+					thread.start();
+					}
+			});
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		}
+
+
+
+	private void sleep(long millis)
+		{
+		try
+			{
+			Thread.sleep(millis);
+			}
+		catch (InterruptedException e)
+			{
+			e.printStackTrace();
+			}
+		}
+
+	private void appearance()
+		{
+		setTitle("Station Météo");
+		setSize(800, 600);
+		setLocationRelativeTo(null); // frame centrer
+		setVisible(true); // last!
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Attributs Private						*|
+	\*------------------------------------------------------------------*/
+
+	// Tools
+	private JPanelStationList panelList;
+	private JPanelStationGraphs panelGraphs;
+	private JButton button;
+
+	// Test
+	private double t;
+	private Thread thread;
+
+	}

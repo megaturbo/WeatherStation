@@ -1,0 +1,128 @@
+
+package ch.coursjava.meteo.graph;
+
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class JFrameStation extends JFrame
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Constructeurs							*|
+	\*------------------------------------------------------------------*/
+
+	public JFrameStation()
+		{
+		geometry();
+		control();
+		appearance();
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	/*------------------------------*\
+	|*				Set				*|
+	\*------------------------------*/
+
+	/*------------------------------*\
+	|*				Get				*|
+	\*------------------------------*/
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	private void geometry()
+		{
+		button = new JButton("start");
+		panelGraphs = new JPanelStationGraphs();
+
+		setLayout(new BorderLayout());
+
+		JPanel panelControl = new JPanel();
+		panelControl.setLayout(new BoxLayout(panelControl, BoxLayout.PAGE_AXIS));
+
+		panelControl.add(button);
+
+		add(panelControl, BorderLayout.EAST);
+		add(panelGraphs, BorderLayout.CENTER);
+		}
+
+	private void control()
+		{
+		thread = new Thread(new Runnable()
+			{
+
+				@Override
+				public void run()
+					{
+					while(true)
+						{
+						sleep(10);
+
+						t += Math.random() * 0.5;
+
+						panelGraphs.addValue(t, Math.sin(t));
+						System.out.println("t = " + t);
+
+						}
+					}
+			});
+
+		button.addActionListener(new ActionListener()
+			{
+
+				@Override
+				public void actionPerformed(ActionEvent arg0)
+					{
+					t = 0;
+					thread.start();
+					}
+			});
+
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		}
+
+
+
+	private void sleep(long millis)
+		{
+		try
+			{
+			Thread.sleep(millis);
+			}
+		catch (InterruptedException e)
+			{
+			e.printStackTrace();
+			}
+		}
+
+	private void appearance()
+		{
+		setSize(600, 400);
+		setLocationRelativeTo(null); // frame centrer
+		setVisible(true); // last!
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Attributs Private						*|
+	\*------------------------------------------------------------------*/
+
+	// Tools
+	private JPanelStationGraphs panelGraphs;
+	private JButton button;
+
+	// Test
+	private double t;
+	private Thread thread;
+	private boolean RUNNING = false;
+
+	}

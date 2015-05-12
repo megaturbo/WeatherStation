@@ -1,0 +1,51 @@
+
+package ch.coursjava.meteo.graph.customs;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Transparency;
+
+import javax.swing.ImageIcon;
+import javax.swing.JCheckBox;
+
+
+
+public class QKTCheckBox extends JCheckBox
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Constructeurs							*|
+	\*------------------------------------------------------------------*/
+
+	public QKTCheckBox(String text)
+		{
+		super(text);
+
+		this.setForeground(Color.WHITE);
+		this.setBackground(new Color(0,0,0,0));
+		this.setIcon(new ImageIcon("assets/unchecked_checkbox.png"));
+		this.setSelectedIcon(new ImageIcon("assets/checked_checkbox.png"));
+		this.setPreferredSize(new Dimension(32, 32));
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	/*------------------------------*\
+	|*				Set				*|
+	\*------------------------------*/
+
+	/*------------------------------*\
+	|*				Get				*|
+	\*------------------------------*/
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	/*------------------------------------------------------------------*\
+	|*							Attributs Private						*|
+	\*------------------------------------------------------------------*/
+	}
+

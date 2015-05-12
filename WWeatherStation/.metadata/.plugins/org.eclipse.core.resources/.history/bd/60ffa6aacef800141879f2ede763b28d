@@ -1,0 +1,69 @@
+
+package ch.coursjava.meteo.graph.main;
+
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+
+public class JPanelMain extends JPanel
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Constructeurs							*|
+	\*------------------------------------------------------------------*/
+
+	public JPanelMain()
+		{
+		geometry();
+		control();
+		appearance();
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	/*------------------------------*\
+	|*				Set				*|
+	\*------------------------------*/
+
+	/*------------------------------*\
+	|*				Get				*|
+	\*------------------------------*/
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	private void geometry()
+		{
+		// JComponent : Instanciation
+		panelStationGraphs = new JPanelStationGraphs();
+		panelMap = new JPanelMap();
+
+		JTabbedPane tabbedPane = new JTabbedPane();
+		tabbedPane.addTab("Map", panelMap);
+		tabbedPane.addTab("Graph", panelStationGraphs);
+
+		// JComponent : add
+
+		}
+
+	private void control()
+		{
+		// rien
+		}
+
+	private void appearance()
+		{
+		// rien
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Attributs Private						*|
+	\*------------------------------------------------------------------*/
+
+	// Tools
+	private JPanelStationGraphs panelStationGraphs;
+	private JPanelMap panelMap;
+
+	}

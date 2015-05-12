@@ -1,0 +1,139 @@
+
+package ch.coursjava.meteo.graph;
+
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+
+import javax.swing.DefaultListModel;
+import javax.swing.JCheckBox;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ListCellRenderer;
+
+public class JPanelStationList extends JPanel
+	{
+	
+	/*------------------------------------------------------------------*\
+	|*							Constructeurs							*|
+	\*------------------------------------------------------------------*/
+	
+	public JPanelStationList()
+		{
+		geometry();
+		control();
+		appearance();
+		}
+	
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+	
+	/*------------------------------*\
+	|*				Set				*|
+	\*------------------------------*/
+	
+	/*------------------------------*\
+	|*				Get				*|
+	\*------------------------------*/
+	
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+	
+	private void geometry()
+		{
+		JCheckBox cbBerlin = new JCheckBox("Berlin");
+		JCheckBox cbParis = new JCheckBox("Paris");
+		JCheckBox cbBerne = new JCheckBox("Berne");
+		JCheckBox checkBoxes[] = { cbBerlin, cbParis, cbBerne };
+		listStations = new JList<JCheckBox>(checkBoxes);
+		listStations.setCellRenderer(new CheckBoxListRenderer());
+		
+		JScrollPane scrollPane = new JScrollPane(listStations);
+		scrollPane.setPreferredSize(new Dimension(200, 400));
+		
+		FlowLayout flowlayout = new FlowLayout(FlowLayout.CENTER);
+		setLayout(flowlayout);
+		
+		add(scrollPane);
+		}
+	
+	private void control()
+		{
+		// rien
+		}
+	
+	private void appearance()
+		{
+		// rien
+		}
+	
+	 private class CheckListItem
+	  {
+	    private Object item;
+	    private boolean selected;
+
+	    public CheckListItem(Object item)
+	    {
+	      this.item = item;
+	    }
+
+	    @SuppressWarnings("unused")
+	    public Object getItem()
+	    {
+	      return item;
+	    }
+
+	    public boolean isSelected()
+	    {
+	      return selected;
+	    }
+
+	    public void setSelected(boolean isSelected)
+	    {
+	      this.selected = isSelected;
+	    }
+
+	    @Override
+	    public String toString()
+	    {
+	      return item.toString();
+	    }
+	  }
+	
+	private class CheckBoxListRenderer extends JCheckBox implements ListCellRenderer
+		{
+		
+		public Component getListCellRendererComponent(JList comp, Object value, int index, boolean isSelected, boolean hasFocus)
+			{
+			setEnabled(comp.isEnabled());
+			setSelected(((CheckListItem)value).isSelected());
+			setFont(comp.getFont());
+			setText(value.toString());
+			
+			if (isSelected)
+				{
+				setBackground(comp.getSelectionBackground());
+				setForeground(comp.getSelectionForeground());
+				}
+			else
+				{
+				setBackground(comp.getBackground());
+				setForeground(comp.getForeground());
+				}
+			
+			return this;
+			}
+		}
+	
+	/*------------------------------------------------------------------*\
+	|*							Attributs Private						*|
+	\*------------------------------------------------------------------*/
+	
+	// Tools
+	private JList listStations;
+	private DefaultListModel listModel;
+	
+	}

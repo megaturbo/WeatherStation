@@ -1,0 +1,77 @@
+package ch.coursjava.meteo.graph;
+
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+
+import javax.swing.DefaultListModel;
+import javax.swing.JCheckBox;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
+public class JPanelStationList extends JPanel
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Constructeurs							*|
+	\*------------------------------------------------------------------*/
+
+	public JPanelStationList()
+		{
+		geometry();
+		control();
+		appearance();
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	/*------------------------------*\
+	|*				Set				*|
+	\*------------------------------*/
+
+	/*------------------------------*\
+	|*				Get				*|
+	\*------------------------------*/
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	private void geometry()
+		{
+		JCheckBox cbBerlin = new JCheckBox("Berlin");
+		JCheckBox cbParis = new JCheckBox("Paris");
+		JCheckBox cbBerne = new JCheckBox("Berne");
+		JCheckBox checkBoxes[] = {cbBerlin, cbParis, cbBerne};
+		listStations = new JList<String>(testList);
+		JScrollPane scrollPane = new JScrollPane(listStations);
+		scrollPane.setPreferredSize(new Dimension(200, 400));
+
+		FlowLayout flowlayout = new FlowLayout(FlowLayout.CENTER);
+		setLayout(flowlayout);
+
+		add(scrollPane);
+		}
+
+	private void control()
+		{
+		// rien
+		}
+
+	private void appearance()
+		{
+		// rien
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Attributs Private						*|
+	\*------------------------------------------------------------------*/
+
+	// Tools
+	private JList listStations;
+	private DefaultListModel listModel;
+
+
+	}
