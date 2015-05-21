@@ -33,5 +33,8 @@
 			<attribute name="javadoc_location" value="jar:platform:/resource/WeatherStation/ext/apache-commons-logging/commons-logging-1.2-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="ext/RXTXcomm.jar"/>
+	<classpathentry kind="lib" path="ext/BilatRmiTools.jar"/>
+	<classpathentry kind="lib" path="ext/junit-4.12.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

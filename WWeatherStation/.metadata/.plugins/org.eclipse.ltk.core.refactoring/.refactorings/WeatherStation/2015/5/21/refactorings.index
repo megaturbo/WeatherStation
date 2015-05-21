@@ -5,3 +5,15 @@
 1432206266687	Rename package 'ch.coursjava.meteo.graph.utils'
 1432206277091	Rename package 'ch.coursjava.meteo.graph.view'
 1432206289291	Rename package 'ch.coursjava.meteo.graph.view.mainpanel'
+1432207374705	Delete element
+1432207378307	Delete element
+1432207663381	Rename package 'ch.coursjava.meteo'
+1432207677913	Rename package 'ch.coursjava.meteo.imp'
+1432207695785	Rename package 'ch.coursjava.meteo.imp.afficheur.real'
+1432207701385	Rename package 'ch.coursjava.meteo.imp.afficheur.simulateur'
+1432207709967	Rename package 'ch.coursjava.meteo.imp.afficheur.simulateur.moo'
+1432207719957	Rename package 'ch.coursjava.meteo.imp.afficheur.simulateur.vue.atome'
+1432207725266	Rename package 'ch.coursjava.meteo.imp.afficheur.simulateur.vue'
+1432207734913	Rename package 'ch.coursjava.meteo.imp.com.logique'
+1432207757496	Rename package 'ch.coursjava.meteo.imp.com.real'
+1432208685869	Delete element
