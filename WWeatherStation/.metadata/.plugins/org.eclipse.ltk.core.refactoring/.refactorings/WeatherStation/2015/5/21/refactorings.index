@@ -1,2 +1,7 @@
 1432195275062	Move compilation units
 1432195290444	Rename package 'ch.coursjava.meteo.graph.mainpanel'
+1432206243762	Rename package 'ch.coursjava.meteo.graph'
+1432206259150	Rename package 'ch.coursjava.meteo.graph.customs'
+1432206266687	Rename package 'ch.coursjava.meteo.graph.utils'
+1432206277091	Rename package 'ch.coursjava.meteo.graph.view'
+1432206289291	Rename package 'ch.coursjava.meteo.graph.view.mainpanel'

@@ -27,5 +27,11 @@
 			<attribute name="javadoc_location" value="jar:platform:/resource/WeatherStation/ext/swingx/swingx-ws-1.0-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="ext/jxmapviewer2-2.0.jar"/>
+	<classpathentry kind="lib" path="ext/apache-commons-logging/commons-logging-1.2.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/WeatherStation/ext/apache-commons-logging/commons-logging-1.2-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

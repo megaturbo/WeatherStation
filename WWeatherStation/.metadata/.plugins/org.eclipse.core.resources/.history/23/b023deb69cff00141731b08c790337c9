@@ -1,0 +1,17 @@
+
+package ch.coursjava.meteo.graph.view;
+
+import javax.swing.LookAndFeel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
+public class UseFrameMain
+	{
+
+	public static void main(final String[] args)
+		{
+		LookAndFeel[] looks = UIManager.getAuxiliaryLookAndFeels();
+		
+		new JFrameMain();
+		}
+	}
