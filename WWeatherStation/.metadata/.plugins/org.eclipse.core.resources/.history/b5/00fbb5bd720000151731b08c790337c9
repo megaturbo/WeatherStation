@@ -1,0 +1,106 @@
+
+package ch.hearc.meteo.imp.afficheur.real.moo;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.jfree.data.time.Millisecond;
+import org.jfree.data.time.RegularTimePeriod;
+import org.jfree.data.time.TimeSeries;
+import org.jfree.data.time.TimeSeriesCollection;
+
+import ch.hearc.meteo.spec.com.meteo.listener.event.MeteoEvent;
+import ch.hearc.meteo.spec.com.meteo.listener.event.Sources;
+
+public class Manager
+	{
+	
+	/*------------------------------------------------------------------*\
+	|*							Constructeurs							*|
+	\*------------------------------------------------------------------*/
+	
+	public Manager()
+		{
+		collectionAltitude = new TimeSeriesCollection();
+		collectionPression = new TimeSeriesCollection();
+		collectionTemperature = new TimeSeriesCollection();
+		
+		mapAltitude = new HashMap<Sources, TimeSeries>();
+		mapPression = new HashMap<Sources, TimeSeries>();
+		mapTemperature = new HashMap<Sources, TimeSeries>();
+		}
+	
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+	
+	public void printAltitude(MeteoEvent event)
+		{
+		manage(collectionAltitude, mapAltitude, event);
+		}
+	
+	public void printPression(MeteoEvent event)
+		{
+		manage(collectionPression, mapPression, event);
+		}
+	
+	public void printTemperature(MeteoEvent event)
+		{
+		manage(collectionTemperature, mapTemperature, event);
+		}
+	
+	/*------------------------------*\
+	|*				Set				*|
+	\*------------------------------*/
+	
+	/*------------------------------*\
+	|*				Get				*|
+	\*------------------------------*/
+	
+	public TimeSeriesCollection getCollectionAltitude()
+		{
+		return this.collectionAltitude;
+		}
+	
+	public TimeSeriesCollection getCollectionPression()
+		{
+		return this.collectionPression;
+		}
+	
+	public TimeSeriesCollection getCollectionTemperature()
+		{
+		return this.collectionTemperature;
+		}
+	
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+	
+	private void manage(TimeSeriesCollection collection, Map<Sources, TimeSeries> map, MeteoEvent event)
+		{
+		// Create Key if it didn't exist
+		if (!map.containsKey(event.getSource()))
+			{
+			map.put(event.getSource(), new TimeSeries(event.getSource().toString()));
+			collection.addSeries(map.get(event.getSource()));
+			}
+		TimeSeries sourceSeries = map.get(event.getSource());
+		RegularTimePeriod time = new Millisecond(new Date(event.getTime()));
+		sourceSeries.add(time, event.getValue());
+		
+		}
+	
+	/*------------------------------------------------------------------*\
+	|*							Attributs Private						*|
+	\*------------------------------------------------------------------*/
+	
+	// Tools
+	private TimeSeriesCollection collectionAltitude;
+	private TimeSeriesCollection collectionPression;
+	private TimeSeriesCollection collectionTemperature;
+	private Map<Sources, TimeSeries> mapAltitude;
+	private Map<Sources, TimeSeries> mapPression;
+	private Map<Sources, TimeSeries> mapTemperature;
+	
+	}

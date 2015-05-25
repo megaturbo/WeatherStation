@@ -1,0 +1,78 @@
+
+package ch.hearc.meteo.imp.afficheur.real.moo;
+
+import java.util.ArrayList;
+
+import org.jfree.data.time.TimeSeries;
+import org.jfree.data.time.TimeSeriesCollection;
+
+import ch.hearc.meteo.spec.com.meteo.listener.event.MeteoEvent;
+
+public class AfficheurServiceMOO
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Constructeurs							*|
+	\*------------------------------------------------------------------*/
+
+	public AfficheurServiceMOO()
+		{
+		this.datasetAltitude = new TimeSeriesCollection();
+		this.datasetPression = new TimeSeriesCollection();
+		this.datasetTemperature = new TimeSeriesCollection();
+
+		this.seriesAltitude = new ArrayList<TimeSeries>();
+		this.seriesPression = new ArrayList<TimeSeries>();
+		this.seriesTemperature = new ArrayList<TimeSeries>();
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	public void printAltitude(MeteoEvent event)
+		{
+		manage(seriesAltitude, event);
+		}
+
+	public void printPression(MeteoEvent event)
+		{
+
+		}
+
+	public void printTemperature(MeteoEvent event)
+		{
+
+		}
+
+	/*------------------------------*\
+	|*				Set				*|
+	\*------------------------------*/
+
+	/*------------------------------*\
+	|*				Get				*|
+	\*------------------------------*/
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	private void manage(ArrayList<TimeSeries> series, MeteoEvent event)
+		{
+		series.add(new TimeSeries("3"));
+		System.out.println(series.get(0).getKey());
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Attributs Private						*|
+	\*------------------------------------------------------------------*/
+
+	// Tools
+	private TimeSeriesCollection datasetAltitude;
+	private TimeSeriesCollection datasetPression;
+	private TimeSeriesCollection datasetTemperature;
+	private ArrayList<TimeSeries> seriesAltitude;
+	private ArrayList<TimeSeries> seriesPression;
+	private ArrayList<TimeSeries> seriesTemperature;
+
+	}

@@ -444,3 +444,6 @@ Caused by: java.net.SocketTimeoutException: null
 	at java.lang.reflect.Method.invoke(Unknown Source) ~[na:1.8.0_45]
 	at org.apache.commons.httpclient.protocol.ReflectionSocketFactory.createSocket(ReflectionSocketFactory.java:140) ~[na:na]
 	... 69 common frames omitted
+2015-05-22 17:49:21,147 [Stop Help Server] INFO  o.e.j.server.handler.ContextHandler - stopped o.e.j.s.ServletContextHandler{/help,null}
+2015-05-24 13:03:12,831 [Start Help Server] INFO  org.eclipse.jetty.server.Server - jetty-8.1.14.v20131031
+2015-05-24 13:03:12,921 [Start Help Server] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@127.0.0.1:58212
