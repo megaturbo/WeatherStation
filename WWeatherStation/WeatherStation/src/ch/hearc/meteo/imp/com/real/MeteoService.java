@@ -3,6 +3,7 @@ package ch.hearc.meteo.imp.com.real;
 
 import ch.hearc.meteo.imp.com.logique.MeteoService_A;
 import ch.hearc.meteo.imp.com.real.com.ComConnexions_I;
+import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 import ch.hearc.meteo.spec.com.meteo.exception.MeteoServiceException;
 
 /**
@@ -63,7 +64,8 @@ public class MeteoService extends MeteoService_A
 	/**
 	 * asynchronous, when data "value" received , must call altitudePerformed(value) of MeteoServiceCallback_I
 	 */
-	@Override public void askAltitudeAsync() throws MeteoServiceException
+	@Override
+	public void askAltitudeAsync() throws MeteoServiceException
 		{
 		try
 			{
@@ -78,7 +80,8 @@ public class MeteoService extends MeteoService_A
 	/**
 	 * asynchronous, when data "value" received , must call pressionPerformed(value) of MeteoServiceCallback_I
 	 */
-	@Override public void askPressionAsync() throws MeteoServiceException
+	@Override
+	public void askPressionAsync() throws MeteoServiceException
 		{
 		try
 			{
@@ -93,7 +96,8 @@ public class MeteoService extends MeteoService_A
 	/**
 	 * assynchrone, when data "value" received , must call temperaturePerformed(value) of MeteoServiceCallback_I
 	 */
-	@Override public void askTemperatureAsync() throws MeteoServiceException
+	@Override
+	public void askTemperatureAsync() throws MeteoServiceException
 		{
 		try
 			{
@@ -105,7 +109,8 @@ public class MeteoService extends MeteoService_A
 			}
 		}
 
-	@Override protected void connectHardware() throws MeteoServiceException
+	@Override
+	protected void connectHardware() throws MeteoServiceException
 		{
 		try
 			{
@@ -118,7 +123,8 @@ public class MeteoService extends MeteoService_A
 
 		}
 
-	@Override protected void disconnectHardware() throws MeteoServiceException
+	@Override
+	protected void disconnectHardware() throws MeteoServiceException
 		{
 		try
 			{
@@ -131,6 +137,35 @@ public class MeteoService extends MeteoService_A
 
 		}
 
+	@Override synchronized public void start(MeteoServiceOptions meteoServiceOptions)
+	{
+		super.start(meteoServiceOptions);
+		try
+			{
+			comConnexion.start();
+			}
+		catch (Exception e)
+			{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			}
+	}
+
+	@Override
+	synchronized public void stop()
+		{
+		super.stop();
+		try
+			{
+			comConnexion.stop();
+			}
+		catch (Exception e)
+			{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			}
+		}
+
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
@@ -141,7 +176,5 @@ public class MeteoService extends MeteoService_A
 
 	// Tools
 	private ComConnexions_I comConnexion;
-
-
 
 	}
