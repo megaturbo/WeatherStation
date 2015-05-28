@@ -55,4 +55,7 @@
 <fullyQualifiedTypeName name="org.jfree.data.xy.XYSeries"/>
 <fullyQualifiedTypeName name="org.jfree.chart.plot.XYPlot"/>
 <fullyQualifiedTypeName name="org.jfree.data.xy.XYDataItem"/>
+<fullyQualifiedTypeName name="ch.hearc.meteo.spec.reseau.RemoteAfficheurCreatorFactory_I"/>
+<fullyQualifiedTypeName name="ch.hearc.meteo.imp.afficheur.real.AfficheurService"/>
+<fullyQualifiedTypeName name="com.bilat.tools.reseau.rmi.RmiTools"/>
 </qualifiedTypeNameHistroy>
