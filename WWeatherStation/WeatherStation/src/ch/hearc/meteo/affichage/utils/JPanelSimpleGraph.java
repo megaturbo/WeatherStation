@@ -3,19 +3,19 @@ package ch.hearc.meteo.affichage.utils;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
 
 import javax.swing.JPanel;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.DateAxis;
+import org.jfree.chart.axis.DateTickMarkPosition;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.ValueAxis;
-import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.data.xy.XYSeries;
-import org.jfree.data.xy.XYSeriesCollection;
+import org.jfree.data.time.TimeSeriesCollection;
 
 public class JPanelSimpleGraph extends JPanel
 	{
@@ -24,9 +24,10 @@ public class JPanelSimpleGraph extends JPanel
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JPanelSimpleGraph(String graphTitle)
+	public JPanelSimpleGraph(String graphTitle, TimeSeriesCollection collection)
 		{
 		this.graphTitle = graphTitle;
+		this.collection = collection;
 
 		geometry();
 		control();
@@ -36,20 +37,14 @@ public class JPanelSimpleGraph extends JPanel
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
-	public void addValue(double x, double y)
-		{
-		XYSeries serie = series.get(0);
-		serie.add(x, y);
-
-		if (serie.getItemCount() > 100)
-			{
-			serie.remove(0);
-			}
-		}
 
 	/*------------------------------*\
 	|*				Set				*|
 	\*------------------------------*/
+
+	public void setSeriesVisible(int serie, boolean visible) {
+		plot.getRenderer().setSeriesVisible(serie, visible);
+	}
 
 	/*------------------------------*\
 	|*				Get				*|
@@ -61,22 +56,14 @@ public class JPanelSimpleGraph extends JPanel
 
 	private void geometry()
 		{
-		series = new ArrayList<XYSeries>();
-
-		series.add(new XYSeries("Berne"));
-
-		dataset = new XYSeriesCollection();
-
-		for(XYSeries serie:series)
-			{
-			dataset.addSeries(serie);
-			}
-
+		// Chart
 		JFreeChart chart = createChart();
 		chartPanel = new ChartPanel(chart);
 
+		// Layout
 		setLayout(new BorderLayout());
 
+		// Add
 		add(chartPanel, BorderLayout.CENTER);
 		}
 
@@ -93,11 +80,11 @@ public class JPanelSimpleGraph extends JPanel
 	private JFreeChart createChart()
 		{
 		// create the chart...
-		final JFreeChart chart = ChartFactory.createXYLineChart(graphTitle, // chart title
-				"Time (s)", // x axis label
+		final JFreeChart chart = ChartFactory.createTimeSeriesChart(graphTitle, // chart title
+				"Timestamp", // x axis label
 				graphTitle, // y axis label
-				dataset, // data
-				PlotOrientation.VERTICAL, true, // include legend
+				collection, // data
+				true, // include legend
 				true, // tooltips
 				false // urls
 				);
@@ -114,10 +101,11 @@ public class JPanelSimpleGraph extends JPanel
 
 		// change the auto tick unit selection to integer units only...
 		ValueAxis rangeAxis = plot.getRangeAxis();
-		ValueAxis domainAxis = plot.getDomainAxis();
+		DateAxis dateAxis = (DateAxis) plot.getDomainAxis();
 
 		rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
-		domainAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
+		dateAxis.setDateFormatOverride(new SimpleDateFormat("HH:mm:ss"));
+		dateAxis.setTickMarkPosition(DateTickMarkPosition.MIDDLE);
 
 		// OPTIONAL CUSTOMISATION COMPLETED.
 
@@ -130,10 +118,9 @@ public class JPanelSimpleGraph extends JPanel
 
 	// Input
 	private String graphTitle;
+	private TimeSeriesCollection collection;
 
 	// Tools
-	private ArrayList<XYSeries> series;
-	private XYSeriesCollection dataset;
 	private ChartPanel chartPanel;
 	private XYPlot plot;
 

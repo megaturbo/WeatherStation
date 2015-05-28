@@ -1,9 +1,13 @@
 
 package ch.hearc.meteo.imp.afficheur.real;
 
+import ch.hearc.meteo.imp.afficheur.real.moo.Manager;
+import ch.hearc.meteo.imp.afficheur.real.view.JFrameMain;
+import ch.hearc.meteo.spec.afficheur.AffichageOptions;
 import ch.hearc.meteo.spec.afficheur.AfficheurService_I;
 import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 import ch.hearc.meteo.spec.com.meteo.listener.event.MeteoEvent;
+import ch.hearc.meteo.spec.reseau.rmiwrapper.MeteoServiceWrapper_I;
 
 public class AfficheurService implements AfficheurService_I
 	{
@@ -16,22 +20,28 @@ public class AfficheurService implements AfficheurService_I
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
+	public AfficheurService(AffichageOptions affichageOptions, MeteoServiceWrapper_I meteoServiceRemote)
+		{
+		manager = new Manager();
+		frameService = new JFrameMain(manager);
+		}
+
 	@Override public void printPression(MeteoEvent event)
 		{
-		// TODO Auto-generated method stub
-
+		manager.printPression(event);
+		frameService.refresh();
 		}
 
 	@Override public void printAltitude(MeteoEvent event)
 		{
-		// TODO Auto-generated method stub
-
+		manager.printAltitude(event);
+		frameService.refresh();
 		}
 
 	@Override public void printTemperature(MeteoEvent event)
 		{
-		// TODO Auto-generated method stub
-
+		manager.printTemperature(event);
+		frameService.refresh();
 		}
 
 	@Override public void updateMeteoServiceOptions(MeteoServiceOptions meteoServiceOptions)
@@ -40,8 +50,6 @@ public class AfficheurService implements AfficheurService_I
 
 		}
 
-
-
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
@@ -49,4 +57,9 @@ public class AfficheurService implements AfficheurService_I
 	/*------------------------------------------------------------------*\
 	|*							Attributs Private						*|
 	\*------------------------------------------------------------------*/
+
+	// Inputs
+	private Manager manager;
+	private JFrameMain frameService;
+
 	}

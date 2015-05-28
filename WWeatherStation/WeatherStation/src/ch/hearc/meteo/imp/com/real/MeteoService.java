@@ -45,6 +45,10 @@ public class MeteoService extends MeteoService_A
 	 *
 	 *  </pre>
 	 */
+
+	/*------------------------------------------------------------------*\
+	|*							Constructeurs							*|
+	\*------------------------------------------------------------------*/
 	public MeteoService(ComConnexions_I comConnexion)
 		{
 		super(comConnexion.getNamePort());
@@ -53,15 +57,11 @@ public class MeteoService extends MeteoService_A
 		}
 
 	/*------------------------------------------------------------------*\
-	|*							Constructeurs							*|
-	\*------------------------------------------------------------------*/
-
-	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
 	/**
-	 * assynchrone, when data "value" received , must call altitudePerformed(value) of MeteoServiceCallback_I
+	 * asynchronous, when data "value" received , must call altitudePerformed(value) of MeteoServiceCallback_I
 	 */
 	@Override public void askAltitudeAsync() throws MeteoServiceException
 		{
@@ -76,7 +76,7 @@ public class MeteoService extends MeteoService_A
 		}
 
 	/**
-	 * assynchrone, when data "value" received , must call pressionPerformed(value) of MeteoServiceCallback_I
+	 * asynchronous, when data "value" received , must call pressionPerformed(value) of MeteoServiceCallback_I
 	 */
 	@Override public void askPressionAsync() throws MeteoServiceException
 		{
