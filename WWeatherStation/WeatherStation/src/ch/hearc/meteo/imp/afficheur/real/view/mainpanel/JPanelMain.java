@@ -32,6 +32,11 @@ public class JPanelMain extends JPanel
 	/*------------------------------*\
 	|*				Set				*|
 	\*------------------------------*/
+	public void setSeriesVisible(int serie, boolean visible)
+		{
+		panelStationGraphs.setSeriesVisible(serie, visible);
+		panelMap.refresh();
+		}
 
 	/*------------------------------*\
 	|*				Get				*|
@@ -45,14 +50,13 @@ public class JPanelMain extends JPanel
 		{
 		// JComponent : Instanciation
 		panelStationGraphs = new JPanelStationGraphs(manager);
-		panelMap = new JPanelMap();
+		panelMap = new JPanelMap(manager);
 
 		JTabbedPane tabbedPane = new JTabbedPane(SwingConstants.BOTTOM);
 		tabbedPane.addTab("Map", panelMap);
 		tabbedPane.addTab("Graph", panelStationGraphs);
 
 		setLayout(new BorderLayout());
-
 
 		// JComponent : add
 		add(tabbedPane, BorderLayout.CENTER);

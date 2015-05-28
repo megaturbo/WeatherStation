@@ -447,3 +447,7 @@ Caused by: java.net.SocketTimeoutException: null
 2015-05-22 17:49:21,147 [Stop Help Server] INFO  o.e.j.server.handler.ContextHandler - stopped o.e.j.s.ServletContextHandler{/help,null}
 2015-05-24 13:03:12,831 [Start Help Server] INFO  org.eclipse.jetty.server.Server - jetty-8.1.14.v20131031
 2015-05-24 13:03:12,921 [Start Help Server] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@127.0.0.1:58212
+2015-05-25 14:01:25,877 [Stop Help Server] INFO  o.e.j.server.handler.ContextHandler - stopped o.e.j.s.ServletContextHandler{/help,null}
+2015-05-26 10:44:44,204 [Start Help Server] INFO  org.eclipse.jetty.server.Server - jetty-8.1.14.v20131031
+2015-05-26 10:44:44,334 [Start Help Server] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@127.0.0.1:50187
+2015-05-26 13:35:10,215 [Stop Help Server] INFO  o.e.j.server.handler.ContextHandler - stopped o.e.j.s.ServletContextHandler{/help,null}

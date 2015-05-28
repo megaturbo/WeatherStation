@@ -42,6 +42,10 @@ public class JPanelSimpleGraph extends JPanel
 	|*				Set				*|
 	\*------------------------------*/
 
+	public void setSeriesVisible(int serie, boolean visible) {
+		plot.getRenderer().setSeriesVisible(serie, visible);
+	}
+
 	/*------------------------------*\
 	|*				Get				*|
 	\*------------------------------*/
@@ -102,7 +106,6 @@ public class JPanelSimpleGraph extends JPanel
 		rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
 		dateAxis.setDateFormatOverride(new SimpleDateFormat("HH:mm:ss"));
 		dateAxis.setTickMarkPosition(DateTickMarkPosition.MIDDLE);
-		dateAxis.setVerticalTickLabels(true);
 
 		// OPTIONAL CUSTOMISATION COMPLETED.
 

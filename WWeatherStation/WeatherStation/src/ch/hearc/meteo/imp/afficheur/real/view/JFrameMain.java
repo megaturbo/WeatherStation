@@ -37,6 +37,11 @@ public class JFrameMain extends JFrame
 	/*------------------------------*\
 	|*				Set				*|
 	\*------------------------------*/
+	public void setSeriesVisible(int serie, boolean visible)
+		{
+		panelMain.setSeriesVisible(serie, visible);
+		}
+
 
 	/*------------------------------*\
 	|*				Get				*|
@@ -49,7 +54,7 @@ public class JFrameMain extends JFrame
 	private void geometry()
 		{
 		panelMain = new JPanelMain(manager);
-		panelList = new JPanelStationList(manager);
+		panelList = new JPanelStationList(this, manager);
 
 		setLayout(new BorderLayout());
 
@@ -65,7 +70,7 @@ public class JFrameMain extends JFrame
 	private void appearance()
 		{
 		setTitle("Station Météo");
-		setSize(800, 600);
+		setSize(1200, 800);
 		setLocationRelativeTo(null); 	// frame centrer
 		setVisible(true); 				// last!
 		}

@@ -72,15 +72,17 @@ public class UseComplet
 					afficheurService.printTemperature(event);
 					}
 
-				//				@Override public void altitudePerformed(MeteoEvent event)
-				//					{
-				//					afficheurService.printAltitude(event);
-				//					}
-				//
-				//				@Override public void pressionPerformed(MeteoEvent event)
-				//					{
-				//					afficheurService.printPression(event);
-				//					}
+				@Override
+				public void altitudePerformed(MeteoEvent event)
+					{
+					afficheurService.printAltitude(event);
+					}
+
+				@Override
+				public void pressionPerformed(MeteoEvent event)
+					{
+					afficheurService.printPression(event);
+					}
 
 			});
 

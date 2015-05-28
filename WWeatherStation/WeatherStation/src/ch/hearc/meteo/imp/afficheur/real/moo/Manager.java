@@ -4,12 +4,17 @@ package ch.hearc.meteo.imp.afficheur.real.moo;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import org.jfree.data.time.Millisecond;
 import org.jfree.data.time.RegularTimePeriod;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
+import org.jxmapviewer.viewer.DefaultWaypoint;
+import org.jxmapviewer.viewer.Waypoint;
 
 import ch.hearc.meteo.spec.com.meteo.listener.event.MeteoEvent;
 import ch.hearc.meteo.spec.com.meteo.listener.event.Sources;
@@ -27,7 +32,7 @@ public class Manager
 		collectionPression = new TimeSeriesCollection();
 		collectionTemperature = new TimeSeriesCollection();
 
-		mapSourcesStation = new HashMap<Sources, Station>();
+		stationFromSources = new HashMap<Sources, Station>();
 		}
 
 	/*------------------------------------------------------------------*\
@@ -36,17 +41,17 @@ public class Manager
 
 	public void printAltitude(MeteoEvent event)
 		{
-		manage(collectionAltitude, Sensor.ALTITUDE, event);
+		manage(Sensor.ALTITUDE, event);
 		}
 
 	public void printPression(MeteoEvent event)
 		{
-		manage(collectionPression, Sensor.PRESSURE, event);
+		manage(Sensor.PRESSURE, event);
 		}
 
 	public void printTemperature(MeteoEvent event)
 		{
-		manage(collectionTemperature, Sensor.TEMPERATURE, event);
+		manage(Sensor.TEMPERATURE, event);
 		}
 
 	/*------------------------------*\
@@ -59,7 +64,7 @@ public class Manager
 
 	public Collection<Station> getStationList()
 		{
-		return this.mapSourcesStation.values();
+		return this.stationFromSources.values();
 		}
 
 	public TimeSeriesCollection getCollectionAltitude()
@@ -77,23 +82,48 @@ public class Manager
 		return this.collectionTemperature;
 		}
 
+	public Set<? extends Waypoint> getWaypoints()
+		{
+		Set<DefaultWaypoint> waypoints = new HashSet<DefaultWaypoint>();
+		for(Entry<Sources, Station> entry:stationFromSources.entrySet())
+			{
+			Station station = entry.getValue();
+			if (station.isVisible())
+				{
+				waypoints.add(station.getWaypoint());
+				}
+			}
+		return waypoints;
+		}
+
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
 
-	private void manage(TimeSeriesCollection collection, Sensor sensor, MeteoEvent event)
+	private void manage(Sensor sensor, MeteoEvent event)
 		{
 		Sources source = event.getSource();
 
-		if(!mapSourcesStation.containsKey(source)) {
-			Station station = new Station(source);
-			mapSourcesStation.put(source, station);
-			collection.addSeries(station.getSeries(sensor));
-		}
+		if (!stationFromSources.containsKey(source))
+			{
+			createNewKey(source);
+			}
 
 		RegularTimePeriod time = new Millisecond(new Date(event.getTime()));
-		TimeSeries series = mapSourcesStation.get(source).getSeries(sensor);
+		Station station = stationFromSources.get(source);
+		TimeSeries series = station.getSeries(sensor);
+
 		series.add(time, event.getValue());
+		}
+
+	private void createNewKey(Sources source)
+		{
+		Station station = new Station(source);
+		stationFromSources.put(source, station);
+
+		collectionAltitude.addSeries(station.getSeriesAltitude());
+		collectionPression.addSeries(station.getSeriesPression());
+		collectionTemperature.addSeries(station.getSeriesTemperature());
 		}
 
 	/*------------------------------------------------------------------*\
@@ -105,6 +135,6 @@ public class Manager
 	private TimeSeriesCollection collectionPression;
 	private TimeSeriesCollection collectionTemperature;
 
-	private Map<Sources, Station> mapSourcesStation;
+	private Map<Sources, Station> stationFromSources;
 
 	}

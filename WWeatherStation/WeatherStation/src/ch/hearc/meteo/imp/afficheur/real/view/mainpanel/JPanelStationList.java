@@ -3,16 +3,19 @@ package ch.hearc.meteo.imp.afficheur.real.view.mainpanel;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.Collection;
 
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import ch.hearc.meteo.affichage.customs.QKTCheckBox;
-import ch.hearc.meteo.affichage.customs.QKTScrollBarUI;
+import ch.hearc.meteo.imp.afficheur.real.customs.QKTCheckBox;
+import ch.hearc.meteo.imp.afficheur.real.customs.QKTScrollBarUI;
 import ch.hearc.meteo.imp.afficheur.real.moo.Manager;
 import ch.hearc.meteo.imp.afficheur.real.moo.Station;
+import ch.hearc.meteo.imp.afficheur.real.view.JFrameMain;
 
 public class JPanelStationList extends JPanel
 	{
@@ -21,8 +24,9 @@ public class JPanelStationList extends JPanel
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JPanelStationList(Manager manager)
+	public JPanelStationList(JFrameMain parent, Manager manager)
 		{
+		this.parent = parent;
 		this.manager = manager;
 
 		geometry();
@@ -38,16 +42,30 @@ public class JPanelStationList extends JPanel
 		{
 		Collection<Station> stations = manager.getStationList();
 
-		// Clear
 		panelList.removeAll();
 
 		for(Station s: stations)
 			{
 			QKTCheckBox cb = new QKTCheckBox(s.getName());
 			cb.setSelected(s.isVisible());
+			addCheckBoxListener(s, cb);
 			panelList.add(cb);
 			}
 		this.updateUI();
+		}
+
+	private void addCheckBoxListener(Station s, QKTCheckBox cb)
+		{
+		cb.addItemListener(new ItemListener()
+			{
+
+				@Override
+				public void itemStateChanged(ItemEvent event)
+					{
+					parent.setSeriesVisible(0, !s.isVisible());
+					s.setVisible(!s.isVisible());
+					}
+			});
 		}
 
 	/*------------------------------*\
@@ -94,9 +112,10 @@ public class JPanelStationList extends JPanel
 	\*------------------------------------------------------------------*/
 
 	// Inputs
+	private JFrameMain parent;
 	private Manager manager;
 
 	// Tools
-	JPanel panelList;
+	private JPanel panelList;
 
 	}

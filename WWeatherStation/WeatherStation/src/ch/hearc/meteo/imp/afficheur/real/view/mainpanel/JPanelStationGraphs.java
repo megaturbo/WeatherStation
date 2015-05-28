@@ -31,6 +31,12 @@ public class JPanelStationGraphs extends JPanel
 	|*				Set				*|
 	\*------------------------------*/
 
+	public void setSeriesVisible(int serie, boolean visible) {
+		panelAltitude.setSeriesVisible(serie, visible);
+		panelPressure.setSeriesVisible(serie, visible);
+		panelTemperature.setSeriesVisible(serie, visible);
+	}
+
 	/*------------------------------*\
 	|*				Get				*|
 	\*------------------------------*/
@@ -41,9 +47,9 @@ public class JPanelStationGraphs extends JPanel
 
 	private void geometry()
 		{
-		panelAltitude = new JPanelSimpleGraph("Temperature", manager.getCollectionAltitude());
+		panelAltitude = new JPanelSimpleGraph("Altitude", manager.getCollectionAltitude());
 		panelPressure = new JPanelSimpleGraph("Pression", manager.getCollectionPression());
-		panelTemperature = new JPanelSimpleGraph("Altitude", manager.getCollectionTemperature());
+		panelTemperature = new JPanelSimpleGraph("Temperature", manager.getCollectionTemperature());
 
 		GridLayout layout = new GridLayout(3, 1);
 		setLayout(layout);

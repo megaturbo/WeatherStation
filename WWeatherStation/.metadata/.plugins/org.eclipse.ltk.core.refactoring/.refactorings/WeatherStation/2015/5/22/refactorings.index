@@ -1,0 +1,4 @@
+1432552100355	Extract method 'addCheckBoxListener'
+1432552911242	Extract method 'createNewKey'
+1432553258686	Rename field 'mapSourcesStation'
+1432626247896	Rename package 'ch.hearc.meteo.affichage.customs'
