@@ -16,9 +16,6 @@ public class AfficheurServiceSimulateur implements AfficheurService_I
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	/**
-	 * n = #data to print
-	 */
 	public AfficheurServiceSimulateur(AffichageOptions affichageOptions, MeteoServiceWrapper_I meteoServiceRemote)
 		{
 		afficheurServiceMOO = new AfficheurServiceMOO(affichageOptions, meteoServiceRemote);

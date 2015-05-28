@@ -1,5 +1,5 @@
 
-package ch.hearc.meteo.affichage.utils;
+package ch.hearc.meteo.imp.afficheur.real.view.utils;
 
 import java.awt.BasicStroke;
 import java.awt.Color;

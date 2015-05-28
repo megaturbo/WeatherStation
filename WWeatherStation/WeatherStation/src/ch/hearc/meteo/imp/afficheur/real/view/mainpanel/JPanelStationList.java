@@ -1,18 +1,18 @@
 
 package ch.hearc.meteo.imp.afficheur.real.view.mainpanel;
 
-import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Collection;
 
 import javax.swing.BoxLayout;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import ch.hearc.meteo.imp.afficheur.real.customs.QKTCheckBox;
-import ch.hearc.meteo.imp.afficheur.real.customs.QKTScrollBarUI;
 import ch.hearc.meteo.imp.afficheur.real.moo.Manager;
 import ch.hearc.meteo.imp.afficheur.real.moo.Station;
 import ch.hearc.meteo.imp.afficheur.real.view.JFrameMain;
@@ -87,14 +87,21 @@ public class JPanelStationList extends JPanel
 		panelList.setLayout(new BoxLayout(panelList, BoxLayout.PAGE_AXIS));
 
 		JScrollPane scrollPane = new JScrollPane(panelList);
-		scrollPane.setPreferredSize(new Dimension(200, 400));
-				scrollPane.getVerticalScrollBar().setUI(new QKTScrollBarUI(QKTScrollBarUI.VERTICAL));
-				scrollPane.getHorizontalScrollBar().setUI(new QKTScrollBarUI(QKTScrollBarUI.HORIZONTAL));
+//		scrollPane.setPreferredSize(new Dimension(200, 600));
 
-		FlowLayout flowlayout = new FlowLayout(FlowLayout.CENTER);
-		setLayout(flowlayout);
+		setLayout(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
+		c.fill = GridBagConstraints.BOTH;
 
-		add(scrollPane);
+		c.gridx = 0;
+		c.gridy = 0;
+		c.weightx = 1;
+		c.weighty = 1;
+		add(new JLabel("Connected Stations"), c);
+
+		c.gridy = 1;
+		c.weighty = 9;
+		add(scrollPane, c);
 		}
 
 	private void control()
