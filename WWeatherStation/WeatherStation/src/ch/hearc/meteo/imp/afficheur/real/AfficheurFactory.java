@@ -23,5 +23,10 @@ public class AfficheurFactory implements AfficheurFactory_I
 		return new AfficheurServiceLocalFull(affichageOptions, meteoServiceRemote);
 		}
 
+	public AfficheurService_I createOnLocalPCLight()
+	{
+		return new AfficheurServiceLocalLight();
+	}
+
 	}
 
