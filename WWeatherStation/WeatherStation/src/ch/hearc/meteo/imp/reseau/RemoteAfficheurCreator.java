@@ -3,7 +3,7 @@ package ch.hearc.meteo.imp.reseau;
 
 import java.rmi.RemoteException;
 
-import ch.hearc.meteo.imp.afficheur.real.AfficheurService;
+import ch.hearc.meteo.imp.afficheur.real.AfficheurServiceLocalFull;
 import ch.hearc.meteo.spec.afficheur.AffichageOptions;
 import ch.hearc.meteo.spec.afficheur.AfficheurService_I;
 import ch.hearc.meteo.spec.reseau.RemoteAfficheurCreator_I;
@@ -83,7 +83,7 @@ public class RemoteAfficheurCreator implements RemoteAfficheurCreator_I
 		{
 		// TODO
 		//		AfficheurService_I afficheurService = new AfficheurService(); //
-		return new AfficheurService(); //
+		return new AfficheurServiceLocalFull(affichageOptions, meteoServiceRemote); //
 		}
 
 	private void server() throws RemoteException
