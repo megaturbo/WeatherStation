@@ -95,12 +95,11 @@ public class ComConnexion implements ComConnexions_I
 			{
 			if (!running)
 				{
-				Thread asking = new Thread(askQuestions());
+				questionner = new Thread(askQuestions());
 				running = true;
-				asking.start();
+				questionner.start();
 				}
 			}
-
 
 		}
 
@@ -110,6 +109,8 @@ public class ComConnexion implements ComConnexions_I
 		// stop asking questions
 		if (running)
 			{
+			Thread.sleep(100);
+			questionner.join();
 			running = false;
 			}
 
@@ -153,6 +154,7 @@ public class ComConnexion implements ComConnexions_I
 				});
 			reader = new BufferedReader(new InputStreamReader(serialPort.getInputStream()));
 			writer = serialPort.getOutputStream();
+			connected = true;
 			}
 
 		}
@@ -186,6 +188,7 @@ public class ComConnexion implements ComConnexions_I
 			reader.close();
 			writer.close();
 			serialPort.close();
+			connected = false;
 			}
 		}
 
@@ -280,4 +283,5 @@ public class ComConnexion implements ComConnexions_I
 	private BufferedReader reader;
 	private boolean running;
 	private boolean connected;
+	private Thread questionner;
 	}
