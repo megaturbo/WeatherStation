@@ -41,7 +41,7 @@ public class UseComplet
 
 	public static void main() throws MeteoServiceException
 		{
-		String portName = "COM9";
+		String portName = "COM5";
 		MeteoService_I meteoService = (new MeteoFactory()).create(portName);
 		use(meteoService);
 		}
