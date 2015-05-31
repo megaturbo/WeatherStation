@@ -1,6 +1,9 @@
 
 package ch.hearc.meteo.imp.use.local;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import ch.hearc.meteo.imp.afficheur.real.AfficheurFactory;
 import ch.hearc.meteo.imp.com.real.MeteoFactory;
 import ch.hearc.meteo.spec.afficheur.AffichageOptions;
@@ -30,7 +33,8 @@ public class UseComplet
 			}
 		catch (MeteoServiceException e)
 			{
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "Connection Error", JOptionPane.ERROR_MESSAGE);
+			System.exit(0);
 			}
 		}
 
