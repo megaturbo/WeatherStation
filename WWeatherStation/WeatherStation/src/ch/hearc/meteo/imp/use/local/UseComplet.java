@@ -34,6 +34,7 @@ public class UseComplet
 		catch (MeteoServiceException e)
 			{
 			JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "Connection Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
 			System.exit(0);
 			}
 		}
