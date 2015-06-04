@@ -3,7 +3,6 @@ package ch.hearc.meteo.imp.afficheur.real;
 
 import ch.hearc.meteo.imp.afficheur.real.moo.Manager;
 import ch.hearc.meteo.imp.afficheur.real.view.JFrameLocalFull;
-import ch.hearc.meteo.spec.afficheur.AffichageOptions;
 import ch.hearc.meteo.spec.afficheur.AfficheurService_I;
 import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 import ch.hearc.meteo.spec.com.meteo.listener.event.MeteoEvent;
@@ -20,10 +19,10 @@ public class AfficheurServiceLocalFull implements AfficheurService_I
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
-	public AfficheurServiceLocalFull(String portCom, AffichageOptions affichageOptions, MeteoServiceWrapper_I meteoServiceRemote)
+	public AfficheurServiceLocalFull(MeteoServiceWrapper_I meteoServiceRemote)
 		{
 		manager = new Manager();
-		frameService = new JFrameLocalFull(portCom, manager);
+		frameService = new JFrameLocalFull(meteoServiceRemote, manager);
 		}
 
 	@Override public void printPression(MeteoEvent event)

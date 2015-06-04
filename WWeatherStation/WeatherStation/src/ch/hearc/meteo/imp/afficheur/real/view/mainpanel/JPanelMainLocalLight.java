@@ -4,6 +4,7 @@ package ch.hearc.meteo.imp.afficheur.real.view.mainpanel;
 import java.awt.BorderLayout;
 
 import javax.swing.JPanel;
+import javax.swing.JSlider;
 
 import ch.hearc.meteo.imp.afficheur.real.moo.Manager;
 
@@ -41,6 +42,7 @@ public class JPanelMainLocalLight extends JPanel
 	private void geometry()
 		{
 		// JComponent : Instanciation
+		sliderAltitude = new JSlider();
 
 		setLayout(new BorderLayout());
 
@@ -65,6 +67,8 @@ public class JPanelMainLocalLight extends JPanel
 	private Manager manager;
 
 	// Tools
-
+	private JSlider sliderAltitude;
+	private JSlider sliderPressure;
+	private JSlider sliderTemperature;
 
 	}

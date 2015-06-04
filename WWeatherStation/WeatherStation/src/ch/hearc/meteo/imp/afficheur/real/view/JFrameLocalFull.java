@@ -16,6 +16,7 @@ import javax.swing.KeyStroke;
 import ch.hearc.meteo.imp.afficheur.real.moo.Manager;
 import ch.hearc.meteo.imp.afficheur.real.view.mainpanel.JPanelMainLocalFull;
 import ch.hearc.meteo.imp.afficheur.real.view.mainpanel.subpanels.JPanelStationList;
+import ch.hearc.meteo.spec.reseau.rmiwrapper.MeteoServiceWrapper_I;
 
 public class JFrameLocalFull extends JFrame implements JFrameFull_I
 	{
@@ -24,7 +25,7 @@ public class JFrameLocalFull extends JFrame implements JFrameFull_I
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JFrameLocalFull(String portCom, Manager manager)
+	public JFrameLocalFull(MeteoServiceWrapper_I meteoServiceRemote, Manager manager)
 		{
 		this.manager = manager;
 

@@ -12,9 +12,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
-import ch.hearc.meteo.imp.afficheur.real.AfficheurFactory;
 import ch.hearc.meteo.imp.afficheur.real.moo.Manager;
 import ch.hearc.meteo.imp.afficheur.real.view.mainpanel.JPanelMainLocalLight;
+import ch.hearc.meteo.spec.reseau.rmiwrapper.MeteoServiceWrapper_I;
 
 public class JFrameLocalLight extends JFrame
 	{
@@ -23,7 +23,7 @@ public class JFrameLocalLight extends JFrame
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JFrameLocalLight(String portCom, Manager manager)
+	public JFrameLocalLight(MeteoServiceWrapper_I meteoServiceRemote, Manager manager)
 		{
 		this.manager = manager;
 
@@ -64,7 +64,7 @@ public class JFrameLocalLight extends JFrame
 
 	private void control()
 		{
-		//setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		}
 
 	private void appearance()
@@ -91,7 +91,7 @@ public class JFrameLocalLight extends JFrame
 				@Override
 				public void actionPerformed(ActionEvent arg0)
 					{
-					(new AfficheurFactory()).createOnLocalPCLight();
+					// TODO new Local Light JVM
 					}
 			});
 
