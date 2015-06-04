@@ -42,8 +42,6 @@ public class TestGraph extends ApplicationFrame {
 		// NOW DO SOME OPTIONAL CUSTOMISATION OF THE CHART...
 		chart.setBackgroundPaint(Color.white);
 
-		
-
 		// get a reference to the plot for further customisation...
 		final XYPlot plot = chart.getXYPlot();
 		plot.setBackgroundPaint(Color.lightGray);
@@ -52,9 +50,11 @@ public class TestGraph extends ApplicationFrame {
 		plot.setRangeGridlinePaint(Color.white);
 
 		// change the auto tick unit selection to integer units only...
-		plot.getRangeAxis().setStandardTickUnits(NumberAxis.createIntegerTickUnits());
-		plot.getDomainAxis().setStandardTickUnits(NumberAxis.createIntegerTickUnits());
-		
+		plot.getRangeAxis().setStandardTickUnits(
+				NumberAxis.createIntegerTickUnits());
+		plot.getDomainAxis().setStandardTickUnits(
+				NumberAxis.createIntegerTickUnits());
+
 		// OPTIONAL CUSTOMISATION COMPLETED.
 
 		return chart;
