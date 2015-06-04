@@ -1,20 +1,20 @@
+
 package ch.hearc.meteo.imp.afficheur.real.view.mainpanel;
 
-import java.awt.GridLayout;
+import java.awt.BorderLayout;
 
 import javax.swing.JPanel;
 
 import ch.hearc.meteo.imp.afficheur.real.moo.Manager;
-import ch.hearc.meteo.imp.afficheur.real.view.utils.JPanelSimpleGraph;
 
-public class JPanelStationGraphs extends JPanel
+public class JPanelMainLocalLight extends JPanel
 	{
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JPanelStationGraphs(Manager manager)
+	public JPanelMainLocalLight(Manager manager)
 		{
 		this.manager = manager;
 
@@ -30,13 +30,6 @@ public class JPanelStationGraphs extends JPanel
 	/*------------------------------*\
 	|*				Set				*|
 	\*------------------------------*/
-
-	public void setSeriesVisible(int serie, boolean visible) {
-		panelAltitude.setSeriesVisible(serie, visible);
-		panelPressure.setSeriesVisible(serie, visible);
-		panelTemperature.setSeriesVisible(serie, visible);
-	}
-
 	/*------------------------------*\
 	|*				Get				*|
 	\*------------------------------*/
@@ -47,21 +40,16 @@ public class JPanelStationGraphs extends JPanel
 
 	private void geometry()
 		{
-		panelAltitude = new JPanelSimpleGraph("Altitude", manager.getCollectionAltitude());
-		panelPressure = new JPanelSimpleGraph("Pression", manager.getCollectionPression());
-		panelTemperature = new JPanelSimpleGraph("Temperature", manager.getCollectionTemperature());
+		// JComponent : Instanciation
 
-		GridLayout layout = new GridLayout(3, 1);
-		setLayout(layout);
+		setLayout(new BorderLayout());
 
-		add(panelTemperature);
-		add(panelPressure);
-		add(panelAltitude);
+		// JComponent : add
 		}
 
 	private void control()
 		{
-		// rien
+
 		}
 
 	private void appearance()
@@ -77,10 +65,6 @@ public class JPanelStationGraphs extends JPanel
 	private Manager manager;
 
 	// Tools
-	private JPanelSimpleGraph panelTemperature;
-	private JPanelSimpleGraph panelPressure;
-	private JPanelSimpleGraph panelAltitude;
 
 
 	}
-

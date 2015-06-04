@@ -1,22 +1,20 @@
+package ch.hearc.meteo.imp.afficheur.real.view.mainpanel.subpanels;
 
-package ch.hearc.meteo.imp.afficheur.real.view.mainpanel;
-
-import java.awt.BorderLayout;
+import java.awt.GridLayout;
 
 import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-import javax.swing.SwingConstants;
 
 import ch.hearc.meteo.imp.afficheur.real.moo.Manager;
+import ch.hearc.meteo.imp.afficheur.real.view.utils.JPanelSimpleGraph;
 
-public class JPanelMain extends JPanel
+public class JPanelStationGraphs extends JPanel
 	{
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JPanelMain(Manager manager)
+	public JPanelStationGraphs(Manager manager)
 		{
 		this.manager = manager;
 
@@ -32,11 +30,12 @@ public class JPanelMain extends JPanel
 	/*------------------------------*\
 	|*				Set				*|
 	\*------------------------------*/
-	public void setSeriesVisible(int serie, boolean visible)
-		{
-		panelStationGraphs.setSeriesVisible(serie, visible);
-		panelMap.refresh();
-		}
+
+	public void setSeriesVisible(int serie, boolean visible) {
+		panelAltitude.setSeriesVisible(serie, visible);
+		panelPressure.setSeriesVisible(serie, visible);
+		panelTemperature.setSeriesVisible(serie, visible);
+	}
 
 	/*------------------------------*\
 	|*				Get				*|
@@ -48,23 +47,21 @@ public class JPanelMain extends JPanel
 
 	private void geometry()
 		{
-		// JComponent : Instanciation
-		panelStationGraphs = new JPanelStationGraphs(manager);
-		panelMap = new JPanelMap(manager);
+		panelAltitude = new JPanelSimpleGraph("Altitude", manager.getCollectionAltitude());
+		panelPressure = new JPanelSimpleGraph("Pression", manager.getCollectionPression());
+		panelTemperature = new JPanelSimpleGraph("Temperature", manager.getCollectionTemperature());
 
-		JTabbedPane tabbedPane = new JTabbedPane(SwingConstants.BOTTOM);
-		tabbedPane.addTab("Map", panelMap);
-		tabbedPane.addTab("Graph", panelStationGraphs);
+		GridLayout layout = new GridLayout(3, 1);
+		setLayout(layout);
 
-		setLayout(new BorderLayout());
-
-		// JComponent : add
-		add(tabbedPane, BorderLayout.CENTER);
+		add(panelTemperature);
+		add(panelPressure);
+		add(panelAltitude);
 		}
 
 	private void control()
 		{
-
+		// rien
 		}
 
 	private void appearance()
@@ -80,7 +77,10 @@ public class JPanelMain extends JPanel
 	private Manager manager;
 
 	// Tools
-	private JPanelStationGraphs panelStationGraphs;
-	private JPanelMap panelMap;
+	private JPanelSimpleGraph panelTemperature;
+	private JPanelSimpleGraph panelPressure;
+	private JPanelSimpleGraph panelAltitude;
+
 
 	}
+

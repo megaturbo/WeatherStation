@@ -196,9 +196,7 @@ public class ComConnexion implements ComConnexions_I
 	public void askAltitudeAsync() throws Exception
 		{
 		byte[] tabByte = TrameEncoder.coder("010200");
-		System.out.println("asking for altitude");
 		writer.write(tabByte);
-		System.out.println("altitude asked");
 		}
 
 	@Override

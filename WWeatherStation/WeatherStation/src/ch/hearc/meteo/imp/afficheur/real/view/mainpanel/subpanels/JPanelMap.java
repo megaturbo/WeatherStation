@@ -1,5 +1,5 @@
 
-package ch.hearc.meteo.imp.afficheur.real.view.mainpanel;
+package ch.hearc.meteo.imp.afficheur.real.view.mainpanel.subpanels;
 
 import java.awt.BorderLayout;
 import java.util.ArrayList;
