@@ -1,7 +1,8 @@
 
-package ch.hearc.meteo.imp.afficheur.real.view.mainpanel.subpanels;
+package ch.hearc.meteo.imp.afficheur.real.view.mainpanel.light;
 
-import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.rmi.RemoteException;
 
 import javax.swing.BorderFactory;
@@ -85,11 +86,21 @@ public class JPanelSlider extends JPanel
 		sliderPressure.setBorder(borderPressure);
 		sliderTemperature.setBorder(borderTemperature);
 
-		setLayout(new FlowLayout(FlowLayout.CENTER));
+		setLayout(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
+		c.fill = GridBagConstraints.BOTH;
 
-		add(sliderAltitude);
-		add(sliderPressure);
-		add(sliderTemperature);
+		c.gridx = 0;
+		c.gridy = 0;
+		c.weightx = 1;
+		c.weighty = 1;
+		add(sliderAltitude, c);
+
+		c.gridy = 1;
+		add(sliderPressure, c);
+
+		c.gridy = 2;
+		add(sliderTemperature, c);
 		}
 
 	private void apparence()

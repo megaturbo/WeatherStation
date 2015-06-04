@@ -7,7 +7,7 @@ import java.awt.GridBagLayout;
 import javax.swing.JPanel;
 
 import ch.hearc.meteo.imp.afficheur.real.moo.Manager;
-import ch.hearc.meteo.imp.afficheur.real.view.mainpanel.subpanels.JPanelSlider;
+import ch.hearc.meteo.imp.afficheur.real.view.mainpanel.light.JPanelSlider;
 import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 
 

@@ -8,8 +8,8 @@ import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 
 import ch.hearc.meteo.imp.afficheur.real.moo.Manager;
-import ch.hearc.meteo.imp.afficheur.real.view.mainpanel.subpanels.JPanelMap;
-import ch.hearc.meteo.imp.afficheur.real.view.mainpanel.subpanels.JPanelStationGraphs;
+import ch.hearc.meteo.imp.afficheur.real.view.mainpanel.full.JPanelMap;
+import ch.hearc.meteo.imp.afficheur.real.view.mainpanel.full.JPanelStationGraphs;
 
 public class JPanelMainLocalFull extends JPanel
 	{
