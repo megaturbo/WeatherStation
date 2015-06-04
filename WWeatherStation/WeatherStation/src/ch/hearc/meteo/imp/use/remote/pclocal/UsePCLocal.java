@@ -23,7 +23,7 @@ public class UsePCLocal
 
 	public static void main()
 		{
-		String portCom = "COM5";
+		String portCom = "COM4";
 		MeteoServiceOptions meteoServiceOptions = new MeteoServiceOptions(800, 1000, 1200);
 		AffichageOptions affichageOptions = new AffichageOptions(3, RmiTools.getLocalHost() + "");
 		RmiURL rmiURL = new RmiURL(IdTools.createID(RemoteAfficheurCreator.RMI_ID)); //TODO not localhost

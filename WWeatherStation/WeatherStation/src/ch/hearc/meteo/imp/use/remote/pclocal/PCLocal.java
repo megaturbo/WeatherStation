@@ -76,14 +76,16 @@ public class PCLocal implements PC_I
 	private void server() throws MeteoServiceException, RemoteException
 		{
 		MeteoService meteoService = (MeteoService)new MeteoFactory().create(portCom);
-		meteoService.connect();
-		meteoService.start(meteoServiceOptions);
+//		meteoService.connect();
+//		meteoService.start(meteoServiceOptions);
 
 		MeteoServiceWrapper_I meteoServiceWrapper = new MeteoServiceWrapper(meteoService);
 
 		AfficheurService_I afficheurService = new AfficheurFactory().createOnLocalPCLight(meteoServiceWrapper);
 
+		System.out.println("PC Local: sharing meteoServiceWrapper");
 		RmiTools.shareObject(meteoServiceWrapper, rmiURLafficheurManager);
+		System.out.println("PC Local: sharing success\n");
 		}
 
 	/*------------------------------*\
@@ -100,7 +102,9 @@ public class PCLocal implements PC_I
 
 		RmiURL afficheurServicermiURL = remoteAfficheurCreator.createRemoteAfficheurService(affichageOptions, rmiURLafficheurManager);
 
+		System.out.println("PC Local: connecting to afficheurService");
 		afficheurServiceRemote = (AfficheurServiceWrapper_I)RmiTools.connectionRemoteObject(afficheurServicermiURL); //
+		System.out.println("PC Local: connection success\n");
 		}
 
 	/*------------------------------------------------------------------*\
