@@ -18,7 +18,7 @@ public class AfficheurServiceLocalLight implements AfficheurService_I
 	\*------------------------------------------------------------------*/
 
 	public AfficheurServiceLocalLight(MeteoServiceWrapper_I meteoServiceRemote) {
-		manager = new Manager();
+		manager = new Manager(meteoServiceRemote);
 		frameService = new JFrameLocalLight(meteoServiceRemote, manager);
 	}
 
