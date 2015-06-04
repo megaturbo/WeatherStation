@@ -38,16 +38,16 @@ public class UseComplet
 			System.exit(0);
 			}
 		catch (Exception e)
-		{
+			{
 			JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "Something happened", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
 			System.exit(0);
-		}
+			}
 		}
 
 	public static void main() throws MeteoServiceException
 		{
-		String portName = "COM9";
+		String portName = "COM5";
 		MeteoService_I meteoService = (new MeteoServiceSimulatorFactory()).create(portName);
 		use(meteoService);
 		}
@@ -64,21 +64,26 @@ public class UseComplet
 
 		String titre = RmiTools.getLocalHost() + " " + meteoService.getPort();
 		AffichageOptions affichageOption = new AffichageOptions(3, titre);
-//		AfficheurService_I afficheurService = (new AfficheurSimulateurFactory()).createOnLocalPC(affichageOption, meteoServiceWrapper);
+		// AfficheurService_I afficheurService = (new
+		// AfficheurSimulateurFactory()).createOnLocalPC(affichageOption,
+		// meteoServiceWrapper);
+		//		AfficheurService_I afficheurService = (new AfficheurSimulateurFactory()).createOnLocalPC(affichageOption, meteoServiceWrapper);
 		AfficheurService_I afficheurService = (new AfficheurFactory()).createOnLocalPCLight(meteoServiceWrapper);
 
 		use(meteoService, afficheurService);
 		}
 
 	/**
-	 * Liason entre les deux services d'affichage : MeteoService_I et AfficheurService_I
+	 * Liason entre les deux services d'affichage : MeteoService_I et
+	 * AfficheurService_I
 	 */
 	public static void use(final MeteoService_I meteoService, final AfficheurService_I afficheurService) throws MeteoServiceException
 		{
 		meteoService.addMeteoListener(new MeteoAdapter()
 			{
 
-				@Override public void temperaturePerformed(MeteoEvent event)
+				@Override
+				public void temperaturePerformed(MeteoEvent event)
 					{
 					afficheurService.printTemperature(event);
 					}
@@ -101,20 +106,21 @@ public class UseComplet
 		Thread threadSimulationChangementDt = new Thread(new Runnable()
 			{
 
-				@Override public void run()
+				@Override
+				public void run()
 					{
 					double x = 0;
 					double dx = Math.PI / 10;
 
 					while(true)
 						{
-						long dt = 1000 + (long)(5000 * Math.abs(Math.cos(x))); //ms
+						long dt = 1000 + (long)(5000 * Math.abs(Math.cos(x))); // ms
 
 						System.out.println("modification dt temperature = " + dt);
 
 						meteoService.getMeteoServiceOptions().setTemperatureDT(dt);
 
-						//	System.out.println(meteoService.getMeteoServiceOptions());
+						// System.out.println(meteoService.getMeteoServiceOptions());
 
 						attendre(3000); // disons
 						x += dx;
@@ -126,7 +132,8 @@ public class UseComplet
 		Thread threadPoolingOptions = new Thread(new Runnable()
 			{
 
-				@Override public void run()
+				@Override
+				public void run()
 					{
 
 					while(true)
@@ -134,9 +141,9 @@ public class UseComplet
 						MeteoServiceOptions option = meteoService.getMeteoServiceOptions();
 						afficheurService.updateMeteoServiceOptions(option);
 
-						//System.out.println(option);
+						// System.out.println(option);
 
-						attendre(1000); //disons
+						attendre(1000); // disons
 						}
 					}
 			});
