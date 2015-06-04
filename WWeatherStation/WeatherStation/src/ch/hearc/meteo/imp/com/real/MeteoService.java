@@ -142,7 +142,7 @@ public class MeteoService extends MeteoService_A
 		super.start(meteoServiceOptions);
 		try
 			{
-			comConnexion.start();
+			comConnexion.start(meteoServiceOptions);
 			}
 		catch (Exception e)
 			{

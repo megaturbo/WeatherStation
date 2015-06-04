@@ -6,8 +6,6 @@ import ch.hearc.meteo.spec.afficheur.AfficheurFactory_I;
 import ch.hearc.meteo.spec.afficheur.AfficheurService_I;
 import ch.hearc.meteo.spec.reseau.rmiwrapper.MeteoServiceWrapper_I;
 
-
-
 public class AfficheurFactory implements AfficheurFactory_I
 	{
 
@@ -23,9 +21,8 @@ public class AfficheurFactory implements AfficheurFactory_I
 		return new AfficheurServiceLocalFull(meteoServiceRemote);
 		}
 
-		public AfficheurService_I createOnLocalPCLight(MeteoServiceWrapper_I meteoServiceRemote)
+	public AfficheurService_I createOnLocalPCLight(MeteoServiceWrapper_I meteoServiceRemote)
 		{
-			return new AfficheurServiceLocalLight(meteoServiceRemote);
+		return new AfficheurServiceLocalLight(meteoServiceRemote);
 		}
 	}
-

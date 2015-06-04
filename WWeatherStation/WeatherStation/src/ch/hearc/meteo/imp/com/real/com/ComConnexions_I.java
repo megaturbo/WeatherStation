@@ -1,6 +1,8 @@
 
 package ch.hearc.meteo.imp.com.real.com;
 
+import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
+
 /**
  * Le cosntructeur de ComConnexions doit avoir comme paramètre d'entrée un MeteoServiceCallback_I
  */
@@ -37,11 +39,12 @@ public interface ComConnexions_I
 	/**
 	 * add listener on the port com
 	 */
-	public void start() throws Exception;
+	public void start(MeteoServiceOptions meteoServiceOptions) throws Exception;
 
 	/**
 	 * remove listener on the port com
 	 */
 	public void stop() throws Exception;
+
 
 	}

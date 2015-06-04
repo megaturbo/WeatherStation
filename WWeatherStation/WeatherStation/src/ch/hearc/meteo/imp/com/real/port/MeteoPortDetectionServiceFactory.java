@@ -1,27 +1,30 @@
 
-package ch.hearc.meteo.imp.reseau;
+package ch.hearc.meteo.imp.com.real.port;
+import ch.hearc.meteo.spec.com.port.MeteoPortDetectionServiceFactory_I;
+import ch.hearc.meteo.spec.com.port.MeteoPortDetectionService_I;
 
-import java.rmi.RemoteException;
 
-import ch.hearc.meteo.spec.reseau.RemoteAfficheurCreatorFactory_I;
-import ch.hearc.meteo.spec.reseau.RemoteAfficheurCreator_I;
 
-public class RemoteAfficheurCreatorFactory implements RemoteAfficheurCreatorFactory_I //
+public class MeteoPortDetectionServiceFactory implements MeteoPortDetectionServiceFactory_I
 	{
+
+
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
+	public MeteoPortDetectionServiceFactory()
+		{
+		// rien
+		}
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
-
 	@Override
-	public RemoteAfficheurCreator_I create() throws RemoteException
+	public MeteoPortDetectionService_I create()
 		{
-		// TODO Auto-generated method stub
-		return null;
+		return new MeteoPortDetectionService();
 		}
 	/*------------------------------*\
 	|*				Set				*|
@@ -38,5 +41,5 @@ public class RemoteAfficheurCreatorFactory implements RemoteAfficheurCreatorFact
 	/*------------------------------------------------------------------*\
 	|*							Attributs Private						*|
 	\*------------------------------------------------------------------*/
-
 	}
+
