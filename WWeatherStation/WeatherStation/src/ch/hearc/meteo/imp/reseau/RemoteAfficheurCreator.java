@@ -47,7 +47,6 @@ public class RemoteAfficheurCreator implements RemoteAfficheurCreator_I
 		MeteoServiceWrapper_I meteoServiceRemote = null;
 			// client
 			{
-			// TODO connecion to meteoService on PC-Local with meteoServiceRmiURL
 			try
 				{
 				meteoServiceRemote = (MeteoServiceWrapper_I)RmiTools.connectionRemoteObject(meteoServiceRmiURL); //
@@ -61,12 +60,13 @@ public class RemoteAfficheurCreator implements RemoteAfficheurCreator_I
 			// server
 			{
 			AfficheurService_I afficheurService = createAfficheurService(affichageOptions, meteoServiceRemote);
-			// TODO share afficheurService
 			AfficheurServiceWrapper_I afficheurServiceWrapper = new AfficheurServiceWrapper(afficheurService); //
 
 			RmiURL afficheurServicermiURL = rmiUrl();
 			RmiTools.shareObject(afficheurServiceWrapper, afficheurServicermiURL); //
-			return afficheurServicermiURL; // Retourner le RMI-ID pour une connection distante sur le serveur d'affichage
+			return afficheurServicermiURL; // Retourner le RMI-ID pour une
+											// connection distante sur le
+											// serveur d'affichage
 			}
 		}
 
@@ -90,20 +90,16 @@ public class RemoteAfficheurCreator implements RemoteAfficheurCreator_I
 
 	private AfficheurService_I createAfficheurService(AffichageOptions affichageOptions, MeteoServiceWrapper_I meteoServiceRemote)
 		{
-		// TODO
-		//		AfficheurService_I afficheurService = new AfficheurService(); //
-<<<<<<< HEAD
-		return new AfficheurService(affichageOptions, meteoServiceRemote); //
-=======
+		// AfficheurService_I afficheurService = new AfficheurService(); //
+		// return new AfficheurService(affichageOptions, meteoServiceRemote); //
 		return new AfficheurServiceLocalFull(affichageOptions, meteoServiceRemote); //
->>>>>>> 7e072cac4fe01dfb947b31110142db45074658ae
 		}
 
 	private void server() throws RemoteException
 		{
 		// TODO share this
-		//		TODO rmiurl? //
-		RmiTools.shareObject(this, rmiUrl()); //
+		String id = IdTools.createID(RMI_ID_CREATOR);//
+		RmiTools.shareObject(this, new RmiURL(id)); //
 		}
 
 	/*------------------------------*\
@@ -116,7 +112,6 @@ public class RemoteAfficheurCreator implements RemoteAfficheurCreator_I
 	private static RmiURL rmiUrl()
 		{
 		String id = IdTools.createID(PREFIXE);
-
 		return new RmiURL(id);
 		}
 
@@ -136,6 +131,6 @@ public class RemoteAfficheurCreator implements RemoteAfficheurCreator_I
 	private static final String PREFIXE = "AFFICHEUR_SERVICE";
 
 	public static final String RMI_ID = PREFIXE;
-
+	public static final String RMI_ID_CREATOR = "CREATOR_ID";
 
 	}
