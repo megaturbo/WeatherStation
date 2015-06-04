@@ -98,8 +98,9 @@ public class RemoteAfficheurCreator implements RemoteAfficheurCreator_I
 	private void server() throws RemoteException
 		{
 		// TODO share this
-		String id = IdTools.createID(RMI_ID_CREATOR);//
-		RmiTools.shareObject(this, new RmiURL(id)); //
+		//		String id = IdTools.createID(RMI_ID_CREATOR);//
+		//		RmiTools.shareObject(this, new RmiURL(id)); //
+		RmiTools.shareObject(this, new RmiURL(RMI_ID_CREATOR)); //
 		}
 
 	/*------------------------------*\

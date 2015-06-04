@@ -76,8 +76,8 @@ public class PCLocal implements PC_I
 	private void server() throws MeteoServiceException, RemoteException
 		{
 		MeteoService meteoService = (MeteoService)new MeteoFactory().create(portCom);
-//		meteoService.connect();
-//		meteoService.start(meteoServiceOptions);
+		meteoService.connect();
+		meteoService.start(meteoServiceOptions);
 
 		MeteoServiceWrapper_I meteoServiceWrapper = new MeteoServiceWrapper(meteoService);
 
@@ -92,8 +92,11 @@ public class PCLocal implements PC_I
 
 	private void client() throws RemoteException, UnknownHostException, NotBoundException
 		{
+		//		String id_creator = IdTools.createID(RemoteAfficheurCreator.RMI_ID_CREATOR);
 		RmiURL rmiURL = new RmiURL(RemoteAfficheurCreator.RMI_ID_CREATOR); //TODO not localhost
 		RemoteAfficheurCreator_I remoteAfficheurCreator = (RemoteAfficheurCreator_I)RmiTools.connectionRemoteObject(rmiURL);
+
+		//		RemoteAfficheurCreator_I remoteAfficheurCreator = RemoteAfficheurCreator.getInstance();
 
 		RmiURL afficheurServicermiURL = remoteAfficheurCreator.createRemoteAfficheurService(affichageOptions, rmiURLafficheurManager);
 
