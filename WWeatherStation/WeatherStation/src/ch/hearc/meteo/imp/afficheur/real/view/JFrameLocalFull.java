@@ -14,17 +14,18 @@ import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
 import ch.hearc.meteo.imp.afficheur.real.moo.Manager;
-import ch.hearc.meteo.imp.afficheur.real.view.mainpanel.JPanelMain;
-import ch.hearc.meteo.imp.afficheur.real.view.mainpanel.JPanelStationList;
+import ch.hearc.meteo.imp.afficheur.real.view.mainpanel.JPanelMainLocalFull;
+import ch.hearc.meteo.imp.afficheur.real.view.mainpanel.subpanels.JPanelStationList;
+import ch.hearc.meteo.spec.reseau.rmiwrapper.MeteoServiceWrapper_I;
 
-public class JFrameMain extends JFrame
+public class JFrameLocalFull extends JFrame implements JFrameFull_I
 	{
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JFrameMain(Manager manager)
+	public JFrameLocalFull(MeteoServiceWrapper_I meteoServiceRemote, Manager manager)
 		{
 		this.manager = manager;
 
@@ -37,6 +38,11 @@ public class JFrameMain extends JFrame
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
+	@Override
+	public void setSeriesVisible(int serie, boolean visible) {
+		panelMain.setSeriesVisible(serie, visible);
+	}
+
 	public void refresh()
 		{
 		panelList.refresh();
@@ -45,10 +51,6 @@ public class JFrameMain extends JFrame
 	/*------------------------------*\
 	|*				Set				*|
 	\*------------------------------*/
-	public void setSeriesVisible(int serie, boolean visible)
-		{
-		panelMain.setSeriesVisible(serie, visible);
-		}
 
 	/*------------------------------*\
 	|*				Get				*|
@@ -62,7 +64,7 @@ public class JFrameMain extends JFrame
 		{
 		createMenuBar();
 
-		panelMain = new JPanelMain(manager);
+		panelMain = new JPanelMainLocalFull(manager);
 		panelList = new JPanelStationList(this, manager);
 
 		setLayout(new BorderLayout());
@@ -78,7 +80,7 @@ public class JFrameMain extends JFrame
 
 	private void appearance()
 		{
-		setTitle("Station Météo");
+		setTitle("Client Local [Full]");
 		setSize(1200, 800);
 		setLocationRelativeTo(null); // frame centrer
 		setVisible(true); // last!
@@ -102,7 +104,7 @@ public class JFrameMain extends JFrame
 				public void actionPerformed(ActionEvent arg0)
 					{
 					Object[] possibilities = { "COM1", "COM2", "etc..." };
-					Object o = JOptionPane.showInputDialog(JFrameMain.this, "Choose a COM port", "COM port chooser", JOptionPane.PLAIN_MESSAGE, null, possibilities, "ham");
+					Object o = JOptionPane.showInputDialog(JFrameLocalFull.this, "Choose a COM port", "COM port chooser", JOptionPane.PLAIN_MESSAGE, null, possibilities, "ham");
 					// TODO use Port to set connection
 					}
 			});
@@ -121,6 +123,6 @@ public class JFrameMain extends JFrame
 
 	// Tools
 	private JPanelStationList panelList;
-	private JPanelMain panelMain;
+	private JPanelMainLocalFull panelMain;
 
 	}

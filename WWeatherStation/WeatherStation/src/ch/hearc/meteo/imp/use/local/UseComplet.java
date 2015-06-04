@@ -37,6 +37,12 @@ public class UseComplet
 			e.printStackTrace();
 			System.exit(0);
 			}
+		catch (Exception e)
+			{
+			JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "Something happened", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+			System.exit(0);
+			}
 		}
 
 	public static void main() throws MeteoServiceException
@@ -61,7 +67,8 @@ public class UseComplet
 		// AfficheurService_I afficheurService = (new
 		// AfficheurSimulateurFactory()).createOnLocalPC(affichageOption,
 		// meteoServiceWrapper);
-		AfficheurService_I afficheurService = (new AfficheurFactory()).createOnLocalPC(affichageOption, meteoServiceWrapper);
+		//		AfficheurService_I afficheurService = (new AfficheurSimulateurFactory()).createOnLocalPC(affichageOption, meteoServiceWrapper);
+		AfficheurService_I afficheurService = (new AfficheurFactory()).createOnLocalPCLight(meteoServiceWrapper);
 
 		use(meteoService, afficheurService);
 		}

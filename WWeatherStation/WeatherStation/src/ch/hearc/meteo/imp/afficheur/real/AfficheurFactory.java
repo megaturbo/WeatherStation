@@ -20,13 +20,12 @@ public class AfficheurFactory implements AfficheurFactory_I
 	@Override
 	public AfficheurService_I createOnLocalPC(AffichageOptions affichageOptions, MeteoServiceWrapper_I meteoServiceRemote)
 		{
-		return new AfficheurServiceLocalFull(affichageOptions, meteoServiceRemote);
+		return new AfficheurServiceLocalFull(meteoServiceRemote);
 		}
 
-	public AfficheurService_I createOnLocalPCLight()
-	{
-		return new AfficheurServiceLocalLight();
-	}
-
+		public AfficheurService_I createOnLocalPCLight(MeteoServiceWrapper_I meteoServiceRemote)
+		{
+			return new AfficheurServiceLocalLight(meteoServiceRemote);
+		}
 	}
 

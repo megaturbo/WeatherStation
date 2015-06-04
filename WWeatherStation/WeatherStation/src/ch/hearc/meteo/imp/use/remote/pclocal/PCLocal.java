@@ -76,12 +76,12 @@ public class PCLocal implements PC_I
 	private void server() throws MeteoServiceException, RemoteException
 		{
 		MeteoService meteoService = (MeteoService)new MeteoFactory().create(portCom);
-		meteoService.connect();
-		meteoService.start(meteoServiceOptions);
+//		meteoService.connect();
+//		meteoService.start(meteoServiceOptions);
 
 		MeteoServiceWrapper_I meteoServiceWrapper = new MeteoServiceWrapper(meteoService);
 
-		AfficheurService_I afficheurService = new AfficheurFactory().createOnLocalPCLight();
+		AfficheurService_I afficheurService = new AfficheurFactory().createOnLocalPCLight(meteoServiceWrapper);
 
 		RmiTools.shareObject(meteoServiceWrapper, rmiURLafficheurManager);
 		}
