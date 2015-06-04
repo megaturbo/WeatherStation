@@ -1,0 +1,40 @@
+1432195275062	Move compilation units
+1432195290444	Rename package 'ch.coursjava.meteo.graph.mainpanel'
+1432206243762	Rename package 'ch.coursjava.meteo.graph'
+1432206259150	Rename package 'ch.coursjava.meteo.graph.customs'
+1432206266687	Rename package 'ch.coursjava.meteo.graph.utils'
+1432206277091	Rename package 'ch.coursjava.meteo.graph.view'
+1432206289291	Rename package 'ch.coursjava.meteo.graph.view.mainpanel'
+1432207374705	Delete element
+1432207378307	Delete element
+1432207663381	Rename package 'ch.coursjava.meteo'
+1432207677913	Rename package 'ch.coursjava.meteo.imp'
+1432207695785	Rename package 'ch.coursjava.meteo.imp.afficheur.real'
+1432207701385	Rename package 'ch.coursjava.meteo.imp.afficheur.simulateur'
+1432207709967	Rename package 'ch.coursjava.meteo.imp.afficheur.simulateur.moo'
+1432207719957	Rename package 'ch.coursjava.meteo.imp.afficheur.simulateur.vue.atome'
+1432207725266	Rename package 'ch.coursjava.meteo.imp.afficheur.simulateur.vue'
+1432207734913	Rename package 'ch.coursjava.meteo.imp.com.logique'
+1432207757496	Rename package 'ch.coursjava.meteo.imp.com.real'
+1432208685869	Delete element
+1432214159913	Copy compilation unit
+1432214224829	Copy compilation unit
+1432214299597	Rename type 'JFrameAfficheurService'
+1432214567418	Delete element
+1432215175763	Rename package 'ch.hearc.meteo.affichage.view.mainpanel'
+1432215294667	Delete element
+1432279100941	Rename type 'AfficheurServiceMOO'
+1432279124916	Rename field 'afficheurServiceMOO'
+1432280191451	Rename field 'datasetAltitude'
+1432280195562	Rename field 'datasetPression'
+1432280205601	Rename field 'datasetTemperature'
+1432280501806	Rename type 'AfficheurServiceFactory'
+1432284706933	Delete element
+1432284710222	Delete element
+1432284716143	Delete element
+1432470276746	Rename type 'StationDatas'
+1432472515452	Rename local variable 'id'
+1432473833890	Rename field 'stations'
+1432473841971	Rename local variable 'tmpStations'
+1432473875996	Rename local variable 'station'
+1432474391992	Rename field 'mapStationSources'

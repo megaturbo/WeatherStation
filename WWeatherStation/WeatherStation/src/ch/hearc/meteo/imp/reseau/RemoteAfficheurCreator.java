@@ -1,6 +1,7 @@
 
 package ch.hearc.meteo.imp.reseau;
 
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
 import ch.hearc.meteo.imp.afficheur.real.AfficheurService;
@@ -47,6 +48,14 @@ public class RemoteAfficheurCreator implements RemoteAfficheurCreator_I
 			// client
 			{
 			// TODO connecion to meteoService on PC-Local with meteoServiceRmiURL
+			try
+				{
+				meteoServiceRemote = (MeteoServiceWrapper_I)RmiTools.connectionRemoteObject(meteoServiceRmiURL); //
+				}
+			catch (NotBoundException e)
+				{
+				e.printStackTrace();
+				}
 			}
 
 			// server
@@ -83,7 +92,7 @@ public class RemoteAfficheurCreator implements RemoteAfficheurCreator_I
 		{
 		// TODO
 		//		AfficheurService_I afficheurService = new AfficheurService(); //
-		return new AfficheurService(); //
+		return new AfficheurService(affichageOptions, meteoServiceRemote); //
 		}
 
 	private void server() throws RemoteException
@@ -123,5 +132,6 @@ public class RemoteAfficheurCreator implements RemoteAfficheurCreator_I
 	private static final String PREFIXE = "AFFICHEUR_SERVICE";
 
 	public static final String RMI_ID = PREFIXE;
+
 
 	}

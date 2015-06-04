@@ -1,0 +1,77 @@
+
+package ch.hearc.meteo.imp.afficheur.real.view;
+
+import java.awt.BorderLayout;
+
+import javax.swing.JFrame;
+
+import ch.hearc.meteo.imp.afficheur.real.moo.Manager;
+import ch.hearc.meteo.imp.afficheur.real.view.mainpanel.JPanelMain;
+import ch.hearc.meteo.imp.afficheur.real.view.mainpanel.JPanelStationList;
+
+public class JFrameMain extends JFrame
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Constructeurs							*|
+	\*------------------------------------------------------------------*/
+
+	public JFrameMain(Manager manager)
+		{
+		geometry();
+		control();
+		appearance();
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	/*------------------------------*\
+	|*				Set				*|
+	\*------------------------------*/
+
+	/*------------------------------*\
+	|*				Get				*|
+	\*------------------------------*/
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	private void geometry()
+		{
+		panelMain = new JPanelMain();
+		panelList = new JPanelStationList();
+
+		setLayout(new BorderLayout());
+
+		add(panelList, BorderLayout.WEST);
+		add(panelMain, BorderLayout.CENTER);
+		}
+
+	private void control()
+		{
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		}
+
+	private void appearance()
+		{
+		setTitle("Station Météo");
+		setSize(800, 600);
+		setLocationRelativeTo(null); 	// frame centrer
+		setVisible(true); 				// last!
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Attributs Private						*|
+	\*------------------------------------------------------------------*/
+
+	// Inputs
+
+
+	// Tools
+	private JPanelStationList panelList;
+	private JPanelMain panelMain;
+
+	}
