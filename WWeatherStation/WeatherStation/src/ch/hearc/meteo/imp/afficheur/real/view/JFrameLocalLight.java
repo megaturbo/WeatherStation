@@ -26,6 +26,7 @@ public class JFrameLocalLight extends JFrame
 	public JFrameLocalLight(MeteoServiceWrapper_I meteoServiceRemote, Manager manager)
 		{
 		this.manager = manager;
+		this.meteoServiceRemote = meteoServiceRemote;
 
 		geometry();
 		control();
@@ -60,6 +61,8 @@ public class JFrameLocalLight extends JFrame
 		panelMain = new JPanelMainLocalLight(manager);
 
 		setLayout(new BorderLayout());
+
+		add(panelMain);
 		}
 
 	private void control()
@@ -71,9 +74,10 @@ public class JFrameLocalLight extends JFrame
 		{
 		setTitle("Local Client [Light]");
 		setSize(600, 400);
-		setLocationRelativeTo(null); // frame centrer
-		setVisible(true); // last!
+		setLocationRelativeTo(null); 	// frame centrer
+		setVisible(true); 				// last!
 		}
+
 	private void createMenuBar()
 		{
 		JMenuBar menuBar = new JMenuBar();
@@ -106,6 +110,7 @@ public class JFrameLocalLight extends JFrame
 
 	// Inputs
 	private Manager manager;
+	private MeteoServiceWrapper_I meteoServiceRemote;
 
 	// Tools
 	private JPanelMainLocalLight panelMain;

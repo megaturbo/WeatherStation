@@ -1,12 +1,15 @@
 
 package ch.hearc.meteo.imp.afficheur.real.view.mainpanel;
 
-import java.awt.BorderLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 
 import javax.swing.JPanel;
-import javax.swing.JSlider;
 
 import ch.hearc.meteo.imp.afficheur.real.moo.Manager;
+import ch.hearc.meteo.imp.afficheur.real.view.mainpanel.subpanels.JPanelSlider;
+import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
+
 
 public class JPanelMainLocalLight extends JPanel
 	{
@@ -28,6 +31,11 @@ public class JPanelMainLocalLight extends JPanel
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
+	public void updateMeteoServiceOptions(MeteoServiceOptions meteoServiceOptions)
+		{
+		panelSlider.updateMeteoServiceOptions( meteoServiceOptions);
+		}
+
 	/*------------------------------*\
 	|*				Set				*|
 	\*------------------------------*/
@@ -42,11 +50,17 @@ public class JPanelMainLocalLight extends JPanel
 	private void geometry()
 		{
 		// JComponent : Instanciation
-		sliderAltitude = new JSlider();
+		panelSlider = new JPanelSlider(manager);
 
-		setLayout(new BorderLayout());
+		setLayout(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
+		c.fill = GridBagConstraints.BOTH;
 
-		// JComponent : add
+		c.gridx = 0;
+		c.gridy = 0;
+		c.weightx = 1;
+		c.weighty = 1;
+		add(panelSlider, c);
 		}
 
 	private void control()
@@ -67,8 +81,6 @@ public class JPanelMainLocalLight extends JPanel
 	private Manager manager;
 
 	// Tools
-	private JSlider sliderAltitude;
-	private JSlider sliderPressure;
-	private JSlider sliderTemperature;
+	private JPanelSlider panelSlider;
 
 	}
