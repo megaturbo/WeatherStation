@@ -90,61 +90,72 @@ public class ComConnexion implements ComConnexions_I
 
 	@Override
 	public void start() throws Exception
-	{
-		if(!running) {
-		Thread asking = new Thread(askQuestions());
-		running = true;
-		asking.start();
-		}
-
-
-		serialPort.notifyOnDataAvailable(true);
-
-		serialPort.addEventListener(new SerialPortEventListener()
+		{
+		if (connected)
 			{
+			if (!running)
+				{
+				questionner = new Thread(askQuestions());
+				running = true;
+				questionner.start();
+				}
+			}
 
-				@Override
-				public void serialEvent(SerialPortEvent arg0)
-					{
-					switch(arg0.getEventType())
-						{
-						case SerialPortEvent.DATA_AVAILABLE:
-							try
-								{
-								treatValues();
-								}
-							catch (IOException e)
-								{
-								System.err.println("IO error");
-								}
-							catch (MeteoServiceException e)
-								{
-								System.err.println("meteo error");
-								}
-							break;
-						}
-					}
-			});
 		}
 
 	@Override
 	public void stop() throws Exception
 		{
 		// stop asking questions
-		running = false;
+		if (running)
+			{
+			Thread.sleep(100);
+			questionner.join();
+			running = false;
+			}
+
 		}
 
 	@Override
 	public void connect() throws NoSuchPortException, UnsupportedCommOperationException, PortInUseException, TooManyListenersException, IOException
 		{
 		// open stream
-		CommPortIdentifier portID = CommPortIdentifier.getPortIdentifier(portName);
+		if (!connected)
+			{
+			CommPortIdentifier portID = CommPortIdentifier.getPortIdentifier(portName);
 
-		serialPort = (SerialPort)portID.open(portName, 10000);
-		serialPort.setSerialPortParams(comOption.getSpeed(), comOption.getDataBit(), comOption.getStopBit(), comOption.getParity());
+			serialPort = (SerialPort)portID.open(portName, 10000);
+			serialPort.setSerialPortParams(comOption.getSpeed(), comOption.getDataBit(), comOption.getStopBit(), comOption.getParity());
+			serialPort.notifyOnDataAvailable(true);
+			serialPort.addEventListener(new SerialPortEventListener()
+				{
 
-		reader = new BufferedReader(new InputStreamReader(serialPort.getInputStream()));
-		writer = serialPort.getOutputStream();
+					@Override
+					public void serialEvent(SerialPortEvent arg0)
+						{
+						switch(arg0.getEventType())
+							{
+							case SerialPortEvent.DATA_AVAILABLE:
+								try
+									{
+									treatValues();
+									}
+								catch (IOException e)
+									{
+									System.err.println("IO error");
+									}
+								catch (MeteoServiceException e)
+									{
+									System.err.println("meteo error");
+									}
+								break;
+							}
+						}
+				});
+			reader = new BufferedReader(new InputStreamReader(serialPort.getInputStream()));
+			writer = serialPort.getOutputStream();
+			connected = true;
+			}
 
 		}
 
@@ -172,9 +183,13 @@ public class ComConnexion implements ComConnexions_I
 	public void disconnect() throws IOException
 		{
 		// close stream
-		reader.close();
-		writer.close();
-		serialPort.close();
+		if (connected)
+			{
+			reader.close();
+			writer.close();
+			serialPort.close();
+			connected = false;
+			}
 		}
 
 	@Override
@@ -190,18 +205,14 @@ public class ComConnexion implements ComConnexions_I
 	public void askPressionAsync() throws Exception
 		{
 		byte[] tabByte = TrameEncoder.coder("010000");
-		System.out.println("asking for pressure");
 		writer.write(tabByte);
-		System.out.println("pressure asked");
 		}
 
 	@Override
 	public void askTemperatureAsync() throws Exception
 		{
 		byte[] tabByte = TrameEncoder.coder("010100");
-		System.out.println("asking for temperature");
 		writer.write(tabByte);
-		System.out.println("temperature asked");
 
 		}
 
@@ -234,6 +245,7 @@ public class ComConnexion implements ComConnexions_I
 		{
 		return new Runnable()
 			{
+
 				@Override
 				public void run()
 					{
@@ -270,4 +282,6 @@ public class ComConnexion implements ComConnexions_I
 	private OutputStream writer;
 	private BufferedReader reader;
 	private boolean running;
+	private boolean connected;
+	private Thread questionner;
 	}

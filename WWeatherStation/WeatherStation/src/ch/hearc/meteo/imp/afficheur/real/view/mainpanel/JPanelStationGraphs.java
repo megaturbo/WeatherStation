@@ -4,8 +4,8 @@ import java.awt.GridLayout;
 
 import javax.swing.JPanel;
 
-import ch.hearc.meteo.affichage.utils.JPanelSimpleGraph;
 import ch.hearc.meteo.imp.afficheur.real.moo.Manager;
+import ch.hearc.meteo.imp.afficheur.real.view.utils.JPanelSimpleGraph;
 
 public class JPanelStationGraphs extends JPanel
 	{

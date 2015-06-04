@@ -1,7 +1,7 @@
 
 package ch.hearc.meteo.imp.use.local;
 
-import ch.hearc.meteo.imp.com.simulateur.MeteoServiceSimulatorFactory;
+import ch.hearc.meteo.imp.com.real.MeteoFactory;
 import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 import ch.hearc.meteo.spec.com.meteo.MeteoService_I;
 import ch.hearc.meteo.spec.com.meteo.exception.MeteoServiceException;
@@ -29,7 +29,7 @@ public class UseSimple
 
 	public static void main() throws MeteoServiceException
 		{
-		MeteoService_I meteoService = (new MeteoServiceSimulatorFactory()).create("COM1");
+		MeteoService_I meteoService = (new MeteoFactory()).create("COM5");
 		use(meteoService);
 		}
 
