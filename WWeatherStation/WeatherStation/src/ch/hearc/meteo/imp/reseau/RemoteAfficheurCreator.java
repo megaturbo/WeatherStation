@@ -93,9 +93,11 @@ public class RemoteAfficheurCreator implements RemoteAfficheurCreator_I
 		// TODO
 		//		AfficheurService_I afficheurService = new AfficheurService(); //
 
+
 		//return new AfficheurService(affichageOptions, meteoServiceRemote); //
 
-		return new AfficheurServiceLocalFull(affichageOptions, meteoServiceRemote); //
+
+		return new AfficheurServiceLocalFull(meteoServiceRemote); //
 
 		}
 

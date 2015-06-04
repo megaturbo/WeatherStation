@@ -1,5 +1,5 @@
 
-package ch.hearc.meteo.imp.afficheur.real.view.mainpanel;
+package ch.hearc.meteo.imp.afficheur.real.view.mainpanel.subpanels;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -15,7 +15,7 @@ import javax.swing.JScrollPane;
 import ch.hearc.meteo.imp.afficheur.real.customs.QKTCheckBox;
 import ch.hearc.meteo.imp.afficheur.real.moo.Manager;
 import ch.hearc.meteo.imp.afficheur.real.moo.Station;
-import ch.hearc.meteo.imp.afficheur.real.view.JFrameMain;
+import ch.hearc.meteo.imp.afficheur.real.view.JFrameFull_I;
 
 public class JPanelStationList extends JPanel
 	{
@@ -24,7 +24,7 @@ public class JPanelStationList extends JPanel
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JPanelStationList(JFrameMain parent, Manager manager)
+	public JPanelStationList(JFrameFull_I parent, Manager manager)
 		{
 		this.parent = parent;
 		this.manager = manager;
@@ -119,7 +119,7 @@ public class JPanelStationList extends JPanel
 	\*------------------------------------------------------------------*/
 
 	// Inputs
-	private JFrameMain parent;
+	private JFrameFull_I parent;
 	private Manager manager;
 
 	// Tools

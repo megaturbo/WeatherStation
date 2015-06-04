@@ -4,19 +4,18 @@ package ch.hearc.meteo.imp.afficheur.real.view.mainpanel;
 import java.awt.BorderLayout;
 
 import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-import javax.swing.SwingConstants;
+import javax.swing.JSlider;
 
 import ch.hearc.meteo.imp.afficheur.real.moo.Manager;
 
-public class JPanelMain extends JPanel
+public class JPanelMainLocalLight extends JPanel
 	{
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JPanelMain(Manager manager)
+	public JPanelMainLocalLight(Manager manager)
 		{
 		this.manager = manager;
 
@@ -32,12 +31,6 @@ public class JPanelMain extends JPanel
 	/*------------------------------*\
 	|*				Set				*|
 	\*------------------------------*/
-	public void setSeriesVisible(int serie, boolean visible)
-		{
-		panelStationGraphs.setSeriesVisible(serie, visible);
-		panelMap.refresh();
-		}
-
 	/*------------------------------*\
 	|*				Get				*|
 	\*------------------------------*/
@@ -49,17 +42,11 @@ public class JPanelMain extends JPanel
 	private void geometry()
 		{
 		// JComponent : Instanciation
-		panelStationGraphs = new JPanelStationGraphs(manager);
-		panelMap = new JPanelMap(manager);
-
-		JTabbedPane tabbedPane = new JTabbedPane(SwingConstants.BOTTOM);
-		tabbedPane.addTab("Map", panelMap);
-		tabbedPane.addTab("Graph", panelStationGraphs);
+		sliderAltitude = new JSlider();
 
 		setLayout(new BorderLayout());
 
 		// JComponent : add
-		add(tabbedPane, BorderLayout.CENTER);
 		}
 
 	private void control()
@@ -80,7 +67,8 @@ public class JPanelMain extends JPanel
 	private Manager manager;
 
 	// Tools
-	private JPanelStationGraphs panelStationGraphs;
-	private JPanelMap panelMap;
+	private JSlider sliderAltitude;
+	private JSlider sliderPressure;
+	private JSlider sliderTemperature;
 
 	}
