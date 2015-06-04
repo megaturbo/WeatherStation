@@ -1,9 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="lib" path="deploy/jfreechart-1.0.19/lib/jcommon-1.0.23.jar" sourcepath="deploy/jfreechart-1.0.19/docfiles"/>
-	<classpathentry kind="lib" path="deploy/jfreechart-1.0.19/lib/jfreechart-1.0.19-experimental.jar" sourcepath="deploy/jfreechart-1.0.19/docfiles"/>
-	<classpathentry kind="lib" path="deploy/jfreechart-1.0.19/lib/jfreechart-1.0.19.jar" sourcepath="deploy/jfreechart-1.0.19/docfiles"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="C:/Soft/java/jdk/jre"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="ext/jfreechart-1.0.19/lib/jcommon-1.0.23.jar" sourcepath="ext/jfreechart-1.0.19/source">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/WeatherStation/ext/jfreechart-1.0.19/javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="ext/jfreechart-1.0.19/lib/jfreechart-1.0.19-experimental.jar" sourcepath="ext/jfreechart-1.0.19/source">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/WeatherStation/ext/jfreechart-1.0.19/javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="ext/jfreechart-1.0.19/lib/jfreechart-1.0.19.jar" sourcepath="ext/jfreechart-1.0.19/source">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/WeatherStation/ext/jfreechart-1.0.19/javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="ext/swingx/swingx-all-1.6.5-1.jar" sourcepath="ext/swingx/swingx-all-1.6.5-1-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/WeatherStation/ext/swingx/swingx-all-1.6.5-1-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="ext/swingx/swingx-ws-r317.jar" sourcepath="ext/swingx/swingx-ws-r317-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/WeatherStation/ext/swingx/swingx-ws-1.0-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="ext/jxmapviewer2-2.0.jar"/>
+	<classpathentry kind="lib" path="ext/apache-commons-logging/commons-logging-1.2.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/WeatherStation/ext/apache-commons-logging/commons-logging-1.2-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="ext/RXTXcomm.jar"/>
+	<classpathentry kind="lib" path="ext/BilatRmiTools.jar"/>
+	<classpathentry kind="lib" path="ext/junit-4.12.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
