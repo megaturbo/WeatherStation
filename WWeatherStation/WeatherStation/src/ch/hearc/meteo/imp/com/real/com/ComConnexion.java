@@ -18,6 +18,7 @@ import gnu.io.UnsupportedCommOperationException;
 import ch.hearc.meteo.imp.com.logique.MeteoServiceCallback_I;
 import ch.hearc.meteo.imp.com.real.com.trame.TrameDecoder;
 import ch.hearc.meteo.imp.com.real.com.trame.TrameEncoder;
+import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 import ch.hearc.meteo.spec.com.meteo.exception.MeteoServiceException;
 import ch.hearc.meteo.spec.com.meteo.listener.event.MeteoEventType_E;
 
@@ -87,17 +88,23 @@ public class ComConnexion implements ComConnexions_I
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
-
 	@Override
-	public void start() throws Exception
+	public void start(MeteoServiceOptions meteoServiceOptions) throws Exception
 		{
 		if (connected)
 			{
 			if (!running)
 				{
-				questionner = new Thread(askQuestions());
+				temperatureAsker = new Thread(askTemperatureQuestion(meteoServiceOptions.getTemperatureDT()));
+				pressureAsker = new Thread(askPressureQuestion(meteoServiceOptions.getPressionDT()));
+				altitudeAsker = new Thread(askAltitudeQuestion(meteoServiceOptions.getAltitudeDT()));
+
+				temperatureAsker.start();
+				pressureAsker.start();
+				altitudeAsker.start();
+
 				running = true;
-				questionner.start();
+
 				}
 			}
 
@@ -109,8 +116,10 @@ public class ComConnexion implements ComConnexions_I
 		// stop asking questions
 		if (running)
 			{
-			Thread.sleep(100);
-			questionner.join();
+			Thread.sleep(5000);
+			temperatureAsker.join();
+			altitudeAsker.join();
+			pressureAsker.join();
 			running = false;
 			}
 
@@ -196,9 +205,7 @@ public class ComConnexion implements ComConnexions_I
 	public void askAltitudeAsync() throws Exception
 		{
 		byte[] tabByte = TrameEncoder.coder("010200");
-		System.out.println("asking for altitude");
 		writer.write(tabByte);
-		System.out.println("altitude asked");
 		}
 
 	@Override
@@ -241,7 +248,8 @@ public class ComConnexion implements ComConnexions_I
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
-	private Runnable askQuestions() throws Exception
+
+	private Runnable askAltitudeQuestion(long delay)
 		{
 		return new Runnable()
 			{
@@ -253,8 +261,57 @@ public class ComConnexion implements ComConnexions_I
 						{
 						while(running)
 							{
+							Thread.sleep(delay);
 							askAltitudeAsync();
+							}
+						}
+					catch (Exception e)
+						{
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						}
+					}
+			};
+		}
+
+	private Runnable askPressureQuestion(long delay)
+		{
+		return new Runnable()
+			{
+
+				@Override
+				public void run()
+					{
+					try
+						{
+						while(running)
+							{
+							Thread.sleep(delay);
 							askPressionAsync();
+							}
+						}
+					catch (Exception e)
+						{
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						}
+					}
+			};
+		}
+
+	private Runnable askTemperatureQuestion(long delay)
+		{
+		return new Runnable()
+			{
+
+				@Override
+				public void run()
+					{
+					try
+						{
+						while(running)
+							{
+							Thread.sleep(delay);
 							askTemperatureAsync();
 							}
 						}
@@ -265,7 +322,6 @@ public class ComConnexion implements ComConnexions_I
 						}
 					}
 			};
-
 		}
 
 	/*------------------------------------------------------------------*\
@@ -283,5 +339,9 @@ public class ComConnexion implements ComConnexions_I
 	private BufferedReader reader;
 	private boolean running;
 	private boolean connected;
-	private Thread questionner;
+
+	private Thread temperatureAsker;
+	private Thread pressureAsker;
+	private Thread altitudeAsker;
+
 	}

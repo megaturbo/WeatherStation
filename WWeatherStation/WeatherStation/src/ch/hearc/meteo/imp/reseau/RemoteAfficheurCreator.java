@@ -92,11 +92,11 @@ public class RemoteAfficheurCreator implements RemoteAfficheurCreator_I
 		{
 		// TODO
 		//		AfficheurService_I afficheurService = new AfficheurService(); //
-<<<<<<< HEAD
-		return new AfficheurService(affichageOptions, meteoServiceRemote); //
-=======
+
+		//return new AfficheurService(affichageOptions, meteoServiceRemote); //
+
 		return new AfficheurServiceLocalFull(affichageOptions, meteoServiceRemote); //
->>>>>>> 7e072cac4fe01dfb947b31110142db45074658ae
+
 		}
 
 	private void server() throws RemoteException
