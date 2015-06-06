@@ -14,6 +14,7 @@ import javax.swing.KeyStroke;
 
 import ch.hearc.meteo.imp.afficheur.real.moo.Manager;
 import ch.hearc.meteo.imp.afficheur.real.view.mainpanel.JPanelMainLocalLight;
+import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 import ch.hearc.meteo.spec.reseau.rmiwrapper.MeteoServiceWrapper_I;
 
 public class JFrameLocalLight extends JFrame
@@ -36,6 +37,11 @@ public class JFrameLocalLight extends JFrame
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
+
+	public void updateMeteoServiceOptions(MeteoServiceOptions meteoServiceOptions)
+		{
+		panelMain.updateMeteoServiceOptions(meteoServiceOptions);
+		}
 
 	public void refresh()
 		{

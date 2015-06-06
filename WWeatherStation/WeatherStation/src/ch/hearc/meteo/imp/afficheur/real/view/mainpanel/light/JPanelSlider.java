@@ -36,15 +36,24 @@ public class JPanelSlider extends JPanel
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
+	private void updateSlider(JSlider slider, int value) {
+		if(value > slider.getMaximum()) {
+			slider.setMaximum(value + 50);
+		}
+		slider.setValue(value);
+	}
+
 	public void updateMeteoServiceOptions(MeteoServiceOptions meteoServiceOptions)
 		{
-		int valueAltitude = sliderAltitude.getValue();
-		int valuePressure = sliderPressure.getValue();
-		int valueTemperature = sliderTemperature.getValue();
-		sliderAltitude.setValue(valueAltitude);
-		sliderPressure.setValue(valuePressure);
-		sliderTemperature.setValue(valueTemperature);
-		setTitleBorder(valueAltitude, valuePressure, valueTemperature);
+		int valueAltitude = (int) meteoServiceOptions.getAltitudeDT();
+		int valuePressure = (int) meteoServiceOptions.getPressionDT();
+		int valueTemperature = (int) meteoServiceOptions.getTemperatureDT();
+
+		updateSlider(sliderAltitude, valueAltitude);
+		updateSlider(sliderPressure, valuePressure);
+		updateSlider(sliderTemperature, valueTemperature);
+
+		setTitleBorders(valueAltitude, valuePressure, valueTemperature);
 		}
 
 	/*------------------------------------------------------------------*\
@@ -80,7 +89,7 @@ public class JPanelSlider extends JPanel
 		borderPressure = BorderFactory.createTitledBorder("");
 		borderTemperature = BorderFactory.createTitledBorder("");
 
-		setTitleBorder(valueAltitude, valuePressure, valueTemperature);
+		setTitleBorders(valueAltitude, valuePressure, valueTemperature);
 
 		sliderAltitude.setBorder(borderAltitude);
 		sliderPressure.setBorder(borderPressure);
@@ -135,7 +144,7 @@ public class JPanelSlider extends JPanel
 					meteoServiceOption.setPressionDT(valuePressure);
 					meteoServiceOption.setTemperatureDT(valueTemperature);
 
-					setTitleBorder(valueAltitude, valuePressure, valueTemperature);
+					setTitleBorders(valueAltitude, valuePressure, valueTemperature);
 					manager.setMeteoServiceOptions(meteoServiceOption);
 					}
 				catch (RemoteException e1)
@@ -148,7 +157,7 @@ public class JPanelSlider extends JPanel
 		};
 	}
 
-	private void setTitleBorder(int valueAltitude, int valuePressure, int valueTemperature)
+	private void setTitleBorders(int valueAltitude, int valuePressure, int valueTemperature)
 		{
 		borderAltitude.setTitle("\u0394 Altitude =" + valueAltitude + " (ms)");
 		borderPressure.setTitle("\u0394 Pressure =" + valuePressure + " (ms)");

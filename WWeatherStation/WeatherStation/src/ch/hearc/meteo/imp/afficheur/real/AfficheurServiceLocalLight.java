@@ -28,25 +28,23 @@ public class AfficheurServiceLocalLight implements AfficheurService_I
 
 	@Override
 	public void printPression(MeteoEvent event) {
-
+		manager.printPression(event);
 	}
 
 	@Override
 	public void printAltitude(MeteoEvent event) {
-		// TODO Auto-generated method stub
-
+		manager.printAltitude(event);
 	}
 
 	@Override
 	public void printTemperature(MeteoEvent event) {
-		// TODO Auto-generated method stub
-
+		manager.printTemperature(event);
 	}
 
 	@Override
 	public void updateMeteoServiceOptions(
 			MeteoServiceOptions meteoServiceOptions) {
-		// TODO Auto-generated method stub
+		frameService.updateMeteoServiceOptions(meteoServiceOptions);
 	}
 
 	/*------------------------------*\
