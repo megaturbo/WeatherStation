@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import ch.hearc.meteo.imp.afficheur.real.AfficheurFactory;
-import ch.hearc.meteo.imp.com.simulateur.MeteoServiceSimulatorFactory;
+import ch.hearc.meteo.imp.com.real.MeteoFactory;
 import ch.hearc.meteo.spec.afficheur.AfficheurService_I;
 import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 import ch.hearc.meteo.spec.com.meteo.MeteoService_I;
@@ -47,7 +47,7 @@ public class UseComplet
 	public static void main() throws MeteoServiceException
 		{
 		String portName = "COM5";
-		MeteoService_I meteoService = (new MeteoServiceSimulatorFactory()).create(portName);
+		MeteoService_I meteoService = new MeteoFactory().create(portName);
 		use(meteoService);
 		}
 
@@ -66,7 +66,7 @@ public class UseComplet
 		// AfficheurSimulateurFactory()).createOnLocalPC(affichageOption,
 		// meteoServiceWrapper);
 		//		AfficheurService_I afficheurService = (new AfficheurSimulateurFactory()).createOnLocalPC(affichageOption, meteoServiceWrapper);
-		AfficheurService_I afficheurService = (new AfficheurFactory()).createOnLocalPCLight(meteoServiceWrapper);
+		AfficheurService_I afficheurService = (new AfficheurFactory()).createOnCentralPC(null, meteoServiceWrapper);
 
 		use(meteoService, afficheurService);
 		}

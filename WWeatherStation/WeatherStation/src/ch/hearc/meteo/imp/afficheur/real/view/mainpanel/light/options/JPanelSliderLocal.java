@@ -13,17 +13,17 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import ch.hearc.meteo.imp.afficheur.real.moo.ManagerCentral;
+import ch.hearc.meteo.imp.afficheur.real.moo.ManagerLocal;
 import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 
-public class JPanelSlider extends JPanel
+public class JPanelSliderLocal extends JPanel
 	{
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JPanelSlider(ManagerCentral manager)
+	public JPanelSliderLocal(ManagerLocal manager)
 		{
 		this.manager = manager;
 
@@ -172,7 +172,7 @@ public class JPanelSlider extends JPanel
 	\*------------------------------------------------------------------*/
 
 	// Inputs
-	private ManagerCentral manager;
+	private ManagerLocal manager;
 	private String portCom;
 
 	// Tools

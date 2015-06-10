@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 
 import ch.hearc.meteo.imp.afficheur.real.moo.ManagerLocal;
 import ch.hearc.meteo.imp.afficheur.real.view.mainpanel.light.datas.JPanelDatas;
-import ch.hearc.meteo.imp.afficheur.real.view.mainpanel.light.options.JPanelSlider;
+import ch.hearc.meteo.imp.afficheur.real.view.mainpanel.light.options.JPanelSliderLocal;
 import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 
 public class JPanelViewCom extends JPanel
@@ -59,7 +59,7 @@ public class JPanelViewCom extends JPanel
 	\*------------------------------------------------------------------*/
 	private void geometry()
 		{
-		panelSlider = new JPanelSlider(manager);
+		panelSlider = new JPanelSliderLocal(manager);
 		panelDatas = new JPanelDatas(manager);
 
 		setLayout(new GridBagLayout());
@@ -96,6 +96,6 @@ public class JPanelViewCom extends JPanel
 	private ManagerLocal manager;
 
 	// Tools
-	private JPanelSlider panelSlider;
+	private JPanelSliderLocal panelSlider;
 	private JPanelDatas panelDatas;
 	}

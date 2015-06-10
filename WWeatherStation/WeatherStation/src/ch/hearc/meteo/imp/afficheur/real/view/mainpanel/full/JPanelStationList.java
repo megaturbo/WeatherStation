@@ -1,21 +1,25 @@
 
 package ch.hearc.meteo.imp.afficheur.real.view.mainpanel.full;
 
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Collection;
 
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import ch.hearc.meteo.imp.afficheur.real.customs.QKTCheckBox;
 import ch.hearc.meteo.imp.afficheur.real.moo.ManagerCentral;
 import ch.hearc.meteo.imp.afficheur.real.moo.Station;
 import ch.hearc.meteo.imp.afficheur.real.view.JFrameCentral;
+import ch.hearc.meteo.imp.afficheur.real.view.mainpanel.light.options.JPanelSlider;
 public class JPanelStationList extends JPanel
 	{
 
@@ -45,24 +49,38 @@ public class JPanelStationList extends JPanel
 
 		for(Station s: stations)
 			{
-			QKTCheckBox cb = new QKTCheckBox(s.getName());
+			//affiche tt les station connecté NOQKTCHECKBOX
+			/*QKTCheckBox cb = new QKTCheckBox(s.getName());
 			cb.setSelected(s.isVisible());
 			addCheckBoxListener(s, cb);
-			panelList.add(cb);
+			*/
+			//panel.add(new JButton("►"));
+
+			FlowLayout layout = new FlowLayout();
+			JPanel panel = new JPanel(layout);
+			panel.add(new JLabel("Station "+s.getName()));
+
+			JButton settings = new JButton("Settings");
+			addButtonListener(s, settings);
+			panel.add(settings);
+			panelList.add(panel);
 			}
 		this.updateUI();
 		}
 
-	private void addCheckBoxListener(Station s, QKTCheckBox cb)
+	private void addButtonListener(Station s, JButton btn)
 		{
-		cb.addItemListener(new ItemListener()
+		btn.addActionListener(new ActionListener()
 			{
-
 				@Override
-				public void itemStateChanged(ItemEvent event)
+				public void actionPerformed(ActionEvent e)
 					{
-					parent.setSeriesVisible(0, !s.isVisible());
-					s.setVisible(!s.isVisible());
+					JDialog dialog = new JDialog(parent);
+					dialog.add(new JPanelSlider(manager));
+					dialog.setModal(true);
+					dialog.setSize(new Dimension(500,200));
+					dialog.setLocationRelativeTo(parent);
+					dialog.setVisible(true);
 					}
 			});
 		}
