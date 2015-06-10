@@ -29,6 +29,7 @@ public class MeteoPortDetectionService implements MeteoPortDetectionService_I
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<String> findListPortSerie()
 		{
@@ -68,13 +69,14 @@ public class MeteoPortDetectionService implements MeteoPortDetectionService_I
 			}
 		catch (MeteoServiceException e)
 			{
-			//rien
+			return isAStation;
 			}
 		catch (InterruptedException e)
 			{
 			System.out.println("Thread died while checking for ports.");
+			return isAStation;
 			}
-		return isAStation;
+
 		}
 
 	@Override
