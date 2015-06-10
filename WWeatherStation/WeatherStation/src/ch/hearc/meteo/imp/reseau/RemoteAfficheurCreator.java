@@ -115,7 +115,21 @@ public class RemoteAfficheurCreator implements RemoteAfficheurCreator_I
 		{
 		// TODO share this
 		//		String id = IdTools.createID(RMI_ID_CREATOR);//
+
 		//		RmiTools.shareObject(this, new RmiURL(id)); //
+
+		InetAddress ia = null;
+		try
+			{
+			ia = InetAddress.getByName(IP_ADDR);
+			}
+		catch (UnknownHostException e)
+			{
+			e.printStackTrace();
+			}
+
+		RmiURL url = new RmiURL(RMI_ID_CREATOR, ia);
+
 		RmiTools.shareObject(this, new RmiURL(RMI_ID_CREATOR)); //
 		}
 
