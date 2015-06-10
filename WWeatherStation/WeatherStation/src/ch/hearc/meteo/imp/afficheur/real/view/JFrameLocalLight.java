@@ -5,6 +5,7 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.rmi.RemoteException;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -28,6 +29,12 @@ public class JFrameLocalLight extends JFrame
 		{
 		this.manager = manager;
 		this.meteoServiceRemote = meteoServiceRemote;
+
+		try {
+			this.portCom = meteoServiceRemote.getPort();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 
 		geometry();
 		control();
@@ -78,7 +85,7 @@ public class JFrameLocalLight extends JFrame
 
 	private void appearance()
 		{
-		setTitle("Local Client [Light]");
+		setTitle("["+portCom+"] Light Client - Local");
 		setSize(600, 400);
 		setLocationRelativeTo(null); 	// frame centrer
 		setVisible(true); 				// last!
@@ -120,5 +127,6 @@ public class JFrameLocalLight extends JFrame
 
 	// Tools
 	private JPanelMainLocalLight panelMain;
+	private String portCom;
 
 	}

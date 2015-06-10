@@ -130,7 +130,6 @@ public class JPanelSlider extends JPanel
 	{
 		return new ChangeListener()
 		{
-
 			@Override public void stateChanged(ChangeEvent e)
 				{
 				int valueAltitude = sliderAltitude.getValue();
