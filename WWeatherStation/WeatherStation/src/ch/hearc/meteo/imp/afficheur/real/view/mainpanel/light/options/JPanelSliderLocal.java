@@ -59,7 +59,7 @@ public class JPanelSliderLocal extends JPanel
 
 	private void geometry()
 		{
-		int min = 100;
+		int min = 10;
 		int max = 10000;
 		int valueAltitude;
 		int valuePressure;

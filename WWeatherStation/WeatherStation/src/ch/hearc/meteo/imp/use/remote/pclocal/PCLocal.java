@@ -121,6 +121,7 @@ public class PCLocal implements PC_I
 			}
 
 		RmiURL rmiURLRemoteAfficheurCreator = new RmiURL(RemoteAfficheurCreator.RMI_ID_CREATOR); //TODO not localhost
+		System.out.println(RemoteAfficheurCreator.RMI_ID_CREATOR);
 		try
 			{
 			RemoteAfficheurCreator_I remoteAfficheurCreator = (RemoteAfficheurCreator_I)RmiTools.connectionRemoteObject(rmiURLRemoteAfficheurCreator);

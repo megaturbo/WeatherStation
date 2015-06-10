@@ -2,6 +2,7 @@
 package ch.hearc.meteo.imp.afficheur.real.moo;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
@@ -34,6 +35,7 @@ public class ManagerLocal
 	public ManagerLocal(PCLocal pcLocal)
 		{
 		this.pcLocal = pcLocal;
+		this.meteoRemotes = new ArrayList<MeteoServiceWrapper_I>();
 
 		collectionAltitude = new TimeSeriesCollection();
 		collectionPression = new TimeSeriesCollection();
@@ -96,7 +98,7 @@ public class ManagerLocal
 				return remote.getMeteoServiceOptions();
 				}
 			}
-		return null;
+		return new MeteoServiceOptions(10, 10, 10);
 		}
 
 	public Collection<Station> getStationList()
