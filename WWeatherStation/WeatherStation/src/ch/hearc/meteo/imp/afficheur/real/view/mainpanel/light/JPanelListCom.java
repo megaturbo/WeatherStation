@@ -3,7 +3,8 @@ package ch.hearc.meteo.imp.afficheur.real.view.mainpanel.light;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Collection;
+import java.rmi.RemoteException;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -12,9 +13,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import ch.hearc.meteo.imp.afficheur.real.moo.ManagerLocal;
-import ch.hearc.meteo.imp.afficheur.real.moo.Station;
 import ch.hearc.meteo.imp.afficheur.real.view.mainpanel.JPanelMainLocal;
 import ch.hearc.meteo.imp.afficheur.real.view.mainpanel.light.list.JPanelComControl;
+import ch.hearc.meteo.spec.reseau.rmiwrapper.MeteoServiceWrapper_I;
 
 public class JPanelListCom extends JPanel
 	{
@@ -91,15 +92,21 @@ public class JPanelListCom extends JPanel
 	private void refreshList()
 		{
 		panelList.removeAll();
-		Collection<Station> stations = manager.getStationList();
+		List<MeteoServiceWrapper_I> stations = manager.getRemotes();
 
-		for(Station s:stations)
+		for(MeteoServiceWrapper_I s:stations)
 			{
-			panelList.add(new JPanelComControl(this, s.getName()));
+			try
+				{
+				panelList.add(new JPanelComControl(this, s));
+				}
+			catch (RemoteException e)
+				{
+				e.printStackTrace();
+				}
 			}
 
 		this.updateUI();
-
 		}
 
 	/*------------------------------------------------------------------*\

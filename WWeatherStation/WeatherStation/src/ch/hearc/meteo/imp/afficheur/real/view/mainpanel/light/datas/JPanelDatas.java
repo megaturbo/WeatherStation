@@ -83,10 +83,21 @@ public class JPanelDatas extends JPanel
 
 	private void displayRow(JLabel rowLabel, TimeSeries series, GridBagConstraints c, int gridy)
 		{
-
-		String min = String.format("%.1f%n", series.getMinY());
-		String max = String.format("%.1f%n", series.getMaxY());
-		String liv = String.format("%.1f%n", series.getValue(series.getItemCount() - 1));
+		String min;
+		String max;
+		String liv;
+		try
+			{
+			min = String.format("%.1f%n", series.getMinY());
+			max = String.format("%.1f%n", series.getMaxY());
+			liv = String.format("%.1f%n", series.getValue(series.getItemCount() - 1));
+			}
+		catch (NullPointerException e)
+			{
+			min = "W";
+			max = "W";
+			liv = "W";
+			}
 
 		c.gridy = gridy;
 

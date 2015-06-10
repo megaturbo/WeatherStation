@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import ch.hearc.meteo.imp.afficheur.real.view.mainpanel.light.JPanelListCom;
+import ch.hearc.meteo.spec.reseau.rmiwrapper.MeteoServiceWrapper_I;
 
 public class JPanelComControl extends JPanel
 	{
@@ -18,10 +19,10 @@ public class JPanelComControl extends JPanel
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JPanelComControl(JPanelListCom parent, String portName)
+	public JPanelComControl(JPanelListCom parent, MeteoServiceWrapper_I meteoRemote)
 		{
 		this.parent = parent;
-		this.portName = portName;
+		this.meteoRemote = meteoRemote;
 
 		geometry();
 		control();
@@ -46,6 +47,7 @@ public class JPanelComControl extends JPanel
 
 	private void geometry()
 		{
+
 		labelPort = new JLabel(portName);
 		buttonStart = new JButton(">");
 		buttonStop = new JButton("||");
@@ -94,7 +96,7 @@ public class JPanelComControl extends JPanel
 
 	// Inputs
 	private JPanelListCom parent;
-	private String portName;
+	private MeteoServiceWrapper_I meteoRemote;
 
 	// Tools
 	private JLabel labelPort;

@@ -78,6 +78,10 @@ public class ManagerLocal
 		meteoRemotes.add(pcLocal.createMeteoService(portCom));
 	}
 
+	public List<MeteoServiceWrapper_I> getRemotes() {
+		return meteoRemotes;
+	}
+
 	public void setMeteoServiceOptions(String portCom, MeteoServiceOptions meteoServiceOptions) throws RemoteException
 		{
 		for(MeteoServiceWrapper_I remote:meteoRemotes)

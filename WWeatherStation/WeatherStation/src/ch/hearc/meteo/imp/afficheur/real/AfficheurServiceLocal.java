@@ -8,8 +8,6 @@ import ch.hearc.meteo.spec.afficheur.AfficheurService_I;
 import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 import ch.hearc.meteo.spec.com.meteo.listener.event.MeteoEvent;
 
-
-
 public class AfficheurServiceLocal implements AfficheurService_I
 	{
 
@@ -17,38 +15,42 @@ public class AfficheurServiceLocal implements AfficheurService_I
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public AfficheurServiceLocal(PCLocal pcLocal) {
+	public AfficheurServiceLocal(PCLocal pcLocal)
+		{
 		manager = new ManagerLocal(pcLocal);
 		frameService = new JFrameLocal(manager);
-	}
+		}
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
 	@Override
-	public void printPression(MeteoEvent event) {
+	public void printPression(MeteoEvent event)
+		{
 		manager.printPression(event);
 		frameService.refresh();
-	}
+		}
 
 	@Override
-	public void printAltitude(MeteoEvent event) {
+	public void printAltitude(MeteoEvent event)
+		{
 		manager.printAltitude(event);
 		frameService.refresh();
-	}
+		}
 
 	@Override
-	public void printTemperature(MeteoEvent event) {
+	public void printTemperature(MeteoEvent event)
+		{
 		manager.printTemperature(event);
 		frameService.refresh();
-	}
+		}
 
 	@Override
-	public void updateMeteoServiceOptions(
-			MeteoServiceOptions meteoServiceOptions) {
+	public void updateMeteoServiceOptions(MeteoServiceOptions meteoServiceOptions)
+		{
 		frameService.updateMeteoServiceOptions(meteoServiceOptions);
-	}
+		}
 
 	/*------------------------------*\
 	|*				Set				*|
@@ -69,4 +71,3 @@ public class AfficheurServiceLocal implements AfficheurService_I
 	private JFrameLocal frameService;
 
 	}
-

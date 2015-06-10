@@ -86,6 +86,15 @@ public class PCLocal implements PC_I
 
 		MeteoService meteoService = (MeteoService)new MeteoFactory().create(portCom);
 
+		try
+			{
+			meteoService.connect();
+			}
+		catch (MeteoServiceException e1)
+			{
+			e1.printStackTrace();
+			}
+
 		meteoService.addMeteoListener(new MeteoAdapter()
 			{
 
