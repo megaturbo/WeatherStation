@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -22,21 +23,19 @@ import ch.hearc.meteo.spec.com.meteo.listener.event.MeteoEvent;
 import ch.hearc.meteo.spec.com.meteo.listener.event.Sources;
 import ch.hearc.meteo.spec.reseau.rmiwrapper.MeteoServiceWrapper_I;
 
-public class Manager
+public class ManagerCentral
 	{
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public Manager(MeteoServiceWrapper_I meteoServiceRemote)
+	public ManagerCentral()
 		{
-
-		this.meteoServiceRemote = meteoServiceRemote;
-
 		collectionAltitude = new TimeSeriesCollection();
 		collectionPression = new TimeSeriesCollection();
 		collectionTemperature = new TimeSeriesCollection();
+
 		stationFromSources = new HashMap<Sources, Station>();
 		}
 
@@ -71,14 +70,27 @@ public class Manager
 	|*				remote			*|
 	\*------------------------------*/
 
-	public void setMeteoServiceOptions(MeteoServiceOptions meteoServiceOptions) throws RemoteException
+	public void setMeteoServiceOptions(String portCom, MeteoServiceOptions meteoServiceOptions) throws RemoteException
 		{
-		meteoServiceRemote.setMeteoServiceOptions(meteoServiceOptions);
+		for(MeteoServiceWrapper_I remote:meteoRemotes)
+			{
+			if (remote.getPort().equals(portCom))
+				{
+				remote.setMeteoServiceOptions(meteoServiceOptions);
+				}
+			}
 		}
 
-	public MeteoServiceOptions getMeteoServiceOptions() throws RemoteException
+	public MeteoServiceOptions getMeteoServiceOptions(String portCom) throws RemoteException
 		{
-		return this.meteoServiceRemote.getMeteoServiceOptions();
+		for(MeteoServiceWrapper_I remote:meteoRemotes)
+			{
+			if (remote.getPort().equals(portCom))
+				{
+				return remote.getMeteoServiceOptions();
+				}
+			}
+		return null;
 		}
 
 	public Collection<Station> getStationList()
@@ -101,17 +113,20 @@ public class Manager
 		return this.collectionTemperature;
 		}
 
-	public TimeSeries getSeriesFromPort(String portCom, Sensor sensor) {
+	public TimeSeries getSeriesFromPort(String portCom, Sensor sensor)
+		{
 
 		TimeSeries series = null;
-		for(Station s:stationFromSources.values()) {
-			if(s.getName().equals(portCom)) {
+		for(Station s:stationFromSources.values())
+			{
+			if (s.getName().equals(portCom))
+				{
 				series = s.getSeries(sensor);
+				}
 			}
-		}
 
 		return series;
-	}
+		}
 
 	public Set<? extends Waypoint> getWaypoints()
 		{
@@ -162,7 +177,8 @@ public class Manager
 	\*------------------------------------------------------------------*/
 
 	// Input
-	private MeteoServiceWrapper_I meteoServiceRemote;
+	private List<MeteoServiceWrapper_I> meteoRemotes;
+
 	// Tools
 	private TimeSeriesCollection collectionAltitude;
 	private TimeSeriesCollection collectionPression;

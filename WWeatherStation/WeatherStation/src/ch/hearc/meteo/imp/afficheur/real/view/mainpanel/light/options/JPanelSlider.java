@@ -13,7 +13,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import ch.hearc.meteo.imp.afficheur.real.moo.Manager;
+import ch.hearc.meteo.imp.afficheur.real.moo.ManagerLocal;
 import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 
 public class JPanelSlider extends JPanel
@@ -23,7 +23,7 @@ public class JPanelSlider extends JPanel
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JPanelSlider(Manager manager)
+	public JPanelSlider(ManagerLocal manager)
 		{
 		this.manager = manager;
 
@@ -35,13 +35,10 @@ public class JPanelSlider extends JPanel
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
-
-	private void updateSlider(JSlider slider, int value) {
-		if(value > slider.getMaximum()) {
-			slider.setMaximum(value + 50);
+	public void updatePortCom(String portCom)
+		{
+		this.portCom = portCom;
 		}
-		slider.setValue(value);
-	}
 
 	public void updateMeteoServiceOptions(MeteoServiceOptions meteoServiceOptions)
 		{
@@ -69,9 +66,9 @@ public class JPanelSlider extends JPanel
 		int valueTemperature;
 		try
 			{
-			valueAltitude = (int)manager.getMeteoServiceOptions().getAltitudeDT();
-			valuePressure = (int)manager.getMeteoServiceOptions().getPressionDT();
-			valueTemperature = (int)manager.getMeteoServiceOptions().getTemperatureDT();
+			valueAltitude = (int)manager.getMeteoServiceOptions(portCom).getAltitudeDT();
+			valuePressure = (int)manager.getMeteoServiceOptions(portCom).getPressionDT();
+			valueTemperature = (int)manager.getMeteoServiceOptions(portCom).getTemperatureDT();
 			}
 		catch (RemoteException e)
 			{
@@ -138,13 +135,13 @@ public class JPanelSlider extends JPanel
 
 				try
 					{
-					MeteoServiceOptions meteoServiceOption = new MeteoServiceOptions(manager.getMeteoServiceOptions());
+					MeteoServiceOptions meteoServiceOption = new MeteoServiceOptions(manager.getMeteoServiceOptions(portCom));
 					meteoServiceOption.setAltitudeDT(valueAltitude);
 					meteoServiceOption.setPressionDT(valuePressure);
 					meteoServiceOption.setTemperatureDT(valueTemperature);
 
 					setTitleBorders(valueAltitude, valuePressure, valueTemperature);
-					manager.setMeteoServiceOptions(meteoServiceOption);
+					manager.setMeteoServiceOptions(portCom, meteoServiceOption);
 					}
 				catch (RemoteException e1)
 					{
@@ -154,6 +151,13 @@ public class JPanelSlider extends JPanel
 
 				}
 		};
+	}
+
+	private void updateSlider(JSlider slider, int value) {
+		if(value > slider.getMaximum()) {
+			slider.setMaximum(value + 50);
+		}
+		slider.setValue(value);
 	}
 
 	private void setTitleBorders(int valueAltitude, int valuePressure, int valueTemperature)
@@ -168,7 +172,8 @@ public class JPanelSlider extends JPanel
 	\*------------------------------------------------------------------*/
 
 	// Inputs
-	private Manager manager;
+	private ManagerLocal manager;
+	private String portCom;
 
 	// Tools
 	private JSlider sliderAltitude;

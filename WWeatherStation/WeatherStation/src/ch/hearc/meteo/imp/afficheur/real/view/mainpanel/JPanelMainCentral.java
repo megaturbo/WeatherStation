@@ -7,18 +7,18 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 
-import ch.hearc.meteo.imp.afficheur.real.moo.Manager;
+import ch.hearc.meteo.imp.afficheur.real.moo.ManagerCentral;
 import ch.hearc.meteo.imp.afficheur.real.view.mainpanel.full.JPanelMap;
 import ch.hearc.meteo.imp.afficheur.real.view.mainpanel.full.JPanelStationGraphs;
 
-public class JPanelMainLocalFull extends JPanel
+public class JPanelMainCentral extends JPanel
 	{
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JPanelMainLocalFull(Manager manager)
+	public JPanelMainCentral(ManagerCentral manager)
 		{
 		this.manager = manager;
 
@@ -79,7 +79,7 @@ public class JPanelMainLocalFull extends JPanel
 	\*------------------------------------------------------------------*/
 
 	// Inputs
-	private Manager manager;
+	private ManagerCentral manager;
 
 	// Tools
 	private JPanelStationGraphs panelStationGraphs;

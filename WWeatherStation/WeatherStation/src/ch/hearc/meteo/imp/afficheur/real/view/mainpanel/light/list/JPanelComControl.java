@@ -9,6 +9,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import ch.hearc.meteo.imp.afficheur.real.view.mainpanel.light.JPanelListCom;
+
 public class JPanelComControl extends JPanel
 	{
 
@@ -16,8 +18,9 @@ public class JPanelComControl extends JPanel
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JPanelComControl(String portName)
+	public JPanelComControl(JPanelListCom parent, String portName)
 		{
+		this.parent = parent;
 		this.portName = portName;
 
 		geometry();
@@ -71,8 +74,7 @@ public class JPanelComControl extends JPanel
 				@Override
 				public void mousePressed(MouseEvent e)
 					{
-					System.out.println(portName + " pressed");
-
+					parent.updatePortCom(portName);
 					}
 
 				@Override
@@ -91,6 +93,7 @@ public class JPanelComControl extends JPanel
 	\*------------------------------------------------------------------*/
 
 	// Inputs
+	private JPanelListCom parent;
 	private String portName;
 
 	// Tools

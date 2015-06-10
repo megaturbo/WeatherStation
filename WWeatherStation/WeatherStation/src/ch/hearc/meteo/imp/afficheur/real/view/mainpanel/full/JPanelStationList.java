@@ -13,10 +13,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import ch.hearc.meteo.imp.afficheur.real.customs.QKTCheckBox;
-import ch.hearc.meteo.imp.afficheur.real.moo.Manager;
+import ch.hearc.meteo.imp.afficheur.real.moo.ManagerCentral;
 import ch.hearc.meteo.imp.afficheur.real.moo.Station;
-import ch.hearc.meteo.imp.afficheur.real.view.JFrameFull_I;
-
+import ch.hearc.meteo.imp.afficheur.real.view.JFrameCentral;
 public class JPanelStationList extends JPanel
 	{
 
@@ -24,7 +23,7 @@ public class JPanelStationList extends JPanel
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JPanelStationList(JFrameFull_I parent, Manager manager)
+	public JPanelStationList(JFrameCentral parent, ManagerCentral manager)
 		{
 		this.parent = parent;
 		this.manager = manager;
@@ -119,8 +118,8 @@ public class JPanelStationList extends JPanel
 	\*------------------------------------------------------------------*/
 
 	// Inputs
-	private JFrameFull_I parent;
-	private Manager manager;
+	private JFrameCentral parent;
+	private ManagerCentral manager;
 
 	// Tools
 	private JPanel panelList;

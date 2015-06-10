@@ -11,8 +11,9 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import ch.hearc.meteo.imp.afficheur.real.moo.Manager;
+import ch.hearc.meteo.imp.afficheur.real.moo.ManagerLocal;
 import ch.hearc.meteo.imp.afficheur.real.moo.Station;
+import ch.hearc.meteo.imp.afficheur.real.view.mainpanel.JPanelMainLocal;
 import ch.hearc.meteo.imp.afficheur.real.view.mainpanel.light.list.JPanelComControl;
 import ch.hearc.meteo.spec.com.meteo.listener.event.Sources;
 
@@ -23,8 +24,9 @@ public class JPanelListCom extends JPanel
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JPanelListCom(Manager manager)
+	public JPanelListCom(JPanelMainLocal parent, ManagerLocal manager)
 		{
+		this.parent = parent;
 		this.manager = manager;
 
 		geometry();
@@ -35,6 +37,10 @@ public class JPanelListCom extends JPanel
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
+
+	public void updatePortCom(String portCom) {
+		parent.updatePortCom(portCom);
+	}
 
 	/*------------------------------*\
 	|*				Set				*|
@@ -93,7 +99,7 @@ public class JPanelListCom extends JPanel
 
 		for(Station s:stations)
 			{
-			panelList.add(new JPanelComControl(s.getName()));
+			panelList.add(new JPanelComControl(this, s.getName()));
 			}
 
 		this.updateUI();
@@ -105,7 +111,8 @@ public class JPanelListCom extends JPanel
 	\*------------------------------------------------------------------*/
 
 	// Inputs
-	private Manager manager;
+	private JPanelMainLocal parent;
+	private ManagerLocal manager;
 
 	// Tools
 	private JPanel panelList;

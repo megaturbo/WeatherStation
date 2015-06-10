@@ -6,7 +6,7 @@ import java.awt.Dimension;
 
 import javax.swing.JPanel;
 
-import ch.hearc.meteo.imp.afficheur.real.moo.Manager;
+import ch.hearc.meteo.imp.afficheur.real.moo.ManagerLocal;
 import ch.hearc.meteo.imp.afficheur.real.view.mainpanel.light.JPanelListCom;
 import ch.hearc.meteo.imp.afficheur.real.view.mainpanel.light.JPanelViewCom;
 import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
@@ -19,7 +19,7 @@ public class JPanelMainLocal extends JPanel
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JPanelMainLocal(Manager manager)
+	public JPanelMainLocal(ManagerLocal manager)
 		{
 		this.manager = manager;
 
@@ -31,6 +31,15 @@ public class JPanelMainLocal extends JPanel
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
+
+	public void refresh()
+		{
+		panelViewCom.refresh();
+		}
+
+	public void updatePortCom(String portCom) {
+		panelViewCom.updatePortCom(portCom);
+	}
 
 	public void updateMeteoServiceOptions(MeteoServiceOptions meteoServiceOptions)
 		{
@@ -52,7 +61,7 @@ public class JPanelMainLocal extends JPanel
 	private void geometry()
 		{
 		// JComponent : Instanciation
-		panelListCom = new JPanelListCom(manager);
+		panelListCom = new JPanelListCom(this, manager);
 		panelViewCom = new JPanelViewCom(manager);
 
 		setLayout(new BorderLayout());
@@ -76,7 +85,7 @@ public class JPanelMainLocal extends JPanel
 	\*------------------------------------------------------------------*/
 
 	// Inputs
-	private Manager manager;
+	private ManagerLocal manager;
 
 	// Tools
 	private JPanelListCom panelListCom;

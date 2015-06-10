@@ -1,12 +1,11 @@
 
 package ch.hearc.meteo.imp.afficheur.real;
 
-import ch.hearc.meteo.imp.afficheur.real.moo.Manager;
-import ch.hearc.meteo.imp.afficheur.real.view.JFrameLocalFull;
+import ch.hearc.meteo.imp.afficheur.real.moo.ManagerCentral;
+import ch.hearc.meteo.imp.afficheur.real.view.JFrameCentral;
 import ch.hearc.meteo.spec.afficheur.AfficheurService_I;
 import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 import ch.hearc.meteo.spec.com.meteo.listener.event.MeteoEvent;
-import ch.hearc.meteo.spec.reseau.rmiwrapper.MeteoServiceWrapper_I;
 
 
 
@@ -21,10 +20,10 @@ public class AfficheurServiceCentral implements AfficheurService_I
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
-	public AfficheurServiceCentral(MeteoServiceWrapper_I meteoServiceRemote)
+	public AfficheurServiceCentral()
 		{
-		manager = new Manager(meteoServiceRemote);
-		frameService = new JFrameLocalFull(meteoServiceRemote, manager);
+		manager = new ManagerCentral();
+		frameService = new JFrameCentral(manager);
 		}
 
 	@Override public void printPression(MeteoEvent event)
@@ -60,7 +59,7 @@ public class AfficheurServiceCentral implements AfficheurService_I
 	\*------------------------------------------------------------------*/
 
 	// Inputs
-	private Manager manager;
-	private JFrameLocalFull frameService;
+	private ManagerCentral manager;
+	private JFrameCentral frameService;
 	}
 

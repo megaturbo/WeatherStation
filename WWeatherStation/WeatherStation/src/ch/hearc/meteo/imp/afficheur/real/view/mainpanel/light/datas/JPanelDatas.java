@@ -1,3 +1,4 @@
+
 package ch.hearc.meteo.imp.afficheur.real.view.mainpanel.light.datas;
 
 import java.awt.GridBagConstraints;
@@ -8,7 +9,7 @@ import javax.swing.JPanel;
 
 import org.jfree.data.time.TimeSeries;
 
-import ch.hearc.meteo.imp.afficheur.real.moo.Manager;
+import ch.hearc.meteo.imp.afficheur.real.moo.ManagerLocal;
 import ch.hearc.meteo.imp.afficheur.real.moo.Sensor;
 
 public class JPanelDatas extends JPanel
@@ -18,7 +19,7 @@ public class JPanelDatas extends JPanel
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JPanelDatas(Manager manager)
+	public JPanelDatas(ManagerLocal manager)
 		{
 		this.manager = manager;
 
@@ -31,13 +32,20 @@ public class JPanelDatas extends JPanel
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
-	public void updatePortCom(String portCom) {
+	public void refresh()
+		{
+		updatePortCom(portCom);
+		}
+
+	public void updatePortCom(String portCom)
+		{
+		this.portCom = portCom;
 		TimeSeries altitudeSeries = manager.getSeriesFromPort(portCom, Sensor.ALTITUDE);
 		TimeSeries pressureSeries = manager.getSeriesFromPort(portCom, Sensor.PRESSURE);
 		TimeSeries temperatureSeries = manager.getSeriesFromPort(portCom, Sensor.TEMPERATURE);
 
-		repaintDatas(altitudeSeries,pressureSeries,temperatureSeries);
-	}
+		repaintDatas(altitudeSeries, pressureSeries, temperatureSeries);
+		}
 
 	/*------------------------------*\
 	|*				Set				*|
@@ -53,28 +61,43 @@ public class JPanelDatas extends JPanel
 
 	private void repaintDatas(TimeSeries altitudeSeries, TimeSeries pressureSeries, TimeSeries temperatureSeries)
 		{
+		this.removeAll();
+
 		GridBagConstraints c = new GridBagConstraints();
 		c.fill = GridBagConstraints.BOTH;
 
 		c.gridx = 1;
 		c.gridy = 0;
-		add(new JLabel("MIN"));
+		add(new JLabel("MIN"), c);
 		c.gridx = 2;
-		add(new JLabel("MAX"));
+		add(new JLabel("MAX"), c);
 		c.gridx = 3;
-		add(new JLabel("LIVE"));
+		add(new JLabel("LIVE"), c);
+
+		displayRow(labelAltitude, altitudeSeries, c, 1);
+		displayRow(labelPressure, pressureSeries, c, 2);
+		displayRow(labelTemperature, temperatureSeries, c, 3);
+
+		this.updateUI();
+		}
+
+	private void displayRow(JLabel rowLabel, TimeSeries series, GridBagConstraints c, int gridy)
+		{
+
+		String min = String.format("%.1f%n", series.getMinY());
+		String max = String.format("%.1f%n", series.getMaxY());
+		String liv = String.format("%.1f%n", series.getValue(series.getItemCount() - 1));
+
+		c.gridy = gridy;
 
 		c.gridx = 0;
-		c.gridy = 1;
-		add(labelAltitude);
+		add(rowLabel, c);
 		c.gridx = 1;
-		add(new JLabel(""+altitudeSeries.getMinY()));
+		add(new JLabel(min), c);
 		c.gridx = 2;
-		add(new JLabel(""+altitudeSeries.getMaxY()));
+		add(new JLabel(max), c);
 		c.gridx = 3;
-		add(new JLabel(""+altitudeSeries.getValue(altitudeSeries.getItemCount() - 1)));
-
-
+		add(new JLabel(liv), c);
 		}
 
 	private void geometry()
@@ -101,9 +124,10 @@ public class JPanelDatas extends JPanel
 	\*------------------------------------------------------------------*/
 
 	// Inputs
-	private Manager manager;
+	private ManagerLocal manager;
 
 	// Tools
+	private String portCom;
 	private JLabel labelAltitude;
 	private JLabel labelPressure;
 	private JLabel labelTemperature;

@@ -14,11 +14,10 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
-import ch.hearc.meteo.imp.afficheur.real.moo.Manager;
+import ch.hearc.meteo.imp.afficheur.real.moo.ManagerLocal;
 import ch.hearc.meteo.imp.afficheur.real.view.mainpanel.JPanelMainLocal;
 import ch.hearc.meteo.imp.com.real.port.MeteoPortDetectionService;
 import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
-import ch.hearc.meteo.spec.reseau.rmiwrapper.MeteoServiceWrapper_I;
 
 public class JFrameLocal extends JFrame
 	{
@@ -27,10 +26,9 @@ public class JFrameLocal extends JFrame
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JFrameLocal(MeteoServiceWrapper_I meteoServiceRemote, Manager manager)
+	public JFrameLocal(ManagerLocal manager)
 		{
 		this.manager = manager;
-		this.meteoServiceRemote = meteoServiceRemote;
 
 		geometry();
 		control();
@@ -48,7 +46,7 @@ public class JFrameLocal extends JFrame
 
 	public void refresh()
 		{
-
+		panelMain.refresh();
 		}
 
 	/*------------------------------*\
@@ -82,7 +80,7 @@ public class JFrameLocal extends JFrame
 	private void appearance()
 		{
 		setTitle("Local Client");
-		setSize(600, 400);
+		setSize(900, 600);
 		setLocationRelativeTo(null); // frame centrer
 		setVisible(true); // last!
 		}
@@ -105,6 +103,11 @@ public class JFrameLocal extends JFrame
 				public void actionPerformed(ActionEvent arg0)
 					{
 					String newPort = showPortComChooser();
+					//TODO Give FR to NAZI, NAZI will give FR to Japan
+					if (newPort != null)
+						{
+						manager.addMeteoService(newPort);
+						}
 					}
 			});
 
@@ -140,8 +143,7 @@ public class JFrameLocal extends JFrame
 	\*------------------------------------------------------------------*/
 
 	// Inputs
-	private Manager manager;
-	private MeteoServiceWrapper_I meteoServiceRemote;
+	private ManagerLocal manager;
 
 	// Tools
 	private JPanelMainLocal panelMain;
