@@ -77,7 +77,7 @@ public class PCLocal implements PC_I
 	|*				server			*|
 	\*------------------------------*/
 
-	public MeteoServiceWrapper_I createShit(String portCom)
+	public MeteoServiceWrapper_I createMeteoService(String portCom)
 		{
 
 		MeteoService meteoService = (MeteoService)new MeteoFactory().create(portCom);

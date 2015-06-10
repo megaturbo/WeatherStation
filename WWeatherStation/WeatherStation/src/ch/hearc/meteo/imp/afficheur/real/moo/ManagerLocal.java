@@ -73,7 +73,7 @@ public class ManagerLocal
 	\*------------------------------*/
 
 	public void addMeteoService(String portCom) {
-		meteoRemotes.add(pc.createShit(portCom));
+		meteoRemotes.add(pcLocal.createMeteoService(portCom));
 	}
 
 	public void setMeteoServiceOptions(String portCom, MeteoServiceOptions meteoServiceOptions) throws RemoteException
