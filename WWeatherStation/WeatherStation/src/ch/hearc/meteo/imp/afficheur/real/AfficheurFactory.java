@@ -1,8 +1,6 @@
 
 package ch.hearc.meteo.imp.afficheur.real;
 
-import java.rmi.RemoteException;
-
 import ch.hearc.meteo.imp.use.remote.pclocal.PCLocal;
 import ch.hearc.meteo.spec.afficheur.AffichageOptions;
 import ch.hearc.meteo.spec.afficheur.AfficheurFactory_I;
@@ -31,17 +29,10 @@ public class AfficheurFactory implements AfficheurFactory_I
 		return new AfficheurServiceLocal(local);
 		}
 
-	public static AfficheurService_I getCentralInstance() throws RemoteException
+	public static AfficheurService_I getCentralInstance()
 		{
-		if (CENTRAL_INSTANCE == null)
-			{
-			CENTRAL_INSTANCE = new AfficheurServiceCentral();
-			}
-
-		return CENTRAL_INSTANCE;
+			return AfficheurServiceCentral.getInstance();
 		}
 
-
-	private static AfficheurService_I CENTRAL_INSTANCE = null;
 
 	}

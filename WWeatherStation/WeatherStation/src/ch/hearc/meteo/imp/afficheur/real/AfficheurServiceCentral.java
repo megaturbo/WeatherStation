@@ -7,8 +7,6 @@ import ch.hearc.meteo.spec.afficheur.AfficheurService_I;
 import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 import ch.hearc.meteo.spec.com.meteo.listener.event.MeteoEvent;
 
-
-
 public class AfficheurServiceCentral implements AfficheurService_I
 	{
 
@@ -20,31 +18,45 @@ public class AfficheurServiceCentral implements AfficheurService_I
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
-	public AfficheurServiceCentral()
+	private AfficheurServiceCentral()
 		{
 		manager = new ManagerCentral();
 		frameService = new JFrameCentral(manager);
 		}
 
-	@Override public void printPression(MeteoEvent event)
+	public static AfficheurServiceCentral getInstance()
+		{
+		if (INSTANCE == null)
+			{
+			INSTANCE = new AfficheurServiceCentral();
+			}
+
+		return INSTANCE;
+		}
+
+	@Override
+	public void printPression(MeteoEvent event)
 		{
 		manager.printPression(event);
 		frameService.refresh();
 		}
 
-	@Override public void printAltitude(MeteoEvent event)
+	@Override
+	public void printAltitude(MeteoEvent event)
 		{
 		manager.printAltitude(event);
 		frameService.refresh();
 		}
 
-	@Override public void printTemperature(MeteoEvent event)
+	@Override
+	public void printTemperature(MeteoEvent event)
 		{
 		manager.printTemperature(event);
 		frameService.refresh();
 		}
 
-	@Override public void updateMeteoServiceOptions(MeteoServiceOptions meteoServiceOptions)
+	@Override
+	public void updateMeteoServiceOptions(MeteoServiceOptions meteoServiceOptions)
 		{
 		// TODO Auto-generated method stub
 
@@ -61,5 +73,9 @@ public class AfficheurServiceCentral implements AfficheurService_I
 	// Inputs
 	private ManagerCentral manager;
 	private JFrameCentral frameService;
-	}
 
+	/*------------------------------*\
+	|*			  Static			*|
+	\*------------------------------*/
+	private static AfficheurServiceCentral INSTANCE = null;
+	}

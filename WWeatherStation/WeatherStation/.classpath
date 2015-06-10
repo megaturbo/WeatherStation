@@ -37,7 +37,7 @@
 			<attribute name="javadoc_location" value="jar:platform:/resource/WeatherStation/ext/apache-commons-logging/commons-logging-1.2-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/Soft/ProjetMeteo/WeatherStation/WWeatherStation/WeatherStation/ext/RXTXcomm.jar">
+	<classpathentry kind="lib" path="C:/Users/thomas.roulin/Documents/_HE-ARC/020-Niveau-2/CoursJava/WeatherStation/WWeatherStation/WeatherStation/ext/com/RXTXcomm.jar">
 		<attributes>
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="WeatherStation/ext/com/windows"/>
 		</attributes>
