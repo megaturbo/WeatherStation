@@ -1,6 +1,7 @@
 
 package ch.hearc.meteo.imp.use.remote.pclocal;
 
+import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -128,19 +129,32 @@ public class PCLocal implements PC_I
 			{
 			e.printStackTrace();
 			}
+		InetAddress ia = null;
+		try
+			{
+			ia = InetAddress.getByName(RemoteAfficheurCreator.IP_ADDR);
+			}
+		catch (UnknownHostException e)
+			{
+			e.printStackTrace();
+			}
 
-		RmiURL rmiURLRemoteAfficheurCreator = new RmiURL(RemoteAfficheurCreator.RMI_ID_CREATOR); //TODO not localhost
+		RmiURL url = new RmiURL(RemoteAfficheurCreator.RMI_ID_CREATOR, ia);
+		RmiURL rmiURLRemoteAfficheurCreator = url; //TODO not localhost
 		System.out.println(RemoteAfficheurCreator.RMI_ID_CREATOR);
 		try
 			{
 			RemoteAfficheurCreator_I remoteAfficheurCreator = (RemoteAfficheurCreator_I)RmiTools.connectionRemoteObject(rmiURLRemoteAfficheurCreator);
+			System.out.println("woooo");
 			RmiURL afficheurServicermiURL = remoteAfficheurCreator.createRemoteAfficheurService(null, rmiURLmeteoService);
 			//			afficheurServiceRemote = (AfficheurServiceWrapper_I)RmiTools.connectionRemoteObject(afficheurServicermiURL);
+			System.out.println("anrinwaornaowin");
 			}
 		catch (RemoteException | NotBoundException e)
 			{
 			System.out.println("\nLe pc central est introuvable. Veuillez vérifier que vous avez une connexion à cet ordinateur.");
 			}
+		System.out.println("saojrairi");
 		return meteoServiceWrapper;
 		}
 

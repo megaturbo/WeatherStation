@@ -3,7 +3,6 @@ package ch.hearc.meteo.imp.afficheur.real.view.mainpanel.light;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.rmi.RemoteException;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -40,6 +39,10 @@ public class JPanelListCom extends JPanel
 
 	public void updatePortCom(String portCom) {
 		parent.updatePortCom(portCom);
+	}
+
+	public ManagerLocal getManager() {
+		return manager;
 	}
 
 	/*------------------------------*\
@@ -92,18 +95,11 @@ public class JPanelListCom extends JPanel
 	private void refreshList()
 		{
 		panelList.removeAll();
-		List<MeteoServiceWrapper_I> stations = manager.getRemotes();
+		List<MeteoServiceWrapper_I> remotes = manager.getRemotes();
 
-		for(MeteoServiceWrapper_I s:stations)
+		for(MeteoServiceWrapper_I remote:remotes)
 			{
-			try
-				{
-				panelList.add(new JPanelComControl(this, s));
-				}
-			catch (RemoteException e)
-				{
-				e.printStackTrace();
-				}
+			panelList.add(new JPanelComControl(this, remote));
 			}
 
 		this.updateUI();
