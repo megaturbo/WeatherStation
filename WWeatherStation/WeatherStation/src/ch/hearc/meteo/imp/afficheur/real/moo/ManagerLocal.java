@@ -18,7 +18,6 @@ import org.jfree.data.time.TimeSeriesCollection;
 import org.jxmapviewer.viewer.DefaultWaypoint;
 import org.jxmapviewer.viewer.Waypoint;
 
-import ch.hearc.meteo.imp.use.remote.PC_I;
 import ch.hearc.meteo.imp.use.remote.pclocal.PCLocal;
 import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 import ch.hearc.meteo.spec.com.meteo.listener.event.MeteoEvent;
@@ -34,7 +33,7 @@ public class ManagerLocal
 
 	public ManagerLocal(PCLocal pcLocal)
 		{
-		this.pc = pcLocal;
+		this.pcLocal = pcLocal;
 
 		collectionAltitude = new TimeSeriesCollection();
 		collectionPression = new TimeSeriesCollection();
@@ -184,7 +183,7 @@ public class ManagerLocal
 	\*------------------------------------------------------------------*/
 
 	// Input
-	private PC_I pc;
+	private PCLocal pcLocal;
 	private List<MeteoServiceWrapper_I> meteoRemotes;
 
 	// Tools
