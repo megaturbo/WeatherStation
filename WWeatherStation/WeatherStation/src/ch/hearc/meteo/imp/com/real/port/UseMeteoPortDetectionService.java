@@ -20,7 +20,7 @@ public class UseMeteoPortDetectionService
 		{
 		MeteoPortDetectionService meteoPortDetectionService= (MeteoPortDetectionService)new MeteoPortDetectionServiceFactory().create();
 		List<String> list = meteoPortDetectionService.findListPortMeteo();
-		System.out.println(list);
+		System.out.println(list.toString());
 		}
 
 	/*------------------------------------------------------------------*\

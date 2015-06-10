@@ -204,23 +204,32 @@ public class ComConnexion implements ComConnexions_I
 	@Override
 	public void askAltitudeAsync() throws Exception
 		{
-		byte[] tabByte = TrameEncoder.coder("010200");
-		writer.write(tabByte);
+		if (connected && running)
+			{
+			byte[] tabByte = TrameEncoder.coder("010200");
+			writer.write(tabByte);
+			}
 		}
 
 	@Override
 	public void askPressionAsync() throws Exception
 		{
-		byte[] tabByte = TrameEncoder.coder("010000");
-		writer.write(tabByte);
+		if (connected && running)
+			{
+			byte[] tabByte = TrameEncoder.coder("010000");
+			writer.write(tabByte);
+			}
 		}
 
 	@Override
 	public void askTemperatureAsync() throws Exception
 		{
-		byte[] tabByte = TrameEncoder.coder("010100");
-		writer.write(tabByte);
-
+		running = true; //used for checking the connectivity to a meteostation from the port detection class
+		if (connected && running)
+			{
+			byte[] tabByte = TrameEncoder.coder("010100");
+			writer.write(tabByte);
+			}
 		}
 
 	/*------------------------------*\
