@@ -163,7 +163,6 @@ public class Manager
 
 	// Input
 	private MeteoServiceWrapper_I meteoServiceRemote;
-
 	// Tools
 	private TimeSeriesCollection collectionAltitude;
 	private TimeSeriesCollection collectionPression;
