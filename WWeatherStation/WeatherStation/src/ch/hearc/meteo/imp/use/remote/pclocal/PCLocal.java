@@ -17,7 +17,6 @@ import ch.hearc.meteo.spec.com.meteo.exception.MeteoServiceException;
 import ch.hearc.meteo.spec.com.meteo.listener.MeteoAdapter;
 import ch.hearc.meteo.spec.com.meteo.listener.event.MeteoEvent;
 import ch.hearc.meteo.spec.reseau.RemoteAfficheurCreator_I;
-import ch.hearc.meteo.spec.reseau.rmiwrapper.AfficheurServiceWrapper_I;
 import ch.hearc.meteo.spec.reseau.rmiwrapper.MeteoServiceWrapper;
 import ch.hearc.meteo.spec.reseau.rmiwrapper.MeteoServiceWrapper_I;
 
@@ -37,7 +36,12 @@ public class PCLocal implements PC_I
 		//		this.meteoServiceOptions = meteoServiceOptions;
 		//		this.portCom = portCom;
 		//		this.affichageOptions = affichageOptions;
-		this.rmiURLafficheurManager = rmiURLafficheurManager;
+		//		this.rmiURLafficheurManager = rmiURLafficheurManager;
+		}
+
+	public PCLocal()
+		{
+
 		}
 
 	/*------------------------------------------------------------------*\
@@ -117,12 +121,11 @@ public class PCLocal implements PC_I
 			}
 
 		RmiURL rmiURLRemoteAfficheurCreator = new RmiURL(RemoteAfficheurCreator.RMI_ID_CREATOR); //TODO not localhost
-		RemoteAfficheurCreator_I remoteAfficheurCreator;
 		try
 			{
-			remoteAfficheurCreator = (RemoteAfficheurCreator_I)RmiTools.connectionRemoteObject(rmiURLRemoteAfficheurCreator);
-			RmiURL afficheurServicermiURL = remoteAfficheurCreator.createRemoteAfficheurService(null, rmiURLafficheurManager);
-			afficheurServiceRemote = (AfficheurServiceWrapper_I)RmiTools.connectionRemoteObject(afficheurServicermiURL);
+			RemoteAfficheurCreator_I remoteAfficheurCreator = (RemoteAfficheurCreator_I)RmiTools.connectionRemoteObject(rmiURLRemoteAfficheurCreator);
+			RmiURL afficheurServicermiURL = remoteAfficheurCreator.createRemoteAfficheurService(null, rmiURLmeteoService);
+			//			afficheurServiceRemote = (AfficheurServiceWrapper_I)RmiTools.connectionRemoteObject(afficheurServicermiURL);
 			}
 		catch (RemoteException | NotBoundException e)
 			{
@@ -202,8 +205,8 @@ public class PCLocal implements PC_I
 	//	private MeteoServiceOptions meteoServiceOptions;
 	//	private String portCom;
 	//	private AffichageOptions affichageOptions;
-	private RmiURL rmiURLafficheurManager;
+	//	private RmiURL rmiURLafficheurManager;
 	// Tools
-	private AfficheurServiceWrapper_I afficheurServiceRemote;
+	//	private AfficheurServiceWrapper_I afficheurServiceRemote;
 	private AfficheurService_I afficheurService;
 	}
