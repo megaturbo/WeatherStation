@@ -6,7 +6,6 @@ import javax.swing.JOptionPane;
 
 import ch.hearc.meteo.imp.afficheur.real.AfficheurFactory;
 import ch.hearc.meteo.imp.com.simulateur.MeteoServiceSimulatorFactory;
-import ch.hearc.meteo.spec.afficheur.AffichageOptions;
 import ch.hearc.meteo.spec.afficheur.AfficheurService_I;
 import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 import ch.hearc.meteo.spec.com.meteo.MeteoService_I;
@@ -63,7 +62,6 @@ public class UseComplet
 		MeteoServiceWrapper_I meteoServiceWrapper = new MeteoServiceWrapper(meteoService);
 
 		String titre = RmiTools.getLocalHost() + " " + meteoService.getPort();
-		AffichageOptions affichageOption = new AffichageOptions(3, titre);
 		// AfficheurService_I afficheurService = (new
 		// AfficheurSimulateurFactory()).createOnLocalPC(affichageOption,
 		// meteoServiceWrapper);

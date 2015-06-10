@@ -2,7 +2,7 @@
 package ch.hearc.meteo.imp.afficheur.real;
 
 import ch.hearc.meteo.imp.afficheur.real.moo.Manager;
-import ch.hearc.meteo.imp.afficheur.real.view.JFrameLocalLight;
+import ch.hearc.meteo.imp.afficheur.real.view.JFrameLocal;
 import ch.hearc.meteo.spec.afficheur.AfficheurService_I;
 import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 import ch.hearc.meteo.spec.com.meteo.listener.event.MeteoEvent;
@@ -10,16 +10,16 @@ import ch.hearc.meteo.spec.reseau.rmiwrapper.MeteoServiceWrapper_I;
 
 
 
-public class AfficheurServiceLocalLight implements AfficheurService_I
+public class AfficheurServiceLocal implements AfficheurService_I
 	{
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public AfficheurServiceLocalLight(MeteoServiceWrapper_I meteoServiceRemote) {
+	public AfficheurServiceLocal(MeteoServiceWrapper_I meteoServiceRemote) {
 		manager = new Manager(meteoServiceRemote);
-		frameService = new JFrameLocalLight(meteoServiceRemote, manager);
+		frameService = new JFrameLocal(meteoServiceRemote, manager);
 	}
 
 	/*------------------------------------------------------------------*\
@@ -28,25 +28,23 @@ public class AfficheurServiceLocalLight implements AfficheurService_I
 
 	@Override
 	public void printPression(MeteoEvent event) {
-
+		manager.printPression(event);
 	}
 
 	@Override
 	public void printAltitude(MeteoEvent event) {
-		// TODO Auto-generated method stub
-
+		manager.printAltitude(event);
 	}
 
 	@Override
 	public void printTemperature(MeteoEvent event) {
-		// TODO Auto-generated method stub
-
+		manager.printTemperature(event);
 	}
 
 	@Override
 	public void updateMeteoServiceOptions(
 			MeteoServiceOptions meteoServiceOptions) {
-		// TODO Auto-generated method stub
+		frameService.updateMeteoServiceOptions(meteoServiceOptions);
 	}
 
 	/*------------------------------*\
@@ -65,7 +63,7 @@ public class AfficheurServiceLocalLight implements AfficheurService_I
 	|*							Attributs Private						*|
 	\*------------------------------------------------------------------*/
 	private Manager manager;
-	private JFrameLocalLight frameService;
+	private JFrameLocal frameService;
 
 	}
 

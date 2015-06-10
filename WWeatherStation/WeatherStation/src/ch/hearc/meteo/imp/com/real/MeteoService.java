@@ -2,7 +2,7 @@
 package ch.hearc.meteo.imp.com.real;
 
 import ch.hearc.meteo.imp.com.logique.MeteoService_A;
-import ch.hearc.meteo.imp.com.real.com.ComConnexions_I;
+import ch.hearc.meteo.imp.com.real.com.ComConnexion;
 import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 import ch.hearc.meteo.spec.com.meteo.exception.MeteoServiceException;
 
@@ -50,7 +50,7 @@ public class MeteoService extends MeteoService_A
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
-	public MeteoService(ComConnexions_I comConnexion)
+	public MeteoService(ComConnexion comConnexion)
 		{
 		super(comConnexion.getNamePort());
 
@@ -175,6 +175,6 @@ public class MeteoService extends MeteoService_A
 	\*------------------------------------------------------------------*/
 
 	// Tools
-	private ComConnexions_I comConnexion;
+	private ComConnexion comConnexion;
 
 	}

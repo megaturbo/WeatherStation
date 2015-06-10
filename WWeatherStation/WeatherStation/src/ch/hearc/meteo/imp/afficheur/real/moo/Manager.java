@@ -101,6 +101,18 @@ public class Manager
 		return this.collectionTemperature;
 		}
 
+	public TimeSeries getSeriesFromPort(String portCom, Sensor sensor) {
+
+		TimeSeries series = null;
+		for(Station s:stationFromSources.values()) {
+			if(s.getName().equals(portCom)) {
+				series = s.getSeries(sensor);
+			}
+		}
+
+		return series;
+	}
+
 	public Set<? extends Waypoint> getWaypoints()
 		{
 		Set<DefaultWaypoint> waypoints = new HashSet<DefaultWaypoint>();
@@ -151,7 +163,6 @@ public class Manager
 
 	// Input
 	private MeteoServiceWrapper_I meteoServiceRemote;
-
 	// Tools
 	private TimeSeriesCollection collectionAltitude;
 	private TimeSeriesCollection collectionPression;

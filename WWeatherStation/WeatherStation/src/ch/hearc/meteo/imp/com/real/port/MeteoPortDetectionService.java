@@ -29,6 +29,7 @@ public class MeteoPortDetectionService implements MeteoPortDetectionService_I
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<String> findListPortSerie()
 		{
@@ -49,27 +50,33 @@ public class MeteoPortDetectionService implements MeteoPortDetectionService_I
 	public boolean isStationMeteoAvailable(String portName, long timeoutMS)
 		{
 		MeteoService station = (MeteoService)new MeteoFactory().create(portName);
+		station.addMeteoListener(new MeteoAdapter()
+			{
+				@Override
+				public void temperaturePerformed(MeteoEvent event)
+					{
+					isAStation = true;
+					}
+			});
 		isAStation = false;
-		//handle asynchronous
 		try
 			{
 			station.connect();
 			station.askTemperatureAsync();
-			station.addMeteoListener(new MeteoAdapter()
-				{
-					@Override
-					public void temperaturePerformed(MeteoEvent event)
-						{
-						isAStation = true;
-						}
-				});
+			Thread.sleep(timeoutMS);
+			station.disconnect();
 			return isAStation;
-
 			}
 		catch (MeteoServiceException e)
 			{
 			return isAStation;
 			}
+		catch (InterruptedException e)
+			{
+			System.out.println("Thread died while checking for ports.");
+			return isAStation;
+			}
+
 		}
 
 	@Override

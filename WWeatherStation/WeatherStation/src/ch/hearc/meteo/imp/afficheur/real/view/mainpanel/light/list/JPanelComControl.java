@@ -1,26 +1,24 @@
-
-package ch.hearc.meteo.imp.afficheur.real.view.mainpanel;
+package ch.hearc.meteo.imp.afficheur.real.view.mainpanel.light.list;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import ch.hearc.meteo.imp.afficheur.real.moo.Manager;
-import ch.hearc.meteo.imp.afficheur.real.view.mainpanel.light.JPanelSlider;
-import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
-
-
-public class JPanelMainLocalLight extends JPanel
+public class JPanelComControl extends JPanel
 	{
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JPanelMainLocalLight(Manager manager)
+	public JPanelComControl(String portName)
 		{
-		this.manager = manager;
+		this.portName = portName;
 
 		geometry();
 		control();
@@ -31,14 +29,10 @@ public class JPanelMainLocalLight extends JPanel
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
-	public void updateMeteoServiceOptions(MeteoServiceOptions meteoServiceOptions)
-		{
-		panelSlider.updateMeteoServiceOptions( meteoServiceOptions);
-		}
-
 	/*------------------------------*\
 	|*				Set				*|
 	\*------------------------------*/
+
 	/*------------------------------*\
 	|*				Get				*|
 	\*------------------------------*/
@@ -49,28 +43,47 @@ public class JPanelMainLocalLight extends JPanel
 
 	private void geometry()
 		{
-		// JComponent : Instanciation
-		panelSlider = new JPanelSlider(manager);
+		labelPort = new JLabel(portName);
+		buttonStart = new JButton(">");
+		buttonStop = new JButton("||");
+		buttonDisconnect = new JButton("X");
 
-		setLayout(new GridBagLayout());
+		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
-		c.fill = GridBagConstraints.BOTH;
-
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.weightx = 1;
 		c.gridx = 0;
 		c.gridy = 0;
-		c.weightx = 1;
-		c.weighty = 1;
-		add(panelSlider, c);
+
+		add(labelPort, c);
+		c.gridx = 1;
+		add(buttonStart, c);
+		c.gridx = 2;
+		add(buttonStop, c);
+		c.gridx = 3;
+		add(buttonDisconnect, c);
 		}
 
 	private void control()
 		{
+		this.addMouseListener(new MouseAdapter()
+			{
+				@Override
+				public void mousePressed(MouseEvent e)
+					{
+					System.out.println(portName + " pressed");
 
+					}
+
+				@Override
+				public void mouseClicked(MouseEvent arg0)
+					{
+					}
+			});
 		}
 
 	private void appearance()
 		{
-		// rien
 		}
 
 	/*------------------------------------------------------------------*\
@@ -78,9 +91,12 @@ public class JPanelMainLocalLight extends JPanel
 	\*------------------------------------------------------------------*/
 
 	// Inputs
-	private Manager manager;
+	private String portName;
 
 	// Tools
-	private JPanelSlider panelSlider;
+	private JLabel labelPort;
+	private JButton buttonStart;
+	private JButton buttonStop;
+	private JButton buttonDisconnect;
 
 	}
