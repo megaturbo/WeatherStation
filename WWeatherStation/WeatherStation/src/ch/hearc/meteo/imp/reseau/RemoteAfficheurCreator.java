@@ -1,10 +1,12 @@
 
 package ch.hearc.meteo.imp.reseau;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
-import ch.hearc.meteo.imp.afficheur.real.AfficheurServiceLocalFull;
+import ch.hearc.meteo.imp.afficheur.real.AfficheurServiceCentral;
 import ch.hearc.meteo.spec.afficheur.AffichageOptions;
 import ch.hearc.meteo.spec.afficheur.AfficheurService_I;
 import ch.hearc.meteo.spec.reseau.RemoteAfficheurCreator_I;
@@ -37,6 +39,11 @@ public class RemoteAfficheurCreator implements RemoteAfficheurCreator_I
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
+
+	public String getIP() throws UnknownHostException
+		{
+		return InetAddress.getLocalHost().getHostAddress();
+		}
 
 	/**
 	 * Remote use
@@ -96,7 +103,7 @@ public class RemoteAfficheurCreator implements RemoteAfficheurCreator_I
 	private AfficheurService_I createAfficheurService(AffichageOptions affichageOptions, MeteoServiceWrapper_I meteoServiceRemote)
 		{
 
-		return new AfficheurServiceLocalFull(meteoServiceRemote); //
+		return new AfficheurServiceCentral(meteoServiceRemote); //
 
 		}
 
@@ -135,8 +142,8 @@ public class RemoteAfficheurCreator implements RemoteAfficheurCreator_I
 
 	// Tools final
 	private static final String PREFIXE = "AFFICHEUR_SERVICE";
-
 	public static final String RMI_ID = PREFIXE;
 	public static final String RMI_ID_CREATOR = "CREATOR_ID";
+	public static final String IP_ADDR = "192.168.1.109";
 
 	}
