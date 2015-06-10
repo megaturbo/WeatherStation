@@ -21,7 +21,7 @@ import org.jxmapviewer.viewer.TileFactoryInfo;
 import org.jxmapviewer.viewer.Waypoint;
 import org.jxmapviewer.viewer.WaypointPainter;
 
-import ch.hearc.meteo.imp.afficheur.real.moo.Manager;
+import ch.hearc.meteo.imp.afficheur.real.moo.ManagerCentral;
 
 public class JPanelMap extends JPanel
 	{
@@ -30,7 +30,7 @@ public class JPanelMap extends JPanel
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JPanelMap(Manager manager)
+	public JPanelMap(ManagerCentral manager)
 		{
 		this.manager = manager;
 
@@ -135,7 +135,7 @@ public class JPanelMap extends JPanel
 	\*------------------------------------------------------------------*/
 
 	// Inputs
-	private Manager manager;
+	private ManagerCentral manager;
 
 	// Tools
 

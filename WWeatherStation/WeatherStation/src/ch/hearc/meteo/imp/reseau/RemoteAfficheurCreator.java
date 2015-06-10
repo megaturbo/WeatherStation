@@ -6,7 +6,6 @@ import java.net.UnknownHostException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
-import ch.hearc.meteo.imp.afficheur.real.AfficheurServiceCentral;
 import ch.hearc.meteo.spec.afficheur.AffichageOptions;
 import ch.hearc.meteo.spec.afficheur.AfficheurService_I;
 import ch.hearc.meteo.spec.reseau.RemoteAfficheurCreator_I;
@@ -99,12 +98,12 @@ public class RemoteAfficheurCreator implements RemoteAfficheurCreator_I
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
-
+	@Deprecated
 	private AfficheurService_I createAfficheurService(AffichageOptions affichageOptions, MeteoServiceWrapper_I meteoServiceRemote)
 		{
 
-		return new AfficheurServiceCentral(meteoServiceRemote); //
-
+		//		return new AfficheurServiceCentral(meteoServiceRemote); //
+		return null;
 		}
 
 	private void server() throws RemoteException

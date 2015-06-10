@@ -5,9 +5,9 @@ import java.awt.GridBagLayout;
 
 import javax.swing.JPanel;
 
-import ch.hearc.meteo.imp.afficheur.real.moo.Manager;
+import ch.hearc.meteo.imp.afficheur.real.moo.ManagerLocal;
 import ch.hearc.meteo.imp.afficheur.real.view.mainpanel.light.datas.JPanelDatas;
-import ch.hearc.meteo.imp.afficheur.real.view.mainpanel.light.options.JPanelSlider;
+import ch.hearc.meteo.imp.afficheur.real.view.mainpanel.light.options.JPanelSliderLocal;
 import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 
 public class JPanelViewCom extends JPanel
@@ -17,7 +17,7 @@ public class JPanelViewCom extends JPanel
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JPanelViewCom(Manager manager)
+	public JPanelViewCom(ManagerLocal manager)
 		{
 		this.manager = manager;
 
@@ -29,6 +29,17 @@ public class JPanelViewCom extends JPanel
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
+	public void refresh()
+		{
+		panelDatas.refresh();
+		}
+
+	public void updatePortCom(String portCom)
+		{
+		this.setVisible(true);
+		panelSlider.updatePortCom(portCom);
+		panelDatas.updatePortCom(portCom);
+		}
 
 	public void updateMeteoServiceOptions(MeteoServiceOptions meteoServiceOptions)
 		{
@@ -48,14 +59,15 @@ public class JPanelViewCom extends JPanel
 	\*------------------------------------------------------------------*/
 	private void geometry()
 		{
-		panelSlider = new JPanelSlider(manager);
+		panelSlider = new JPanelSliderLocal(manager);
 		panelDatas = new JPanelDatas(manager);
 
 		setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 
 		// JComponent : add
-		c.fill = GridBagConstraints.VERTICAL;
+		c.fill = GridBagConstraints.BOTH;
+		c.weightx = 1;
 		c.weighty = 1;
 		c.gridx = 0;
 		c.gridy = 0;
@@ -81,12 +93,9 @@ public class JPanelViewCom extends JPanel
 	\*------------------------------------------------------------------*/
 
 	// Inputs
-	private Manager manager;
+	private ManagerLocal manager;
 
 	// Tools
-	private JPanelSlider panelSlider;
+	private JPanelSliderLocal panelSlider;
 	private JPanelDatas panelDatas;
-
-
 	}
-

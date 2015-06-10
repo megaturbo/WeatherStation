@@ -4,7 +4,7 @@ import java.awt.GridLayout;
 
 import javax.swing.JPanel;
 
-import ch.hearc.meteo.imp.afficheur.real.moo.Manager;
+import ch.hearc.meteo.imp.afficheur.real.moo.ManagerCentral;
 import ch.hearc.meteo.imp.afficheur.real.view.utils.JPanelSimpleGraph;
 
 public class JPanelStationGraphs extends JPanel
@@ -14,7 +14,7 @@ public class JPanelStationGraphs extends JPanel
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JPanelStationGraphs(Manager manager)
+	public JPanelStationGraphs(ManagerCentral manager)
 		{
 		this.manager = manager;
 
@@ -74,7 +74,7 @@ public class JPanelStationGraphs extends JPanel
 	\*------------------------------------------------------------------*/
 
 	// Inputs
-	private Manager manager;
+	private ManagerCentral manager;
 
 	// Tools
 	private JPanelSimpleGraph panelTemperature;
