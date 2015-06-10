@@ -6,11 +6,12 @@ import java.net.UnknownHostException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
+import ch.hearc.meteo.imp.afficheur.real.AfficheurFactory;
+import ch.hearc.meteo.imp.afficheur.real.AfficheurServiceCentral;
 import ch.hearc.meteo.spec.afficheur.AffichageOptions;
 import ch.hearc.meteo.spec.afficheur.AfficheurService_I;
 import ch.hearc.meteo.spec.reseau.RemoteAfficheurCreator_I;
 import ch.hearc.meteo.spec.reseau.rmiwrapper.AfficheurServiceWrapper;
-import ch.hearc.meteo.spec.reseau.rmiwrapper.AfficheurServiceWrapper_I;
 import ch.hearc.meteo.spec.reseau.rmiwrapper.MeteoServiceWrapper_I;
 
 import com.bilat.tools.reseau.rmi.IdTools;
@@ -70,11 +71,15 @@ public class RemoteAfficheurCreator implements RemoteAfficheurCreator_I
 			// server
 			{
 			System.out.println("PC Central: Sharing afficheurService");
-			AfficheurService_I afficheurService = createAfficheurService(affichageOptions, meteoServiceRemote);
-			AfficheurServiceWrapper_I afficheurServiceWrapper = new AfficheurServiceWrapper(afficheurService); //
+			//			AfficheurService_I afficheurService = createAfficheurService(affichageOptions, meteoServiceRemote);
+			//			AfficheurServiceWrapper_I afficheurServiceWrapper = new AfficheurServiceWrapper(afficheurService); //
+
+			AfficheurServiceCentral central = (AfficheurServiceCentral)AfficheurFactory.getCentralInstance();
+
+			AfficheurServiceWrapper centralWrap = new AfficheurServiceWrapper(central);
 
 			RmiURL afficheurServicermiURL = rmiUrl();
-			RmiTools.shareObject(afficheurServiceWrapper, afficheurServicermiURL); //
+			RmiTools.shareObject(centralWrap, afficheurServicermiURL); //
 			return afficheurServicermiURL; // Retourner le RMI-ID pour une
 											// connection distante sur le
 											// serveur d'affichage
