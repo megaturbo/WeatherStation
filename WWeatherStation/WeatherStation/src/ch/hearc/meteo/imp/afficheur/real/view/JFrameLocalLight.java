@@ -5,6 +5,7 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.rmi.RemoteException;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -14,6 +15,7 @@ import javax.swing.KeyStroke;
 
 import ch.hearc.meteo.imp.afficheur.real.moo.Manager;
 import ch.hearc.meteo.imp.afficheur.real.view.mainpanel.JPanelMainLocalLight;
+import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 import ch.hearc.meteo.spec.reseau.rmiwrapper.MeteoServiceWrapper_I;
 
 public class JFrameLocalLight extends JFrame
@@ -26,6 +28,13 @@ public class JFrameLocalLight extends JFrame
 	public JFrameLocalLight(MeteoServiceWrapper_I meteoServiceRemote, Manager manager)
 		{
 		this.manager = manager;
+		this.meteoServiceRemote = meteoServiceRemote;
+
+		try {
+			this.portCom = meteoServiceRemote.getPort();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 
 		geometry();
 		control();
@@ -35,6 +44,11 @@ public class JFrameLocalLight extends JFrame
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
+
+	public void updateMeteoServiceOptions(MeteoServiceOptions meteoServiceOptions)
+		{
+		panelMain.updateMeteoServiceOptions(meteoServiceOptions);
+		}
 
 	public void refresh()
 		{
@@ -60,6 +74,8 @@ public class JFrameLocalLight extends JFrame
 		panelMain = new JPanelMainLocalLight(manager);
 
 		setLayout(new BorderLayout());
+
+		add(panelMain);
 		}
 
 	private void control()
@@ -69,11 +85,12 @@ public class JFrameLocalLight extends JFrame
 
 	private void appearance()
 		{
-		setTitle("Local Client [Light]");
+		setTitle("["+portCom+"] Light Client - Local");
 		setSize(600, 400);
-		setLocationRelativeTo(null); // frame centrer
-		setVisible(true); // last!
+		setLocationRelativeTo(null); 	// frame centrer
+		setVisible(true); 				// last!
 		}
+
 	private void createMenuBar()
 		{
 		JMenuBar menuBar = new JMenuBar();
@@ -106,8 +123,10 @@ public class JFrameLocalLight extends JFrame
 
 	// Inputs
 	private Manager manager;
+	private MeteoServiceWrapper_I meteoServiceRemote;
 
 	// Tools
 	private JPanelMainLocalLight panelMain;
+	private String portCom;
 
 	}

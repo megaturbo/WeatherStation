@@ -14,6 +14,8 @@ import ch.hearc.meteo.spec.afficheur.AffichageOptions;
 import ch.hearc.meteo.spec.afficheur.AfficheurService_I;
 import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 import ch.hearc.meteo.spec.com.meteo.exception.MeteoServiceException;
+import ch.hearc.meteo.spec.com.meteo.listener.MeteoAdapter;
+import ch.hearc.meteo.spec.com.meteo.listener.event.MeteoEvent;
 import ch.hearc.meteo.spec.reseau.RemoteAfficheurCreator_I;
 import ch.hearc.meteo.spec.reseau.rmiwrapper.AfficheurServiceWrapper_I;
 import ch.hearc.meteo.spec.reseau.rmiwrapper.MeteoServiceWrapper;
@@ -81,9 +83,35 @@ public class PCLocal implements PC_I
 
 		MeteoServiceWrapper_I meteoServiceWrapper = new MeteoServiceWrapper(meteoService);
 
-		AfficheurService_I afficheurService = new AfficheurFactory().createOnLocalPCLight(meteoServiceWrapper);
+		AfficheurService_I afficheurService = new AfficheurFactory().createOnLocalPC(null, meteoServiceWrapper);
 
+
+		meteoService.addMeteoListener(new MeteoAdapter()
+			{
+
+				@Override
+				public void temperaturePerformed(MeteoEvent event)
+					{
+					afficheurService.printTemperature(event);
+					}
+
+				@Override
+				public void altitudePerformed(MeteoEvent event)
+					{
+					afficheurService.printAltitude(event);
+					}
+
+				@Override
+				public void pressionPerformed(MeteoEvent event)
+					{
+					afficheurService.printPression(event);
+					}
+
+			});
+
+		System.out.println("PC Local: sharing meteoServiceWrapper");
 		RmiTools.shareObject(meteoServiceWrapper, rmiURLafficheurManager);
+		System.out.println("PC Local: sharing success\n");
 		}
 
 	/*------------------------------*\
@@ -100,7 +128,9 @@ public class PCLocal implements PC_I
 
 		RmiURL afficheurServicermiURL = remoteAfficheurCreator.createRemoteAfficheurService(affichageOptions, rmiURLafficheurManager);
 
+		System.out.println("PC Local: connecting to afficheurService");
 		afficheurServiceRemote = (AfficheurServiceWrapper_I)RmiTools.connectionRemoteObject(afficheurServicermiURL); //
+		System.out.println("PC Local: connection success\n");
 		}
 
 	/*------------------------------------------------------------------*\

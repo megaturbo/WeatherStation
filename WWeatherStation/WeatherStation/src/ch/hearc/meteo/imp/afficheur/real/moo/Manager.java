@@ -1,6 +1,7 @@
 
 package ch.hearc.meteo.imp.afficheur.real.moo;
 
+import java.rmi.RemoteException;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
@@ -16,8 +17,10 @@ import org.jfree.data.time.TimeSeriesCollection;
 import org.jxmapviewer.viewer.DefaultWaypoint;
 import org.jxmapviewer.viewer.Waypoint;
 
+import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 import ch.hearc.meteo.spec.com.meteo.listener.event.MeteoEvent;
 import ch.hearc.meteo.spec.com.meteo.listener.event.Sources;
+import ch.hearc.meteo.spec.reseau.rmiwrapper.MeteoServiceWrapper_I;
 
 public class Manager
 	{
@@ -26,12 +29,14 @@ public class Manager
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public Manager()
+	public Manager(MeteoServiceWrapper_I meteoServiceRemote)
 		{
+
+		this.meteoServiceRemote = meteoServiceRemote;
+
 		collectionAltitude = new TimeSeriesCollection();
 		collectionPression = new TimeSeriesCollection();
 		collectionTemperature = new TimeSeriesCollection();
-
 		stationFromSources = new HashMap<Sources, Station>();
 		}
 
@@ -62,6 +67,20 @@ public class Manager
 	|*				Get				*|
 	\*------------------------------*/
 
+	/*------------------------------*\
+	|*				remote			*|
+	\*------------------------------*/
+
+	public void setMeteoServiceOptions(MeteoServiceOptions meteoServiceOptions) throws RemoteException
+		{
+		meteoServiceRemote.setMeteoServiceOptions(meteoServiceOptions);
+		}
+
+	public MeteoServiceOptions getMeteoServiceOptions() throws RemoteException
+		{
+		return this.meteoServiceRemote.getMeteoServiceOptions();
+		}
+
 	public Collection<Station> getStationList()
 		{
 		return this.stationFromSources.values();
@@ -81,6 +100,18 @@ public class Manager
 		{
 		return this.collectionTemperature;
 		}
+
+	public TimeSeries getSeriesFromPort(String portCom, Sensor sensor) {
+
+		TimeSeries series = null;
+		for(Station s:stationFromSources.values()) {
+			if(s.getName().equals(portCom)) {
+				series = s.getSeries(sensor);
+			}
+		}
+
+		return series;
+	}
 
 	public Set<? extends Waypoint> getWaypoints()
 		{
@@ -130,11 +161,13 @@ public class Manager
 	|*							Attributs Private						*|
 	\*------------------------------------------------------------------*/
 
+	// Input
+	private MeteoServiceWrapper_I meteoServiceRemote;
+
 	// Tools
 	private TimeSeriesCollection collectionAltitude;
 	private TimeSeriesCollection collectionPression;
 	private TimeSeriesCollection collectionTemperature;
-
 	private Map<Sources, Station> stationFromSources;
 
 	}

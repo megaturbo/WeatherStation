@@ -14,7 +14,7 @@ import javax.swing.KeyStroke;
 
 import ch.hearc.meteo.imp.afficheur.real.moo.Manager;
 import ch.hearc.meteo.imp.afficheur.real.view.mainpanel.JPanelMainLocalFull;
-import ch.hearc.meteo.imp.afficheur.real.view.mainpanel.subpanels.JPanelStationList;
+import ch.hearc.meteo.imp.afficheur.real.view.mainpanel.full.JPanelStationList;
 
 public class JFrameCentralFull extends JFrame implements JFrameFull_I {
 

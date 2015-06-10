@@ -21,7 +21,7 @@ public class AfficheurServiceLocalFull implements AfficheurService_I
 
 	public AfficheurServiceLocalFull(MeteoServiceWrapper_I meteoServiceRemote)
 		{
-		manager = new Manager();
+		manager = new Manager(meteoServiceRemote);
 		frameService = new JFrameLocalFull(meteoServiceRemote, manager);
 		}
 

@@ -12,7 +12,7 @@ public class AfficheurFactory implements AfficheurFactory_I
 	@Override
 	public AfficheurService_I createOnCentralPC(AffichageOptions affichageOptions, MeteoServiceWrapper_I meteoServiceRemote)
 		{
-		return new AfficheurServiceCentral(affichageOptions, meteoServiceRemote);
+		return new AfficheurServiceCentral(meteoServiceRemote);
 		}
 
 	@Override

@@ -1,7 +1,8 @@
 
 package ch.hearc.meteo.imp.afficheur.real;
 
-import ch.hearc.meteo.spec.afficheur.AffichageOptions;
+import ch.hearc.meteo.imp.afficheur.real.moo.Manager;
+import ch.hearc.meteo.imp.afficheur.real.view.JFrameLocalFull;
 import ch.hearc.meteo.spec.afficheur.AfficheurService_I;
 import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 import ch.hearc.meteo.spec.com.meteo.listener.event.MeteoEvent;
@@ -16,50 +17,39 @@ public class AfficheurServiceCentral implements AfficheurService_I
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public AfficheurServiceCentral(AffichageOptions affichageOptions, MeteoServiceWrapper_I meteoServiceRemote)
-		{
-		// TODO Auto-generated constructor stub
-		}
-
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
-	@Override
-	public void printPression(MeteoEvent event)
+	public AfficheurServiceCentral(MeteoServiceWrapper_I meteoServiceRemote)
+		{
+		manager = new Manager(meteoServiceRemote);
+		frameService = new JFrameLocalFull(meteoServiceRemote, manager);
+		}
+
+	@Override public void printPression(MeteoEvent event)
+		{
+		manager.printPression(event);
+		frameService.refresh();
+		}
+
+	@Override public void printAltitude(MeteoEvent event)
+		{
+		manager.printAltitude(event);
+		frameService.refresh();
+		}
+
+	@Override public void printTemperature(MeteoEvent event)
+		{
+		manager.printTemperature(event);
+		frameService.refresh();
+		}
+
+	@Override public void updateMeteoServiceOptions(MeteoServiceOptions meteoServiceOptions)
 		{
 		// TODO Auto-generated method stub
 
 		}
-
-	@Override
-	public void printAltitude(MeteoEvent event)
-		{
-		// TODO Auto-generated method stub
-
-		}
-
-	@Override
-	public void printTemperature(MeteoEvent event)
-		{
-		// TODO Auto-generated method stub
-
-		}
-
-	@Override
-	public void updateMeteoServiceOptions(MeteoServiceOptions meteoServiceOptions)
-		{
-		// TODO Auto-generated method stub
-
-		}
-
-	/*------------------------------*\
-	|*				Set				*|
-	\*------------------------------*/
-
-	/*------------------------------*\
-	|*				Get				*|
-	\*------------------------------*/
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
@@ -68,5 +58,9 @@ public class AfficheurServiceCentral implements AfficheurService_I
 	/*------------------------------------------------------------------*\
 	|*							Attributs Private						*|
 	\*------------------------------------------------------------------*/
+
+	// Inputs
+	private Manager manager;
+	private JFrameLocalFull frameService;
 	}
 

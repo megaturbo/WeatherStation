@@ -49,16 +49,21 @@ public class RemoteAfficheurCreator implements RemoteAfficheurCreator_I
 			{
 			try
 				{
+				System.out.println("PC Central: Trying to connect to " + meteoServiceRmiURL.toString());
 				meteoServiceRemote = (MeteoServiceWrapper_I)RmiTools.connectionRemoteObject(meteoServiceRmiURL); //
+				System.out.println("PC Central: Connection success\n");
 				}
 			catch (NotBoundException e)
 				{
+				System.out.println();
+				System.out.println("PC Central: Connection failed: ");
 				e.printStackTrace();
 				}
 			}
 
 			// server
 			{
+			System.out.println("PC Central: Sharing afficheurService");
 			AfficheurService_I afficheurService = createAfficheurService(affichageOptions, meteoServiceRemote);
 			AfficheurServiceWrapper_I afficheurServiceWrapper = new AfficheurServiceWrapper(afficheurService); //
 
