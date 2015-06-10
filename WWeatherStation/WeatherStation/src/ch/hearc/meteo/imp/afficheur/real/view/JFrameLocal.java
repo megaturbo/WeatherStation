@@ -5,36 +5,32 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.rmi.RemoteException;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
 import ch.hearc.meteo.imp.afficheur.real.moo.Manager;
-import ch.hearc.meteo.imp.afficheur.real.view.mainpanel.JPanelMainLocalLight;
+import ch.hearc.meteo.imp.afficheur.real.view.mainpanel.JPanelMainLocal;
+import ch.hearc.meteo.imp.com.real.port.MeteoPortDetectionService;
 import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 import ch.hearc.meteo.spec.reseau.rmiwrapper.MeteoServiceWrapper_I;
 
-public class JFrameLocalLight extends JFrame
+public class JFrameLocal extends JFrame
 	{
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JFrameLocalLight(MeteoServiceWrapper_I meteoServiceRemote, Manager manager)
+	public JFrameLocal(MeteoServiceWrapper_I meteoServiceRemote, Manager manager)
 		{
 		this.manager = manager;
 		this.meteoServiceRemote = meteoServiceRemote;
-
-		try {
-			this.portCom = meteoServiceRemote.getPort();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
 
 		geometry();
 		control();
@@ -71,7 +67,7 @@ public class JFrameLocalLight extends JFrame
 		{
 		createMenuBar();
 
-		panelMain = new JPanelMainLocalLight(manager);
+		panelMain = new JPanelMainLocal(manager);
 
 		setLayout(new BorderLayout());
 
@@ -85,10 +81,10 @@ public class JFrameLocalLight extends JFrame
 
 	private void appearance()
 		{
-		setTitle("["+portCom+"] Light Client - Local");
+		setTitle("Local Client");
 		setSize(600, 400);
-		setLocationRelativeTo(null); 	// frame centrer
-		setVisible(true); 				// last!
+		setLocationRelativeTo(null); // frame centrer
+		setVisible(true); // last!
 		}
 
 	private void createMenuBar()
@@ -99,7 +95,7 @@ public class JFrameLocalLight extends JFrame
 		menuConnection.setMnemonic(KeyEvent.VK_C);
 		menuBar.add(menuConnection);
 
-		JMenuItem itemSelectCom = new JMenuItem("Select COM");
+		JMenuItem itemSelectCom = new JMenuItem("Add a Weather Station");
 		itemSelectCom.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.ALT_MASK));
 
 		itemSelectCom.addActionListener(new ActionListener()
@@ -108,13 +104,35 @@ public class JFrameLocalLight extends JFrame
 				@Override
 				public void actionPerformed(ActionEvent arg0)
 					{
-					// TODO new Local Light JVM
+					String newPort = showPortComChooser();
 					}
 			});
 
 		menuConnection.add(itemSelectCom);
 
 		setJMenuBar(menuBar);
+		}
+
+	/**
+	 * Show an input dialog to add a Weather Station
+	 *
+	 * @return Port com, but if cancel or nothing found => null
+	 */
+	private String showPortComChooser()
+		{
+		MeteoPortDetectionService portDetector = new MeteoPortDetectionService();
+		List<String> ports = portDetector.findListPortMeteo();
+		if (ports.isEmpty())
+			{
+			JOptionPane.showMessageDialog(new JFrame(), "No Weather Station found.");
+			return null;
+			}
+		else
+			{
+
+			Object o = JOptionPane.showInputDialog(new JFrame(), "Add a COM port", "COM port chooser", JOptionPane.PLAIN_MESSAGE, null, ports.toArray(), "ham");
+			return (String)o;
+			}
 		}
 
 	/*------------------------------------------------------------------*\
@@ -126,7 +144,5 @@ public class JFrameLocalLight extends JFrame
 	private MeteoServiceWrapper_I meteoServiceRemote;
 
 	// Tools
-	private JPanelMainLocalLight panelMain;
-	private String portCom;
-
+	private JPanelMainLocal panelMain;
 	}

@@ -24,7 +24,7 @@ public class JFrameLocalFull extends JFrame implements JFrameFull_I
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
-
+@Deprecated
 	public JFrameLocalFull(MeteoServiceWrapper_I meteoServiceRemote, Manager manager)
 		{
 		this.manager = manager;

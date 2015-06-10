@@ -1,5 +1,5 @@
 
-package ch.hearc.meteo.imp.afficheur.real.view.mainpanel.light;
+package ch.hearc.meteo.imp.afficheur.real.view.mainpanel.light.options;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
