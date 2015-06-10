@@ -63,7 +63,7 @@ public class JPanelSlider extends JPanel
 	private void geometry()
 		{
 		int min = 100;
-		int max = 1200;
+		int max = 10000;
 		int valueAltitude;
 		int valuePressure;
 		int valueTemperature;
