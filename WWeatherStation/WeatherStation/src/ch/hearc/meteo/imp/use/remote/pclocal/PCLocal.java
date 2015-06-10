@@ -139,7 +139,7 @@ public class PCLocal implements PC_I
 			}
 		catch (RemoteException | NotBoundException e)
 			{
-			e.printStackTrace();
+			System.out.println("\nLe pc central est introuvable. Veuillez vérifier que vous avez une connexion à cet ordinateur.");
 			}
 		return meteoServiceWrapper;
 		}
