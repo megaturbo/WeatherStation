@@ -80,6 +80,8 @@ public class ManagerLocal
 
 	public void setCentralRemote(AfficheurServiceWrapper_I afficheurCentralRemote)
 		{
+		System.out.println("GOT CENTRAL REMOTE");
+		System.out.println(centralRemote.toString());
 		this.centralRemote = afficheurCentralRemote;
 		}
 
@@ -106,7 +108,7 @@ public class ManagerLocal
 				{
 				if (remote.getPort().equals(portCom))
 					{
-					centralRemote.updateMeteoServiceOptions(meteoServiceOptions);
+					centralRemote.updateMeteoServiceOptions(null);
 					remote.setMeteoServiceOptions(meteoServiceOptions);
 					}
 				}
