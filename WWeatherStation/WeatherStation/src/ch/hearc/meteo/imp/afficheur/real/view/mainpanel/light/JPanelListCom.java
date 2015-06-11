@@ -37,6 +37,12 @@ public class JPanelListCom extends JPanel
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
+	public void removeRemote(MeteoServiceWrapper_I meteoRemote)
+		{
+		manager.removeRemote(meteoRemote);
+		refreshList();
+		}
+
 	public void updatePortCom(String portCom) {
 		parent.updatePortCom(portCom);
 	}

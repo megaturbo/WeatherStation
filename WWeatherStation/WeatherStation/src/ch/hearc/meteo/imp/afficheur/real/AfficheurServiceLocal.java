@@ -1,15 +1,13 @@
 
 package ch.hearc.meteo.imp.afficheur.real;
 
-import java.rmi.RemoteException;
-
 import ch.hearc.meteo.imp.afficheur.real.moo.ManagerLocal;
 import ch.hearc.meteo.imp.afficheur.real.view.JFrameLocal;
-import ch.hearc.meteo.imp.com.real.MeteoService;
 import ch.hearc.meteo.imp.use.remote.pclocal.PCLocal;
 import ch.hearc.meteo.spec.afficheur.AfficheurService_I;
 import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 import ch.hearc.meteo.spec.com.meteo.listener.event.MeteoEvent;
+import ch.hearc.meteo.spec.reseau.rmiwrapper.AfficheurServiceWrapper_I;
 
 public class AfficheurServiceLocal implements AfficheurService_I
 	{
@@ -27,6 +25,10 @@ public class AfficheurServiceLocal implements AfficheurService_I
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
+
+	public void setCentralRemote(AfficheurServiceWrapper_I afficheurCentralRemote) {
+		manager.setCentralRemote(afficheurCentralRemote);
+	}
 
 	@Override
 	public void printPression(MeteoEvent event)
@@ -52,7 +54,7 @@ public class AfficheurServiceLocal implements AfficheurService_I
 	@Override
 	public void updateMeteoServiceOptions(MeteoServiceOptions meteoServiceOptions)
 		{
-		frameService.updateMeteoServiceOptions(meteoServiceOptions);
+		frameService.refresh();
 		}
 
 	/*------------------------------*\
