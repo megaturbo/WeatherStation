@@ -144,6 +144,7 @@ public class JPanelComControl extends JPanel
 					{
 					try
 						{
+						parent.removeRemote(meteoRemote);
 						meteoRemote.disconnect();
 						}
 					catch (RemoteException | MeteoServiceException e1)

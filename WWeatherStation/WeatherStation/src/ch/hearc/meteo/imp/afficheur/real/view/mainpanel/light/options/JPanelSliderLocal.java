@@ -5,6 +5,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -40,13 +41,11 @@ public class JPanelSliderLocal extends JPanel
 	public void updatePortCom(String portCom)
 		{
 		this.portCom = portCom;
-		updateMeteoServiceOptions(manager.getMeteoServiceOptions(portCom));
+		this.meteoServiceOptions = manager.getMeteoServiceOptions(portCom);
 		}
 
-	public void updateMeteoServiceOptions(MeteoServiceOptions meteoServiceOptions)
+	public void refresh()
 		{
-		this.meteoServiceOptions = meteoServiceOptions;
-
 		int valueAltitude = (int)meteoServiceOptions.getAltitudeDT();
 		int valuePressure = (int)meteoServiceOptions.getPressionDT();
 		int valueTemperature = (int)meteoServiceOptions.getTemperatureDT();
@@ -140,6 +139,15 @@ public class JPanelSliderLocal extends JPanel
 					meteoServiceOptions.setAltitudeDT(sliderAltitude.getValue());
 					meteoServiceOptions.setPressionDT(sliderPressure.getValue());
 					meteoServiceOptions.setTemperatureDT(sliderTemperature.getValue());
+
+					try
+						{
+						manager.getCentralRemote().updateMeteoServiceOptions(meteoServiceOptions);
+						}
+					catch (RemoteException e1)
+						{
+						e1.printStackTrace();
+						}
 					}
 			});
 		}

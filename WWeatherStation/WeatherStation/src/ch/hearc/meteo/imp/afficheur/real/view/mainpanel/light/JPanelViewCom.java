@@ -8,7 +8,6 @@ import javax.swing.JPanel;
 import ch.hearc.meteo.imp.afficheur.real.moo.ManagerLocal;
 import ch.hearc.meteo.imp.afficheur.real.view.mainpanel.light.datas.JPanelDatas;
 import ch.hearc.meteo.imp.afficheur.real.view.mainpanel.light.options.JPanelSliderLocal;
-import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 
 public class JPanelViewCom extends JPanel
 	{
@@ -31,6 +30,7 @@ public class JPanelViewCom extends JPanel
 	\*------------------------------------------------------------------*/
 	public void refresh()
 		{
+		panelSlider.refresh();
 		panelDatas.refresh();
 		}
 
@@ -39,11 +39,6 @@ public class JPanelViewCom extends JPanel
 		this.setVisible(true);
 		panelSlider.updatePortCom(portCom);
 		panelDatas.updatePortCom(portCom);
-		}
-
-	public void updateMeteoServiceOptions(MeteoServiceOptions meteoServiceOptions)
-		{
-		panelSlider.updateMeteoServiceOptions(meteoServiceOptions);
 		}
 
 	/*------------------------------*\
