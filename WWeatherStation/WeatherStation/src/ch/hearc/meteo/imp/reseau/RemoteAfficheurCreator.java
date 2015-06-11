@@ -76,7 +76,7 @@ public class RemoteAfficheurCreator implements RemoteAfficheurCreator_I
 
 			AfficheurServiceCentral central = (AfficheurServiceCentral)AfficheurFactory.getCentralInstance();
 
-			//TODO: Adding the meteoService to central afficheurService
+			central.addMeteoServiceRemote(meteoServiceRemote);
 
 			AfficheurServiceWrapper centralWrap = new AfficheurServiceWrapper(central);
 
@@ -116,7 +116,6 @@ public class RemoteAfficheurCreator implements RemoteAfficheurCreator_I
 
 	private void server() throws RemoteException
 		{
-		// TODO share this
 		//		String id = IdTools.createID(RMI_ID_CREATOR);//
 
 		//		RmiTools.shareObject(this, new RmiURL(id)); //
@@ -165,7 +164,7 @@ public class RemoteAfficheurCreator implements RemoteAfficheurCreator_I
 	private static final String PREFIXE = "AFFICHEUR_SERVICE";
 	public static final String RMI_ID = PREFIXE;
 	public static final String RMI_ID_CREATOR = "CREATOR_ID";
+	//public static final String IP_ADDR = "157.26.110.241";
 	public static final String IP_ADDR = "157.26.111.59";
-	//public static final String IP_ADDR = "157.26.111.16";
 
 	}

@@ -19,6 +19,7 @@ import org.jxmapviewer.viewer.GeoPosition;
 import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 import ch.hearc.meteo.spec.com.meteo.listener.event.MeteoEvent;
 import ch.hearc.meteo.spec.com.meteo.listener.event.Sources;
+import ch.hearc.meteo.spec.reseau.rmiwrapper.AfficheurServiceWrapper_I;
 import ch.hearc.meteo.spec.reseau.rmiwrapper.MeteoServiceWrapper_I;
 
 public class ManagerCentral
@@ -30,6 +31,9 @@ public class ManagerCentral
 
 	public ManagerCentral()
 		{
+		this.meteoRemotes = new ArrayList<MeteoServiceWrapper_I>();
+		this.localRemotes = new ArrayList<AfficheurServiceWrapper_I>();
+
 		collectionAltitude = new TimeSeriesCollection();
 		collectionPression = new TimeSeriesCollection();
 		collectionTemperature = new TimeSeriesCollection();
@@ -68,6 +72,11 @@ public class ManagerCentral
 	|*				remote			*|
 	\*------------------------------*/
 
+	public void addLocalRemote(AfficheurServiceWrapper_I localRemote)
+		{
+		localRemotes.add(localRemote);
+		}
+
 	public void addMeteoServiceRemote(MeteoServiceWrapper_I meteoServiceRemote)
 		{
 		meteoRemotes.add(meteoServiceRemote);
@@ -83,6 +92,17 @@ public class ManagerCentral
 					{
 					remote.setMeteoServiceOptions(meteoServiceOptions);
 					}
+				}
+			catch (RemoteException e)
+				{
+				e.printStackTrace();
+				}
+			}
+		for(AfficheurServiceWrapper_I remote:localRemotes)
+			{
+			try
+				{
+				remote.updateMeteoServiceOptions(null);
 				}
 			catch (RemoteException e)
 				{
@@ -189,6 +209,7 @@ public class ManagerCentral
 
 	// Input
 	private List<MeteoServiceWrapper_I> meteoRemotes;
+	private List<AfficheurServiceWrapper_I> localRemotes;
 
 	// Tools
 	private TimeSeriesCollection collectionAltitude;

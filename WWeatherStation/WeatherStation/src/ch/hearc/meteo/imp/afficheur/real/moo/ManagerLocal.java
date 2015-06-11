@@ -20,6 +20,7 @@ import ch.hearc.meteo.imp.use.remote.pclocal.PCLocal;
 import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 import ch.hearc.meteo.spec.com.meteo.listener.event.MeteoEvent;
 import ch.hearc.meteo.spec.com.meteo.listener.event.Sources;
+import ch.hearc.meteo.spec.reseau.rmiwrapper.AfficheurServiceWrapper_I;
 import ch.hearc.meteo.spec.reseau.rmiwrapper.MeteoServiceWrapper_I;
 
 public class ManagerLocal
@@ -71,6 +72,17 @@ public class ManagerLocal
 	|*				remote			*|
 	\*------------------------------*/
 
+
+	public AfficheurServiceWrapper_I getCentralRemote()
+		{
+		return this.centralRemote;
+		}
+
+	public void setCentralRemote(AfficheurServiceWrapper_I afficheurCentralRemote)
+		{
+		this.centralRemote = afficheurCentralRemote;
+		}
+
 	public void addMeteoService(String portCom)
 		{
 		meteoRemotes.add(pcLocal.createMeteoService(portCom));
@@ -81,6 +93,11 @@ public class ManagerLocal
 		return meteoRemotes;
 		}
 
+	public void removeRemote(MeteoServiceWrapper_I meteoRemote)
+		{
+		meteoRemotes.remove(meteoRemote);
+		}
+
 	public void setMeteoServiceOptions(String portCom, MeteoServiceOptions meteoServiceOptions)
 		{
 		for(MeteoServiceWrapper_I remote:meteoRemotes)
@@ -89,6 +106,7 @@ public class ManagerLocal
 				{
 				if (remote.getPort().equals(portCom))
 					{
+					centralRemote.updateMeteoServiceOptions(meteoServiceOptions);
 					remote.setMeteoServiceOptions(meteoServiceOptions);
 					}
 				}
@@ -113,7 +131,7 @@ public class ManagerLocal
 				e.printStackTrace();
 				}
 			}
-		return new MeteoServiceOptions(10, 10, 10);
+		return new MeteoServiceOptions(1000, 1000, 1000);
 		}
 
 	public Collection<Station> getStationList()
@@ -200,6 +218,7 @@ public class ManagerLocal
 
 	// Input
 	private PCLocal pcLocal;
+	private AfficheurServiceWrapper_I centralRemote;
 	private List<MeteoServiceWrapper_I> meteoRemotes;
 
 	// Tools

@@ -3,7 +3,6 @@ package ch.hearc.meteo.imp.afficheur.real.view.mainpanel.full;
 
 import java.awt.BorderLayout;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 import javax.swing.JPanel;
@@ -89,7 +88,8 @@ public class JPanelMap extends JPanel
 		RoutePainter routePainter = new RoutePainter(track);
 
 		// Set the focus
-		mapViewer.zoomToBestFit(new HashSet<GeoPosition>(track), 0.7);
+		mapViewer.setZoom(0);
+		//mapViewer.zoomToBestFit(new HashSet<GeoPosition>(track), 0.7);
 
 		// Interactions
 		MouseInputListener mia = new PanMouseInputListener(mapViewer);
