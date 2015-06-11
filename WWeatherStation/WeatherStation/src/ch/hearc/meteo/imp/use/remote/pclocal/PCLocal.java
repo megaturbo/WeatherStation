@@ -85,6 +85,7 @@ public class PCLocal implements PC_I
 	public MeteoServiceWrapper_I createMeteoService(String portCom)
 		{
 
+		//new meteoService instance
 		MeteoService meteoService = (MeteoService)new MeteoFactory().create(portCom);
 
 		try
@@ -119,8 +120,9 @@ public class PCLocal implements PC_I
 
 			});
 
+		//sharing the meteoService
 		MeteoServiceWrapper_I meteoServiceWrapper = new MeteoServiceWrapper(meteoService);
-		RmiURL rmiURLmeteoService = new RmiURL(IdTools.createID(RemoteAfficheurCreator.RMI_ID)); //TODO not localhost
+		RmiURL rmiURLmeteoService = new RmiURL(IdTools.createID(RemoteAfficheurCreator.RMI_ID));
 		try
 			{
 			RmiTools.shareObject(meteoServiceWrapper, rmiURLmeteoService);
@@ -129,6 +131,7 @@ public class PCLocal implements PC_I
 			{
 			e.printStackTrace();
 			}
+		//IP PC central
 		InetAddress ia = null;
 		try
 			{
@@ -138,27 +141,29 @@ public class PCLocal implements PC_I
 			{
 			e.printStackTrace();
 			}
-
+		//Connection to PC Central
 		RmiURL url = new RmiURL(RemoteAfficheurCreator.RMI_ID_CREATOR, ia);
-		RmiURL rmiURLRemoteAfficheurCreator = url; //TODO not localhost
+		RmiURL rmiURLRemoteAfficheurCreator = url;
 		System.out.println(RemoteAfficheurCreator.RMI_ID_CREATOR);
 		try
 			{
 			RemoteAfficheurCreator_I remoteAfficheurCreator = (RemoteAfficheurCreator_I)RmiTools.connectionRemoteObject(rmiURLRemoteAfficheurCreator);
-			System.out.println("woooo");
-			RmiURL afficheurServicermiURL = remoteAfficheurCreator.createRemoteAfficheurService(null, rmiURLmeteoService);
+			System.out.println("\nPC Local: Connected to PC Central.");
+			/*RmiURL afficheurServicermiURL = */remoteAfficheurCreator.createRemoteAfficheurService(null, rmiURLmeteoService);
 			//			afficheurServiceRemote = (AfficheurServiceWrapper_I)RmiTools.connectionRemoteObject(afficheurServicermiURL);
-			System.out.println("anrinwaornaowin");
+			//TODO: We should add the URL to our afficheurService here
+			System.out.println("\nPC Local: Received rmiURL of PC Central.");
 			}
 		catch (RemoteException | NotBoundException e)
 			{
 			System.out.println("\nLe pc central est introuvable. Veuillez vérifier que vous avez une connexion à cet ordinateur.");
 			}
-		System.out.println("saojrairi");
+		System.out.println("\nPC Local: Done creating meteoService.");
 		return meteoServiceWrapper;
 		}
 
 	@Deprecated
+	@SuppressWarnings("unused")
 	private void server() throws MeteoServiceException, RemoteException
 		{
 		//		MeteoService meteoService = (MeteoService)new MeteoFactory().create(portCom);
@@ -206,6 +211,7 @@ public class PCLocal implements PC_I
 	\*------------------------------*/
 
 	@Deprecated
+	@SuppressWarnings("unused")
 	private void client() throws RemoteException, UnknownHostException, NotBoundException
 		{
 		//		String id_creator = IdTools.createID(RemoteAfficheurCreator.RMI_ID_CREATOR);
