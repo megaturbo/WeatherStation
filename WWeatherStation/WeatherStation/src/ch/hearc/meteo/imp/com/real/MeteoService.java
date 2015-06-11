@@ -137,8 +137,9 @@ public class MeteoService extends MeteoService_A
 
 		}
 
-	@Override synchronized public void start(MeteoServiceOptions meteoServiceOptions)
-	{
+	@Override
+	synchronized public void start(MeteoServiceOptions meteoServiceOptions)
+		{
 		super.start(meteoServiceOptions);
 		try
 			{
@@ -149,7 +150,7 @@ public class MeteoService extends MeteoService_A
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			}
-	}
+		}
 
 	@Override
 	synchronized public void stop()

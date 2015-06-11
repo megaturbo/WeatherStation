@@ -193,6 +193,18 @@ public class ComConnexion implements ComConnexions_I
 		// close stream
 		if (connected)
 			{
+			if(running)
+				{
+				try
+					{
+					stop();
+					}
+				catch (Exception e)
+					{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					}
+				}
 			reader.close();
 			writer.close();
 			serialPort.close();
