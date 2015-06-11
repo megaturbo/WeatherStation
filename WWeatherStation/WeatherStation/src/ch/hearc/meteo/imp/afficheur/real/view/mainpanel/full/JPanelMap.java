@@ -33,6 +33,7 @@ public class JPanelMap extends JPanel
 	public JPanelMap(ManagerCentral manager)
 		{
 		this.manager = manager;
+		track = manager.getGeopositions();
 
 		geometry();
 		control();
@@ -43,10 +44,9 @@ public class JPanelMap extends JPanel
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
-	public void refresh()
+	public void refreshMap()
 		{
-		// TODO Auto-generated method stub
-
+		track = manager.getGeopositions();
 		}
 
 	/*------------------------------*\
@@ -64,6 +64,7 @@ public class JPanelMap extends JPanel
 	private void geometry()
 		{
 		// JComponent : Instanciation
+
 
 		JXMapViewer mapViewer = new JXMapViewer();
 
@@ -83,7 +84,7 @@ public class JPanelMap extends JPanel
 
 		// Create a track from the geo-positions
 		//List<GeoPosition> track = Arrays.asList(frankfurt, wiesbaden, mainz, darmstadt, offenbach);
-		List<GeoPosition> track = manager.getGeopositions();
+		track = manager.getGeopositions();
 
 		RoutePainter routePainter = new RoutePainter(track);
 
@@ -128,5 +129,6 @@ public class JPanelMap extends JPanel
 	private ManagerCentral manager;
 
 	// Tools
+	private List<GeoPosition> track;
 
 	}

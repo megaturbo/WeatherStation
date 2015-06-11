@@ -28,9 +28,13 @@ public class JPanelViewCom extends JPanel
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
+	public void updateMeteoServiceOptions()
+		{
+		panelSlider.updateMeteoServiceOption();
+		}
+
 	public void refresh()
 		{
-		panelSlider.refresh();
 		panelDatas.refresh();
 		}
 
