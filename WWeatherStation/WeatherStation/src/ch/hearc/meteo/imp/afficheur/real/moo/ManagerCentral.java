@@ -82,6 +82,12 @@ public class ManagerCentral
 		meteoRemotes.add(meteoServiceRemote);
 		}
 
+
+	public List<MeteoServiceWrapper_I> getMeteoRemotes()
+		{
+		return meteoRemotes;
+		}
+
 	public void setMeteoServiceOptions(String portCom, MeteoServiceOptions meteoServiceOptions)
 		{
 		for(MeteoServiceWrapper_I remote:meteoRemotes)

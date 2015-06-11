@@ -7,6 +7,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 import java.util.Collection;
 
 import javax.swing.BoxLayout;
@@ -17,9 +18,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import ch.hearc.meteo.imp.afficheur.real.moo.ManagerCentral;
-import ch.hearc.meteo.imp.afficheur.real.moo.Station;
 import ch.hearc.meteo.imp.afficheur.real.view.JFrameCentral;
 import ch.hearc.meteo.imp.afficheur.real.view.mainpanel.light.options.JPanelSlider;
+import ch.hearc.meteo.spec.reseau.rmiwrapper.MeteoServiceWrapper_I;
 public class JPanelStationList extends JPanel
 	{
 
@@ -43,32 +44,34 @@ public class JPanelStationList extends JPanel
 
 	public void refresh()
 		{
-		Collection<Station> stations = manager.getStationList();
+		Collection<MeteoServiceWrapper_I> stations = manager.getMeteoRemotes();
 
 		panelList.removeAll();
 
-		for(Station s: stations)
+		for(MeteoServiceWrapper_I s: stations)
 			{
-			//affiche tt les station connecté NOQKTCHECKBOX
-			/*QKTCheckBox cb = new QKTCheckBox(s.getName());
-			cb.setSelected(s.isVisible());
-			addCheckBoxListener(s, cb);
-			*/
-			//panel.add(new JButton("►"));
 
 			FlowLayout layout = new FlowLayout();
 			JPanel panel = new JPanel(layout);
-			panel.add(new JLabel("Station "+s.getName()));
+			try
+				{
+				panel.add(new JLabel("Station "+s.getPort()));
+				}
+			catch (RemoteException e)
+				{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				}
 
 			JButton settings = new JButton("Settings");
-			addButtonListener(s, settings);
+			addButtonListener(settings);
 			panel.add(settings);
 			panelList.add(panel);
 			}
 		this.updateUI();
 		}
 
-	private void addButtonListener(Station s, JButton btn)
+	private void addButtonListener(JButton btn)
 		{
 		btn.addActionListener(new ActionListener()
 			{

@@ -56,7 +56,7 @@ public class JFrameCentral extends JFrame{
 	\*------------------------------------------------------------------*/
 
 	private void geometry() {
-		createMenuBar();
+		//createMenuBar();
 
 		panelMain = new JPanelMainCentral(manager);
 		panelList = new JPanelStationList(this, manager);
