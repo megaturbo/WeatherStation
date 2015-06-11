@@ -47,7 +47,8 @@ public class JPanelMainLocal extends JPanel
 
 	public void updateMeteoServiceOptions(MeteoServiceOptions meteoServiceOptions)
 		{
-		panelViewCom.refresh();
+		System.out.println("fasfasf");
+		panelViewCom.updateMeteoServiceOptions();
 		}
 
 	/*------------------------------*\

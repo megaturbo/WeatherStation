@@ -37,7 +37,6 @@ public class JPanelMainCentral extends JPanel
 	public void setSeriesVisible(int serie, boolean visible)
 		{
 		panelStationGraphs.setSeriesVisible(serie, visible);
-		panelMap.refresh();
 		}
 
 	/*------------------------------*\

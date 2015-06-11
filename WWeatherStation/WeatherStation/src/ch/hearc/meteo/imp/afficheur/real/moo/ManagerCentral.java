@@ -190,7 +190,6 @@ public class ManagerCentral
 		if (!stationFromSources.containsKey(keySource))
 			{
 			createNewKey(source);
-
 			}
 
 		RegularTimePeriod time = new Millisecond(new Date(event.getTime()));

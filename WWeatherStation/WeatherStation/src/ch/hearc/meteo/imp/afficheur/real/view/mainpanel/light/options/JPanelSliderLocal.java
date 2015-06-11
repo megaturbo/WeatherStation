@@ -57,6 +57,10 @@ public class JPanelSliderLocal extends JPanel
 		setTitleBorders(valueAltitude, valuePressure, valueTemperature);
 		}
 
+	public void updateMeteoServiceOption() {
+		refresh();
+	}
+
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/

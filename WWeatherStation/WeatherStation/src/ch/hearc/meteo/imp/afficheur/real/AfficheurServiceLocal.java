@@ -55,6 +55,7 @@ public class AfficheurServiceLocal implements AfficheurService_I
 	public void updateMeteoServiceOptions(MeteoServiceOptions meteoServiceOptions)
 		{
 		frameService.refresh();
+		frameService.updateMeteoServiceOptions(meteoServiceOptions);
 		}
 
 	/*------------------------------*\
