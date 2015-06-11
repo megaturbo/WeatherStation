@@ -88,6 +88,8 @@ public class PCLocal implements PC_I
 
 		//new meteoService instance
 		MeteoService meteoService = (MeteoService)new MeteoFactory().create(portCom);
+		MeteoServiceOptions meteoServiceOptions = new MeteoServiceOptions(100, 200, 300);
+		meteoService.setMeteoServiceOptions(meteoServiceOptions);
 
 		try
 			{

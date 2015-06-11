@@ -71,32 +71,46 @@ public class ManagerLocal
 	|*				remote			*|
 	\*------------------------------*/
 
-	public void addMeteoService(String portCom) {
+	public void addMeteoService(String portCom)
+		{
 		meteoRemotes.add(pcLocal.createMeteoService(portCom));
-	}
+		}
 
-	public List<MeteoServiceWrapper_I> getRemotes() {
+	public List<MeteoServiceWrapper_I> getRemotes()
+		{
 		return meteoRemotes;
-	}
+		}
 
-	public void setMeteoServiceOptions(String portCom, MeteoServiceOptions meteoServiceOptions) throws RemoteException
+	public void setMeteoServiceOptions(String portCom, MeteoServiceOptions meteoServiceOptions)
 		{
 		for(MeteoServiceWrapper_I remote:meteoRemotes)
 			{
-			if (remote.getPort().equals(portCom))
+			try
 				{
-				remote.setMeteoServiceOptions(meteoServiceOptions);
+				if (remote.getPort().equals(portCom))
+					{
+					remote.setMeteoServiceOptions(meteoServiceOptions);
+					}
+				}
+			catch (RemoteException e)
+				{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 				}
 			}
 		}
 
-	public MeteoServiceOptions getMeteoServiceOptions(String portCom) throws RemoteException
+	public MeteoServiceOptions getMeteoServiceOptions(String portCom)
 		{
 		for(MeteoServiceWrapper_I remote:meteoRemotes)
 			{
-			if (remote.getPort().equals(portCom))
+			try
 				{
-				return remote.getMeteoServiceOptions();
+				if (remote.getPort().equals(portCom)) { return remote.getMeteoServiceOptions(); }
+				}
+			catch (RemoteException e)
+				{
+				e.printStackTrace();
 				}
 			}
 		return new MeteoServiceOptions(10, 10, 10);
