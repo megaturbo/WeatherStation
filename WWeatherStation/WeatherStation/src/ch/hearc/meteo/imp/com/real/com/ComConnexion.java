@@ -117,9 +117,6 @@ public class ComConnexion implements ComConnexions_I
 		if (running)
 			{
 			running = false;
-			temperatureAsker.join();
-			altitudeAsker.join();
-			pressureAsker.join();
 			}
 
 		}
