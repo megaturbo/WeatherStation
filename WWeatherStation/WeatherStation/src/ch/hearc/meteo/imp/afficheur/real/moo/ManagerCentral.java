@@ -2,21 +2,19 @@
 package ch.hearc.meteo.imp.afficheur.real.moo;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import org.jfree.data.time.Millisecond;
 import org.jfree.data.time.RegularTimePeriod;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
-import org.jxmapviewer.viewer.DefaultWaypoint;
-import org.jxmapviewer.viewer.Waypoint;
+import org.jxmapviewer.viewer.GeoPosition;
 
 import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 import ch.hearc.meteo.spec.com.meteo.listener.event.MeteoEvent;
@@ -70,6 +68,11 @@ public class ManagerCentral
 	|*				remote			*|
 	\*------------------------------*/
 
+	public void addMeteoServiceRemote(MeteoServiceWrapper_I meteoServiceRemote)
+		{
+		meteoRemotes.add(meteoServiceRemote);
+		}
+
 	public void setMeteoServiceOptions(String portCom, MeteoServiceOptions meteoServiceOptions) throws RemoteException
 		{
 		for(MeteoServiceWrapper_I remote:meteoRemotes)
@@ -85,10 +88,7 @@ public class ManagerCentral
 		{
 		for(MeteoServiceWrapper_I remote:meteoRemotes)
 			{
-			if (remote.getPort().equals(portCom))
-				{
-				return remote.getMeteoServiceOptions();
-				}
+			if (remote.getPort().equals(portCom)) { return remote.getMeteoServiceOptions(); }
 			}
 		return null;
 		}
@@ -128,18 +128,15 @@ public class ManagerCentral
 		return series;
 		}
 
-	public Set<? extends Waypoint> getWaypoints()
+	public List<GeoPosition> getGeopositions()
 		{
-		Set<DefaultWaypoint> waypoints = new HashSet<DefaultWaypoint>();
+		List<GeoPosition> geopositions = new ArrayList<GeoPosition>();
 		for(Entry<Sources, Station> entry:stationFromSources.entrySet())
 			{
 			Station station = entry.getValue();
-			if (station.isVisible())
-				{
-				waypoints.add(station.getWaypoint());
-				}
+			geopositions.add(station.getGeoposition());
 			}
-		return waypoints;
+		return geopositions;
 		}
 
 	/*------------------------------------------------------------------*\

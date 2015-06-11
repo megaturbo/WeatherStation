@@ -66,6 +66,8 @@ public class JPanelDatas extends JPanel
 		GridBagConstraints c = new GridBagConstraints();
 		c.fill = GridBagConstraints.BOTH;
 
+		c.weightx = 1;
+		c.weighty = 1;
 		c.gridx = 1;
 		c.gridy = 0;
 		add(new JLabel("MIN"), c);
