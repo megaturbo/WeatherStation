@@ -6,6 +6,7 @@ import ch.hearc.meteo.imp.afficheur.real.view.JFrameCentral;
 import ch.hearc.meteo.spec.afficheur.AfficheurService_I;
 import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 import ch.hearc.meteo.spec.com.meteo.listener.event.MeteoEvent;
+import ch.hearc.meteo.spec.reseau.rmiwrapper.MeteoServiceWrapper_I;
 
 public class AfficheurServiceCentral implements AfficheurService_I
 	{
@@ -33,6 +34,10 @@ public class AfficheurServiceCentral implements AfficheurService_I
 
 		return INSTANCE;
 		}
+
+	public void addMeteoServiceRemote(MeteoServiceWrapper_I meteoServiceRemote) {
+		manager.addMeteoServiceRemote(meteoServiceRemote);
+	}
 
 	@Override
 	public void printPression(MeteoEvent event)

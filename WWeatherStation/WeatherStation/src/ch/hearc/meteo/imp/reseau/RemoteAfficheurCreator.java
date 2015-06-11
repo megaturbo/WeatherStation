@@ -118,17 +118,17 @@ public class RemoteAfficheurCreator implements RemoteAfficheurCreator_I
 
 		//		RmiTools.shareObject(this, new RmiURL(id)); //
 
-		InetAddress ia = null;
-		try
-			{
-			ia = InetAddress.getByName(IP_ADDR);
-			}
-		catch (UnknownHostException e)
-			{
-			e.printStackTrace();
-			}
-
-		RmiURL url = new RmiURL(RMI_ID_CREATOR, ia);
+		//		InetAddress ia = null;
+		//		try
+		//			{
+		//			ia = InetAddress.getByName(IP_ADDR);
+		//			}
+		//		catch (UnknownHostException e)
+		//			{
+		//			e.printStackTrace();
+		//			}
+		//
+		//		RmiURL url = new RmiURL(RMI_ID_CREATOR, ia);
 
 		RmiTools.shareObject(this, new RmiURL(RMI_ID_CREATOR)); //
 		}
@@ -162,7 +162,7 @@ public class RemoteAfficheurCreator implements RemoteAfficheurCreator_I
 	private static final String PREFIXE = "AFFICHEUR_SERVICE";
 	public static final String RMI_ID = PREFIXE;
 	public static final String RMI_ID_CREATOR = "CREATOR_ID";
-	//public static final String IP_ADDR = "157.26.110.241";
-	public static final String IP_ADDR = "157.26.111.16";
+	public static final String IP_ADDR = "157.26.110.241";
+	//	public static final String IP_ADDR = "157.26.111.16";
 
 	}
