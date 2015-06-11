@@ -47,16 +47,40 @@ public class ManagerLocal
 
 	public void printAltitude(MeteoEvent event)
 		{
+		try
+			{
+			this.centralRemote.printAltitude(event);
+			}
+		catch (Exception e)
+			{
+			e.printStackTrace();
+			}
 		manage(Sensor.ALTITUDE, event);
 		}
 
 	public void printPression(MeteoEvent event)
 		{
+		try
+			{
+			this.centralRemote.printPression(event);
+			}
+		catch (Exception e)
+			{
+			e.printStackTrace();
+			}
 		manage(Sensor.PRESSURE, event);
 		}
 
 	public void printTemperature(MeteoEvent event)
 		{
+		try
+			{
+			this.centralRemote.printTemperature(event);
+			}
+		catch (Exception e)
+			{
+			e.printStackTrace();
+			}
 		manage(Sensor.TEMPERATURE, event);
 		}
 
@@ -80,8 +104,6 @@ public class ManagerLocal
 
 	public void setCentralRemote(AfficheurServiceWrapper_I afficheurCentralRemote)
 		{
-		System.out.println("GOT CENTRAL REMOTE");
-		System.out.println(centralRemote.toString());
 		this.centralRemote = afficheurCentralRemote;
 		}
 

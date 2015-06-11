@@ -38,7 +38,7 @@ public class ManagerCentral
 		collectionPression = new TimeSeriesCollection();
 		collectionTemperature = new TimeSeriesCollection();
 
-		stationFromSources = new HashMap<Sources, Station>();
+		stationFromSources = new HashMap<String, Station>();
 		}
 
 	/*------------------------------------------------------------------*\
@@ -84,7 +84,7 @@ public class ManagerCentral
 
 	public List<MeteoServiceWrapper_I> getMeteoRemotes()
 		{
-		return this.meteoRemotes;
+		return meteoRemotes;
 		}
 
 	public void setMeteoServiceOptions(String portCom, MeteoServiceOptions meteoServiceOptions)
@@ -170,7 +170,7 @@ public class ManagerCentral
 	public List<GeoPosition> getGeopositions()
 		{
 		List<GeoPosition> geopositions = new ArrayList<GeoPosition>();
-		for(Entry<Sources, Station> entry:stationFromSources.entrySet())
+		for(Entry<String, Station> entry:stationFromSources.entrySet())
 			{
 			Station station = entry.getValue();
 			geopositions.add(station.getGeoposition());
@@ -185,14 +185,15 @@ public class ManagerCentral
 	private void manage(Sensor sensor, MeteoEvent event)
 		{
 		Sources source = event.getSource();
+		String keySource = source.toString();
 
-		if (!stationFromSources.containsKey(source))
+		if (!stationFromSources.containsKey(keySource))
 			{
 			createNewKey(source);
 			}
 
 		RegularTimePeriod time = new Millisecond(new Date(event.getTime()));
-		Station station = stationFromSources.get(source);
+		Station station = stationFromSources.get(keySource);
 		TimeSeries series = station.getSeries(sensor);
 
 		series.add(time, event.getValue());
@@ -201,7 +202,7 @@ public class ManagerCentral
 	private void createNewKey(Sources source)
 		{
 		Station station = new Station(source);
-		stationFromSources.put(source, station);
+		stationFromSources.put(source.toString(), station);
 
 		collectionAltitude.addSeries(station.getSeriesAltitude());
 		collectionPression.addSeries(station.getSeriesPression());
@@ -220,6 +221,6 @@ public class ManagerCentral
 	private TimeSeriesCollection collectionAltitude;
 	private TimeSeriesCollection collectionPression;
 	private TimeSeriesCollection collectionTemperature;
-	private Map<Sources, Station> stationFromSources;
+	private Map<String, Station> stationFromSources;
 
 	}
