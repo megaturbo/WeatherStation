@@ -38,7 +38,7 @@ public class ManagerCentral
 		collectionPression = new TimeSeriesCollection();
 		collectionTemperature = new TimeSeriesCollection();
 
-		stationFromSources = new HashMap<String, Station>();
+		stationFromSources = new HashMap<Sources, Station>();
 		}
 
 	/*------------------------------------------------------------------*\
@@ -84,7 +84,7 @@ public class ManagerCentral
 
 	public List<MeteoServiceWrapper_I> getMeteoRemotes()
 		{
-		return meteoRemotes;
+		return this.meteoRemotes;
 		}
 
 	public void setMeteoServiceOptions(String portCom, MeteoServiceOptions meteoServiceOptions)
@@ -170,7 +170,7 @@ public class ManagerCentral
 	public List<GeoPosition> getGeopositions()
 		{
 		List<GeoPosition> geopositions = new ArrayList<GeoPosition>();
-		for(Entry<String, Station> entry:stationFromSources.entrySet())
+		for(Entry<Sources, Station> entry:stationFromSources.entrySet())
 			{
 			Station station = entry.getValue();
 			geopositions.add(station.getGeoposition());
@@ -185,15 +185,19 @@ public class ManagerCentral
 	private void manage(Sensor sensor, MeteoEvent event)
 		{
 		Sources source = event.getSource();
-		String keySource = source.toString();
 
-		if (!stationFromSources.containsKey(keySource))
+		if (!stationFromSources.containsKey(source))
 			{
+			System.out.println("new source");
 			createNewKey(source);
+			}
+		else
+			{
+			System.out.println("not a new source");
 			}
 
 		RegularTimePeriod time = new Millisecond(new Date(event.getTime()));
-		Station station = stationFromSources.get(keySource);
+		Station station = stationFromSources.get(source);
 		TimeSeries series = station.getSeries(sensor);
 
 		series.add(time, event.getValue());
@@ -202,7 +206,7 @@ public class ManagerCentral
 	private void createNewKey(Sources source)
 		{
 		Station station = new Station(source);
-		stationFromSources.put(source.toString(), station);
+		stationFromSources.put(source, station);
 
 		collectionAltitude.addSeries(station.getSeriesAltitude());
 		collectionPression.addSeries(station.getSeriesPression());
@@ -221,6 +225,6 @@ public class ManagerCentral
 	private TimeSeriesCollection collectionAltitude;
 	private TimeSeriesCollection collectionPression;
 	private TimeSeriesCollection collectionTemperature;
-	private Map<String, Station> stationFromSources;
+	private Map<Sources, Station> stationFromSources;
 
 	}
