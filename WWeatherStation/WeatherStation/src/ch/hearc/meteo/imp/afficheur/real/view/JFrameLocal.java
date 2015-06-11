@@ -103,7 +103,6 @@ public class JFrameLocal extends JFrame
 				public void actionPerformed(ActionEvent arg0)
 					{
 					String newPort = showPortComChooser();
-					//TODO Give FR to NAZI, NAZI will give FR to Japan
 					if (newPort != null)
 						{
 						manager.addMeteoService(newPort);
@@ -127,6 +126,7 @@ public class JFrameLocal extends JFrame
 		{
 		MeteoPortDetectionService portDetector = new MeteoPortDetectionService();
 		List<String> ports = portDetector.findListPortMeteo();
+		ports.add("COM 3");
 		if (ports.isEmpty())
 			{
 			JOptionPane.showMessageDialog(new JFrame(), "No Weather Station found.");

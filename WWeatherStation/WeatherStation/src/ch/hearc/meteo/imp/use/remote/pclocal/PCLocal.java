@@ -7,8 +7,8 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
 import ch.hearc.meteo.imp.afficheur.real.AfficheurServiceLocal;
-import ch.hearc.meteo.imp.com.real.MeteoFactory;
-import ch.hearc.meteo.imp.com.real.MeteoService;
+import ch.hearc.meteo.imp.com.simulateur.MeteoServiceSimulateur;
+import ch.hearc.meteo.imp.com.simulateur.MeteoServiceSimulatorFactory;
 import ch.hearc.meteo.imp.reseau.RemoteAfficheurCreator;
 import ch.hearc.meteo.imp.use.remote.PC_I;
 import ch.hearc.meteo.spec.afficheur.AffichageOptions;
@@ -87,7 +87,7 @@ public class PCLocal implements PC_I
 		{
 
 		//new meteoService instance
-		MeteoService meteoService = (MeteoService)new MeteoFactory().create(portCom);
+		MeteoServiceSimulateur meteoService = (MeteoServiceSimulateur)new MeteoServiceSimulatorFactory().create(portCom);
 		MeteoServiceOptions meteoServiceOptions = new MeteoServiceOptions(100, 200, 300);
 		meteoService.setMeteoServiceOptions(meteoServiceOptions);
 
