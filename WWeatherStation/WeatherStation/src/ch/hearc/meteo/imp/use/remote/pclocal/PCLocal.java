@@ -153,7 +153,6 @@ public class PCLocal implements PC_I
 			RemoteAfficheurCreator_I remoteAfficheurCreator = (RemoteAfficheurCreator_I)RmiTools.connectionRemoteObject(rmiURLRemoteAfficheurCreator);
 			System.out.println("\nPC Local: Connected to PC Central.");
 			RmiURL afficheurServicermiURL = remoteAfficheurCreator.createRemoteAfficheurService(null, rmiURLmeteoService);
-			//TODO: We should add the URL to our afficheurService here
 			AfficheurServiceWrapper_I afficheurServiceRemote = (AfficheurServiceWrapper_I)RmiTools.connectionRemoteObject(afficheurServicermiURL);
 			((AfficheurServiceLocal)afficheurService).setCentralRemote(afficheurServiceRemote);
 			System.out.println("\nPC Local: Received rmiURL of PC Central.");
