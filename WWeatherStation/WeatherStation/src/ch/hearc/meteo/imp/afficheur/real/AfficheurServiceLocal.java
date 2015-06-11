@@ -1,8 +1,11 @@
 
 package ch.hearc.meteo.imp.afficheur.real;
 
+import java.rmi.RemoteException;
+
 import ch.hearc.meteo.imp.afficheur.real.moo.ManagerLocal;
 import ch.hearc.meteo.imp.afficheur.real.view.JFrameLocal;
+import ch.hearc.meteo.imp.com.real.MeteoService;
 import ch.hearc.meteo.imp.use.remote.pclocal.PCLocal;
 import ch.hearc.meteo.spec.afficheur.AfficheurService_I;
 import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
