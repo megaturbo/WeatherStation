@@ -126,8 +126,7 @@ public class JPanelSlider extends JPanel
 					meteoServiceOptions.setAltitudeDT(sliderAltitude.getValue());
 					meteoServiceOptions.setPressionDT(sliderPressure.getValue());
 					meteoServiceOptions.setTemperatureDT(sliderTemperature.getValue());
-					manager.setMeteoServiceOptions(portCom, meteoServiceOptions);
-//					updateMeteoServiceOptions(new MeteoServiceOptions(sliderAltitude.getValue(), sliderPressure.getValue(), sliderTemperature.getValue()));
+					manager.setMeteoServiceOptions(portCom, new MeteoServiceOptions(sliderAltitude.getValue(), sliderPressure.getValue(), sliderTemperature.getValue()));
 					}
 			});
 		}
