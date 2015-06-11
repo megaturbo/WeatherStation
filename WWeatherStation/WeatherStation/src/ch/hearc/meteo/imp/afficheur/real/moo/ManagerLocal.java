@@ -6,18 +6,15 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import org.jfree.data.time.Millisecond;
 import org.jfree.data.time.RegularTimePeriod;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
-import org.jxmapviewer.viewer.DefaultWaypoint;
-import org.jxmapviewer.viewer.Waypoint;
+import org.jxmapviewer.viewer.GeoPosition;
 
 import ch.hearc.meteo.imp.use.remote.pclocal.PCLocal;
 import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
@@ -140,18 +137,15 @@ public class ManagerLocal
 		return series;
 		}
 
-	public Set<? extends Waypoint> getWaypoints()
+	public List<GeoPosition> getGeopositions()
 		{
-		Set<DefaultWaypoint> waypoints = new HashSet<DefaultWaypoint>();
+		List<GeoPosition> geopositions = new ArrayList<GeoPosition>();
 		for(Entry<Sources, Station> entry:stationFromSources.entrySet())
 			{
 			Station station = entry.getValue();
-			if (station.isVisible())
-				{
-				waypoints.add(station.getWaypoint());
-				}
+			geopositions.add(station.getGeoposition());
 			}
-		return waypoints;
+		return geopositions;
 		}
 
 	/*------------------------------------------------------------------*\
@@ -170,6 +164,8 @@ public class ManagerLocal
 		RegularTimePeriod time = new Millisecond(new Date(event.getTime()));
 		Station station = stationFromSources.get(source);
 		TimeSeries series = station.getSeries(sensor);
+
+		System.out.println(source.getPort() + " has received: " + event.getValue());
 
 		series.add(time, event.getValue());
 		}

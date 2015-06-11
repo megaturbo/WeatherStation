@@ -107,6 +107,7 @@ public class JFrameLocal extends JFrame
 					if (newPort != null)
 						{
 						manager.addMeteoService(newPort);
+						panelMain.updatePortCom(newPort);
 						}
 					}
 			});

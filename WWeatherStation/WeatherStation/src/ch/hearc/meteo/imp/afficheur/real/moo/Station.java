@@ -2,7 +2,6 @@
 package ch.hearc.meteo.imp.afficheur.real.moo;
 
 import org.jfree.data.time.TimeSeries;
-import org.jxmapviewer.viewer.DefaultWaypoint;
 import org.jxmapviewer.viewer.GeoPosition;
 
 import ch.hearc.meteo.spec.com.meteo.listener.event.Sources;
@@ -23,7 +22,10 @@ public class Station
 		{
 		this.source = source;
 		this.visible = visible;
-		this.waypoint = new DefaultWaypoint(new GeoPosition(50, 7, 0, 8, 41, 0));
+
+		//TODO GET NEW WAYPOINTS WITH COUNTER_STATIONS
+		this.geoposition = new GeoPosition(50, 7, 0, 8, 41, 0);
+		COUNTER_STATIONS ++;
 
 		String name = source.getPort();
 		seriesAltitude = new TimeSeries(name + "'s altitude");
@@ -48,9 +50,9 @@ public class Station
 	|*				Get				*|
 	\*------------------------------*/
 
-	public DefaultWaypoint getWaypoint()
+	public GeoPosition getGeoposition()
 		{
-		return this.waypoint;
+		return this.geoposition;
 		}
 
 	public String getName()
@@ -105,10 +107,12 @@ public class Station
 	\*------------------------------------------------------------------*/
 	private Sources source;
 	private boolean visible;
-	private DefaultWaypoint waypoint;
+	private GeoPosition geoposition;
 
 	private TimeSeries seriesAltitude;
 	private TimeSeries seriesPression;
 	private TimeSeries seriesTemperature;
+
+	private static int COUNTER_STATIONS = 0;
 
 	}

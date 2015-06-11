@@ -163,5 +163,6 @@ public class RemoteAfficheurCreator implements RemoteAfficheurCreator_I
 	public static final String RMI_ID = PREFIXE;
 	public static final String RMI_ID_CREATOR = "CREATOR_ID";
 	public static final String IP_ADDR = "157.26.110.241";
+	//	public static final String IP_ADDR = "157.26.111.16";
 
 	}

@@ -155,7 +155,7 @@ public class MeteoService extends MeteoService_A
 	@Override
 	synchronized public void stop()
 		{
-		super.stop();
+		//super.stop();
 		try
 			{
 			comConnexion.stop();

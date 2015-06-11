@@ -3,6 +3,7 @@ package ch.hearc.meteo.imp.afficheur.real.view.mainpanel.full;
 
 import java.awt.BorderLayout;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.swing.JPanel;
@@ -17,11 +18,11 @@ import org.jxmapviewer.input.ZoomMouseWheelListenerCursor;
 import org.jxmapviewer.painter.CompoundPainter;
 import org.jxmapviewer.painter.Painter;
 import org.jxmapviewer.viewer.DefaultTileFactory;
+import org.jxmapviewer.viewer.GeoPosition;
 import org.jxmapviewer.viewer.TileFactoryInfo;
-import org.jxmapviewer.viewer.Waypoint;
-import org.jxmapviewer.viewer.WaypointPainter;
 
 import ch.hearc.meteo.imp.afficheur.real.moo.ManagerCentral;
+import ch.hearc.meteo.imp.afficheur.real.view.utils.RoutePainter;
 
 public class JPanelMap extends JPanel
 	{
@@ -82,11 +83,13 @@ public class JPanelMap extends JPanel
 //		GeoPosition offenbach = new GeoPosition(50,  6, 0, 8, 46, 0);
 
 		// Create a track from the geo-positions
-//		List<GeoPosition> track = Arrays.asList(frankfurt, wiesbaden, mainz, darmstadt, offenbach);
-//		RoutePainter routePainter = new RoutePainter(track);
+		//List<GeoPosition> track = Arrays.asList(frankfurt, wiesbaden, mainz, darmstadt, offenbach);
+		List<GeoPosition> track = manager.getGeopositions();
+
+		RoutePainter routePainter = new RoutePainter(track);
 
 		// Set the focus
-		mapViewer.setZoom(10);
+		mapViewer.zoomToBestFit(new HashSet<GeoPosition>(track), 0.7);
 
 		// Interactions
 		MouseInputListener mia = new PanMouseInputListener(mapViewer);
@@ -96,22 +99,9 @@ public class JPanelMap extends JPanel
 		mapViewer.addMouseWheelListener(new ZoomMouseWheelListenerCursor(mapViewer));
 		mapViewer.addKeyListener(new PanKeyListener(mapViewer));
 
-		// Create waypoints from the geo-positions
-
-//		Set<Waypoint> waypoints = new HashSet<Waypoint>(Arrays.asList(
-//				new DefaultWaypoint(frankfurt),
-//				new DefaultWaypoint(wiesbaden),
-//				new DefaultWaypoint(mainz),
-//				new DefaultWaypoint(darmstadt),
-//				new DefaultWaypoint(offenbach)));
-
-		// Create a waypoint painter that takes all the waypoints
-		WaypointPainter<Waypoint> waypointPainter = new WaypointPainter<Waypoint>();
-		waypointPainter.setWaypoints(manager.getWaypoints());
-
 		// Create a compound painter that uses both the route-painter and the waypoint-painter
 		List<Painter<JXMapViewer>> painters = new ArrayList<Painter<JXMapViewer>>();
-		painters.add(waypointPainter);
+		painters.add(routePainter);
 
 		CompoundPainter<JXMapViewer> painter = new CompoundPainter<JXMapViewer>(painters);
 		mapViewer.setOverlayPainter(painter);

@@ -116,11 +116,10 @@ public class ComConnexion implements ComConnexions_I
 		// stop asking questions
 		if (running)
 			{
-			Thread.sleep(5000);
+			running = false;
 			temperatureAsker.join();
 			altitudeAsker.join();
 			pressureAsker.join();
-			running = false;
 			}
 
 		}
@@ -228,9 +227,7 @@ public class ComConnexion implements ComConnexions_I
 		if (connected && running)
 			{
 			byte[] tabByte = TrameEncoder.coder("010100");
-			System.out.println("asking");
 			writer.write(tabByte);
-			System.out.println("asked");
 			}
 		}
 
