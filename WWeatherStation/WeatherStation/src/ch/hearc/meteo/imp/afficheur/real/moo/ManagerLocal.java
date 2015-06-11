@@ -171,6 +171,8 @@ public class ManagerLocal
 		Station station = stationFromSources.get(source);
 		TimeSeries series = station.getSeries(sensor);
 
+		System.out.println(source.getPort() + " has received: " + event.getValue());
+
 		series.add(time, event.getValue());
 		}
 
