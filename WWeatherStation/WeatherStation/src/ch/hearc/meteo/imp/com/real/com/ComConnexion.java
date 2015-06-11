@@ -111,7 +111,7 @@ public class ComConnexion implements ComConnexions_I
 		}
 
 	@Override
-	public void stop() throws Exception
+	public void stop()
 		{
 		// stop asking questions
 		if (running)
@@ -192,15 +192,7 @@ public class ComConnexion implements ComConnexions_I
 			{
 			if(running)
 				{
-				try
-					{
-					stop();
-					}
-				catch (Exception e)
-					{
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					}
+				stop();
 				}
 			reader.close();
 			writer.close();
