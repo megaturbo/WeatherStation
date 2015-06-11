@@ -18,6 +18,7 @@ import ch.hearc.meteo.spec.com.meteo.exception.MeteoServiceException;
 import ch.hearc.meteo.spec.com.meteo.listener.MeteoAdapter;
 import ch.hearc.meteo.spec.com.meteo.listener.event.MeteoEvent;
 import ch.hearc.meteo.spec.reseau.RemoteAfficheurCreator_I;
+import ch.hearc.meteo.spec.reseau.rmiwrapper.AfficheurServiceWrapper_I;
 import ch.hearc.meteo.spec.reseau.rmiwrapper.MeteoServiceWrapper;
 import ch.hearc.meteo.spec.reseau.rmiwrapper.MeteoServiceWrapper_I;
 
@@ -149,9 +150,10 @@ public class PCLocal implements PC_I
 			{
 			RemoteAfficheurCreator_I remoteAfficheurCreator = (RemoteAfficheurCreator_I)RmiTools.connectionRemoteObject(rmiURLRemoteAfficheurCreator);
 			System.out.println("\nPC Local: Connected to PC Central.");
-			/*RmiURL afficheurServicermiURL = */remoteAfficheurCreator.createRemoteAfficheurService(null, rmiURLmeteoService);
-			//			afficheurServiceRemote = (AfficheurServiceWrapper_I)RmiTools.connectionRemoteObject(afficheurServicermiURL);
+			RmiURL afficheurServicermiURL = remoteAfficheurCreator.createRemoteAfficheurService(null, rmiURLmeteoService);
 			//TODO: We should add the URL to our afficheurService here
+			AfficheurServiceWrapper_I afficheurServiceRemote = (AfficheurServiceWrapper_I)RmiTools.connectionRemoteObject(afficheurServicermiURL);
+			afficheurService.addPCCentralRemote(AfficheurServiceRemote);
 			System.out.println("\nPC Local: Received rmiURL of PC Central.");
 			}
 		catch (RemoteException | NotBoundException e)
