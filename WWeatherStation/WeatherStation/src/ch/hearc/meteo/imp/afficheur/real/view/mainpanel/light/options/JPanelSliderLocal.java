@@ -5,7 +5,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.rmi.RemoteException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -41,14 +40,16 @@ public class JPanelSliderLocal extends JPanel
 	public void updatePortCom(String portCom)
 		{
 		this.portCom = portCom;
+		updateMeteoServiceOptions(manager.getMeteoServiceOptions(portCom));
 		}
 
 	public void updateMeteoServiceOptions(MeteoServiceOptions meteoServiceOptions)
 		{
 		this.meteoServiceOptions = meteoServiceOptions;
-		int valueAltitude = (int) meteoServiceOptions.getAltitudeDT();
-		int valuePressure = (int) meteoServiceOptions.getPressionDT();
-		int valueTemperature = (int) meteoServiceOptions.getTemperatureDT();
+
+		int valueAltitude = (int)meteoServiceOptions.getAltitudeDT();
+		int valuePressure = (int)meteoServiceOptions.getPressionDT();
+		int valueTemperature = (int)meteoServiceOptions.getTemperatureDT();
 
 		updateSlider(sliderAltitude, valueAltitude);
 		updateSlider(sliderPressure, valuePressure);
@@ -68,13 +69,14 @@ public class JPanelSliderLocal extends JPanel
 		int valueAltitude;
 		int valuePressure;
 		int valueTemperature;
+
 		try
 			{
 			valueAltitude = (int)manager.getMeteoServiceOptions(portCom).getAltitudeDT();
 			valuePressure = (int)manager.getMeteoServiceOptions(portCom).getPressionDT();
 			valueTemperature = (int)manager.getMeteoServiceOptions(portCom).getTemperatureDT();
 			}
-		catch (RemoteException e)
+		catch (Exception e)
 			{
 			valueAltitude = (min + max) / 2;
 			valuePressure = (min + max) / 2;
@@ -143,41 +145,29 @@ public class JPanelSliderLocal extends JPanel
 		}
 
 	private ChangeListener createChangeListener()
-	{
-		return new ChangeListener()
 		{
-			@Override public void stateChanged(ChangeEvent e)
-				{
-				int valueAltitude = sliderAltitude.getValue();
-				int valuePressure = sliderPressure.getValue();
-				int valueTemperature = sliderTemperature.getValue();
+		return new ChangeListener()
+			{
 
-				try
+				@Override
+				public void stateChanged(ChangeEvent e)
 					{
-					MeteoServiceOptions meteoServiceOption = new MeteoServiceOptions(manager.getMeteoServiceOptions(portCom));
-					meteoServiceOption.setAltitudeDT(valueAltitude);
-					meteoServiceOption.setPressionDT(valuePressure);
-					meteoServiceOption.setTemperatureDT(valueTemperature);
-
+					int valueAltitude = sliderAltitude.getValue();
+					int valuePressure = sliderPressure.getValue();
+					int valueTemperature = sliderTemperature.getValue();
 					setTitleBorders(valueAltitude, valuePressure, valueTemperature);
-					manager.setMeteoServiceOptions(portCom, meteoServiceOption);
 					}
-				catch (RemoteException e1)
-					{
-					System.err.println("[JPanelSlider] remote update failed");
-					e1.printStackTrace();
-					}
-
-				}
-		};
-	}
-
-	private void updateSlider(JSlider slider, int value) {
-		if(value > slider.getMaximum()) {
-			slider.setMaximum(value + 50);
+			};
 		}
+
+	private void updateSlider(JSlider slider, int value)
+		{
+		if (value > slider.getMaximum())
+			{
+			slider.setMaximum(value + 50);
+			}
 		slider.setValue(value);
-	}
+		}
 
 	private void setTitleBorders(int valueAltitude, int valuePressure, int valueTemperature)
 		{
