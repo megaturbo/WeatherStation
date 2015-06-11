@@ -32,6 +32,10 @@ public class JPanelMainLocal extends JPanel
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
+	public void refreshRemotes() {
+		panelListCom.refreshList();
+	}
+
 	public void refresh()
 		{
 		panelViewCom.refresh();

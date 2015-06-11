@@ -92,7 +92,7 @@ public class JPanelListCom extends JPanel
 		// rien
 		}
 
-	private void refreshList()
+	public void refreshList()
 		{
 		panelList.removeAll();
 		List<MeteoServiceWrapper_I> remotes = manager.getRemotes();

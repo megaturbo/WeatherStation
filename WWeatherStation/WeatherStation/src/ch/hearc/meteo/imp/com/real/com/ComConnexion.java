@@ -116,11 +116,10 @@ public class ComConnexion implements ComConnexions_I
 		// stop asking questions
 		if (running)
 			{
-			Thread.sleep(5000);
+			running = false;
 			temperatureAsker.join();
 			altitudeAsker.join();
 			pressureAsker.join();
-			running = false;
 			}
 
 		}
