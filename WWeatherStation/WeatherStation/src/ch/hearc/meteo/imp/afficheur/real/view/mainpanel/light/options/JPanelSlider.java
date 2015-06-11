@@ -81,6 +81,8 @@ public class JPanelSlider extends JPanel
 			e.printStackTrace();
 			}
 
+		buttonSetOptions = new JButton("Set");
+
 		sliderAltitude = new JSlider(min, max, valueAltitude);
 		sliderPressure = new JSlider(min, max, valuePressure);
 		sliderTemperature = new JSlider(min, max, valueTemperature);
@@ -117,8 +119,6 @@ public class JPanelSlider extends JPanel
 
 	private void apparence()
 		{
-		buttonSetOptions = new JButton("Set");
-
 		sliderTemperature.setOrientation(SwingConstants.HORIZONTAL);
 		}
 
