@@ -33,6 +33,7 @@ public class RemoteAfficheurCreator implements RemoteAfficheurCreator_I
 
 	private RemoteAfficheurCreator() throws RemoteException
 		{
+		AfficheurFactory.getCentralInstance();
 		server();
 		}
 
