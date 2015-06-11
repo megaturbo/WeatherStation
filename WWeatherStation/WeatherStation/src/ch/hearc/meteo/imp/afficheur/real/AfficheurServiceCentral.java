@@ -35,9 +35,12 @@ public class AfficheurServiceCentral implements AfficheurService_I
 		return INSTANCE;
 		}
 
-	public void addMeteoServiceRemote(MeteoServiceWrapper_I meteoServiceRemote) {
+	public void addMeteoServiceRemote(MeteoServiceWrapper_I meteoServiceRemote)
+		{
 		manager.addMeteoServiceRemote(meteoServiceRemote);
-	}
+		System.out.println("AFFICHEURSERVICECENTRAL");
+		frameService.refresh();
+		}
 
 	@Override
 	public void printPression(MeteoEvent event)

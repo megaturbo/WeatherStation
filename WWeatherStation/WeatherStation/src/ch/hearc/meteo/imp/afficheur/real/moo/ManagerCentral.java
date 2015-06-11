@@ -79,6 +79,7 @@ public class ManagerCentral
 
 	public void addMeteoServiceRemote(MeteoServiceWrapper_I meteoServiceRemote)
 		{
+		System.out.println("MANGER");
 		meteoRemotes.add(meteoServiceRemote);
 		}
 
