@@ -3,9 +3,12 @@ package ch.hearc.meteo.imp.afficheur.real.view.mainpanel.light.options;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
 
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.SwingConstants;
@@ -107,11 +110,14 @@ public class JPanelSlider extends JPanel
 
 		c.gridy = 2;
 		add(sliderTemperature, c);
+
+		c.gridy = 3;
+		add(buttonSetOptions, c);
 		}
 
 	private void apparence()
 		{
-		//setBackground(Color.ORANGE);
+		buttonSetOptions = new JButton("Set");
 
 		sliderTemperature.setOrientation(SwingConstants.HORIZONTAL);
 		}
@@ -121,6 +127,18 @@ public class JPanelSlider extends JPanel
 		sliderAltitude.addChangeListener(createChangeListener());
 		sliderPressure.addChangeListener(createChangeListener());
 		sliderTemperature.addChangeListener(createChangeListener());
+
+		buttonSetOptions.addActionListener(new ActionListener()
+			{
+
+				@Override
+				public void actionPerformed(ActionEvent e)
+					{
+					meteoServiceOptions.setAltitudeDT(sliderAltitude.getValue());
+					meteoServiceOptions.setPressionDT(sliderPressure.getValue());
+					meteoServiceOptions.setTemperatureDT(sliderTemperature.getValue());
+					}
+			});
 		}
 
 	private ChangeListener createChangeListener()
@@ -174,6 +192,7 @@ public class JPanelSlider extends JPanel
 	// Inputs
 	private ManagerCentral manager;
 	private String portCom;
+	private MeteoServiceOptions meteoServiceOptions;
 
 	// Tools
 	private JSlider sliderAltitude;
@@ -182,4 +201,5 @@ public class JPanelSlider extends JPanel
 	private TitledBorder borderAltitude;
 	private TitledBorder borderPressure;
 	private TitledBorder borderTemperature;
+	private JButton buttonSetOptions;
 	}
