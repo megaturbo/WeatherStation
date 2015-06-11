@@ -21,6 +21,7 @@ import ch.hearc.meteo.imp.afficheur.real.moo.ManagerCentral;
 import ch.hearc.meteo.imp.afficheur.real.view.JFrameCentral;
 import ch.hearc.meteo.imp.afficheur.real.view.mainpanel.light.options.JPanelSlider;
 import ch.hearc.meteo.spec.reseau.rmiwrapper.MeteoServiceWrapper_I;
+
 public class JPanelStationList extends JPanel
 	{
 
@@ -48,14 +49,14 @@ public class JPanelStationList extends JPanel
 
 		panelList.removeAll();
 
-		for(MeteoServiceWrapper_I s: stations)
+		for(MeteoServiceWrapper_I s:stations)
 			{
 
 			FlowLayout layout = new FlowLayout();
 			JPanel panel = new JPanel(layout);
 			try
 				{
-				panel.add(new JLabel("Station "+s.getPort()));
+				panel.add(new JLabel("Station " + s.getPort()));
 				}
 			catch (RemoteException e)
 				{
@@ -64,24 +65,32 @@ public class JPanelStationList extends JPanel
 				}
 
 			JButton settings = new JButton("Settings");
-			addButtonListener(settings);
+			addButtonListener(settings, s);
 			panel.add(settings);
 			panelList.add(panel);
 			}
 		this.updateUI();
 		}
 
-	private void addButtonListener(JButton btn)
+	private void addButtonListener(JButton btn, MeteoServiceWrapper_I msw)
 		{
 		btn.addActionListener(new ActionListener()
 			{
+
 				@Override
 				public void actionPerformed(ActionEvent e)
 					{
 					JDialog dialog = new JDialog(parent);
-					dialog.add(new JPanelSlider(manager));
+					try
+						{
+						dialog.add(new JPanelSlider(manager, msw.getPort()));
+						}
+					catch (RemoteException e1)
+						{
+						e1.printStackTrace();
+						}
 					dialog.setModal(true);
-					dialog.setSize(new Dimension(500,200));
+					dialog.setSize(new Dimension(500, 200));
 					dialog.setLocationRelativeTo(parent);
 					dialog.setVisible(true);
 					}
@@ -107,7 +116,7 @@ public class JPanelStationList extends JPanel
 		panelList.setLayout(new BoxLayout(panelList, BoxLayout.PAGE_AXIS));
 
 		JScrollPane scrollPane = new JScrollPane(panelList);
-//		scrollPane.setPreferredSize(new Dimension(200, 600));
+		//		scrollPane.setPreferredSize(new Dimension(200, 600));
 
 		setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();

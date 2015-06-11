@@ -25,9 +25,10 @@ public class JPanelSlider extends JPanel
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JPanelSlider(ManagerCentral manager)
+	public JPanelSlider(ManagerCentral manager, String portCom)
 		{
 		this.manager = manager;
+		updatePortCom(portCom);
 
 		geometry();
 		apparence();
@@ -115,6 +116,20 @@ public class JPanelSlider extends JPanel
 
 		c.gridy = 3;
 		add(buttonSetOptions, c);
+
+		buttonSetOptions.addActionListener(new ActionListener()
+			{
+
+				@Override
+				public void actionPerformed(ActionEvent e)
+					{
+					meteoServiceOptions.setAltitudeDT(sliderAltitude.getValue());
+					meteoServiceOptions.setPressionDT(sliderPressure.getValue());
+					meteoServiceOptions.setTemperatureDT(sliderTemperature.getValue());
+					manager.setMeteoServiceOptions(portCom, meteoServiceOptions);
+//					updateMeteoServiceOptions(new MeteoServiceOptions(sliderAltitude.getValue(), sliderPressure.getValue(), sliderTemperature.getValue()));
+					}
+			});
 		}
 
 	private void apparence()
