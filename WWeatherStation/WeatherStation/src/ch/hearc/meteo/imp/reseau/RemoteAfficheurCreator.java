@@ -76,6 +76,8 @@ public class RemoteAfficheurCreator implements RemoteAfficheurCreator_I
 
 			AfficheurServiceCentral central = (AfficheurServiceCentral)AfficheurFactory.getCentralInstance();
 
+			//TODO: Adding the meteoService to central afficheurService
+
 			AfficheurServiceWrapper centralWrap = new AfficheurServiceWrapper(central);
 
 			RmiURL afficheurServicermiURL = rmiUrl();
@@ -104,6 +106,7 @@ public class RemoteAfficheurCreator implements RemoteAfficheurCreator_I
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
 	@Deprecated
+	@SuppressWarnings("unused")
 	private AfficheurService_I createAfficheurService(AffichageOptions affichageOptions, MeteoServiceWrapper_I meteoServiceRemote)
 		{
 
